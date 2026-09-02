@@ -1,0 +1,15 @@
+# apktool build output
+build/
+dist/
+*.unsigned.apk
+SecAccu-built.apk
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.iml
+
+# Local staging (used when apktool cannot run on UNC path)
+SecAccu_local/

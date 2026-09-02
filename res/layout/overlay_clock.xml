@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/overlayRoot" android:background="@drawable/overlay_bg" android:paddingTop="10.0dp" android:paddingBottom="10.0dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="14.0dp" android:paddingEnd="8.0dp" android:elevation="10.0dp"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <LinearLayout android:gravity="bottom" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:textSize="28.0sp" android:textStyle="bold" android:textColor="#f4f7ff" android:id="@id/overlayTime" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="00:00:00" android:includeFontPadding="false" android:fontFamily="monospace" />
+            <TextView android:textSize="16.0sp" android:textColor="#7cffd0" android:id="@id/overlayMillis" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="2.0dp" android:text=".000" android:includeFontPadding="false" android:fontFamily="monospace" android:layout_marginStart="2.0dp" />
+        </LinearLayout>
+        <TextView android:textSize="11.0sp" android:textColor="#a8b3c7" android:id="@id/overlayMeta" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2.0dp" />
+    </LinearLayout>
+    <ImageButton android:id="@id/overlayClose" android:background="@android:color/transparent" android:padding="6.0dp" android:layout_width="36.0dp" android:layout_height="36.0dp" android:src="@drawable/ic_close" android:tint="#a8b3c7" android:contentDescription="@string/close" android:layout_marginStart="8.0dp" />
+</LinearLayout>

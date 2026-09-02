@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView android:background="@color/bg" android:scrollbars="vertical" android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:padding="20.0dp" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/headerRow" android:layout_width="match_parent" android:layout_height="wrap_content">
+            <ImageView android:layout_width="36.0dp" android:layout_height="36.0dp" android:src="@drawable/ic_stat_clock" android:contentDescription="@string/app_name" app:tint="@color/accent" />
+            <TextView android:textSize="28.0sp" android:textStyle="bold" android:textColor="@color/text_primary" android:layout_width="0.0dp" android:layout_height="wrap_content" android:text="@string/app_name" android:layout_weight="1.0" android:layout_marginStart="12.0dp" />
+        </LinearLayout>
+        <TextView android:textSize="14.0sp" android:textColor="@color/text_secondary" android:id="@id/subtitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dp" android:text="@string/subtitle" />
+        <com.google.android.material.card.MaterialCardView android:id="@id/clockCard" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="18.0dp" app:cardBackgroundColor="@color/card" app:cardCornerRadius="@dimen/card_radius" app:cardElevation="0.0dp" app:strokeColor="@color/stroke" app:strokeWidth="1.0dp">
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:paddingTop="20.0dp" android:paddingBottom="16.0dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="16.0dp" android:paddingEnd="16.0dp">
+                <TextView android:textSize="13.0sp" android:textColor="@color/accent" android:gravity="center" android:id="@id/clockLabel" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/clock_idle" />
+                <LinearLayout android:gravity="bottom" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4.0dp">
+                    <TextView android:textSize="46.0sp" android:textStyle="bold" android:textColor="@color/clock" android:id="@id/clockTime" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="00:00:00" android:includeFontPadding="false" android:fontFamily="monospace" />
+                    <TextView android:textSize="22.0sp" android:textColor="@color/clock_ms" android:id="@id/clockMillis" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="4.0dp" android:text=".000" android:includeFontPadding="false" android:fontFamily="monospace" android:layout_marginStart="2.0dp" />
+                </LinearLayout>
+                <TextView android:textSize="12.0sp" android:textColor="@color/text_secondary" android:gravity="center" android:id="@id/metaText" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dp" android:text="@string/meta_idle" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <LinearLayout android:orientation="vertical" android:id="@id/actionsRow" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14.0dp">
+            <com.google.android.material.button.MaterialButton android:textSize="16.0sp" android:id="@id/syncButton" android:layout_width="match_parent" android:layout_height="56.0dp" android:text="@string/sync" app:backgroundTint="@color/accent" app:cornerRadius="16.0dp" />
+            <com.google.android.material.button.MaterialButton android:id="@id/overlayButton" android:layout_width="match_parent" android:layout_height="52.0dp" android:layout_marginTop="8.0dp" android:text="@string/overlay" app:cornerRadius="16.0dp" style="@style/Widget.Material3.Button.TonalButton" />
+            <com.google.android.material.materialswitch.MaterialSwitch android:textSize="15.0sp" android:textColor="@color/text_primary" android:id="@id/alarmSwitch" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dp" android:checked="true" android:text="@string/alarm_title" />
+            <TextView android:textSize="14.0sp" android:textColor="@color/text_primary" android:id="@id/alarmLeadLabel" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dp" android:text="@string/alarm_lead_label" />
+            <com.google.android.material.slider.Slider android:value="10" android:id="@id/alarmLeadSlider" android:layout_width="match_parent" android:layout_height="wrap_content" android:stepSize="1.0" android:valueFrom="1" android:valueTo="30" app:haloColor="@color/accent" app:thumbColor="@color/accent" app:trackColorActive="@color/accent" app:trackColorInactive="@color/stroke" />
+            <TextView android:textSize="12.0sp" android:textColor="@color/text_secondary" android:id="@id/alarmHint" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="2.0dp" android:text="@string/alarm_hint" />
+        </LinearLayout>
+        <TextView android:textSize="13.0sp" android:textColor="@color/text_secondary" android:id="@id/statusText" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dp" android:text="@string/status_hint" />
+        <com.google.android.material.card.MaterialCardView android:id="@id/siteCard" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16.0dp" app:cardBackgroundColor="@color/card" app:cardCornerRadius="@dimen/card_radius" app:cardElevation="0.0dp" app:strokeColor="@color/stroke" app:strokeWidth="1.0dp">
+            <LinearLayout android:orientation="vertical" android:padding="14.0dp" android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="16.0sp" android:textStyle="bold" android:textColor="@color/text_primary" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pick_site" />
+                <TextView android:textSize="14.0sp" android:textColor="@color/accent" android:id="@id/selectedSite" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dp" android:breakStrategy="simple" />
+                <TextView android:textSize="12.0sp" android:textColor="@color/text_secondary" android:id="@id/selectedUrl" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="2.0dp" android:breakStrategy="simple" />
+                <ScrollView android:id="@id/siteListScroll" android:scrollbars="vertical" android:layout_width="match_parent" android:layout_height="280.0dp" android:layout_marginTop="10.0dp" android:fillViewport="false" android:fadeScrollbars="false" android:overScrollMode="ifContentScrolls" android:nestedScrollingEnabled="true">
+                    <LinearLayout android:orientation="vertical" android:id="@id/siteList" android:layout_width="match_parent" android:layout_height="wrap_content" />
+                </ScrollView>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.button.MaterialButton android:id="@id/openFavoriteButton" android:layout_width="match_parent" android:layout_height="52.0dp" android:layout_marginTop="12.0dp" android:layout_marginBottom="28.0dp" android:text="@string/add_favorite" app:cornerRadius="16.0dp" style="@style/Widget.Material3.Button.TonalButton" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:paddingTop="8.0dp" android:paddingBottom="4.0dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="20.0dp" android:paddingEnd="20.0dp"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/custom_name_hint" app:boxBackgroundMode="outline" app:boxStrokeColor="@color/accent">
+        <com.google.android.material.textfield.TextInputEditText android:textSize="14.0sp" android:textColor="@color/text_primary" android:id="@id/dialogName" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textCapWords" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dp" android:hint="@string/custom_hint" app:boxBackgroundMode="outline" app:boxStrokeColor="@color/accent">
+        <com.google.android.material.textfield.TextInputEditText android:textSize="14.0sp" android:textColor="@color/text_primary" android:id="@id/dialogUrl" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textUri" />
+    </com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>

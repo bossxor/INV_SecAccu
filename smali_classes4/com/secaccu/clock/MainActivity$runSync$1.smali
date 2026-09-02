@@ -1,0 +1,636 @@
+.class final Lcom/secaccu/clock/MainActivity$runSync$1;
+.super Lkotlin/coroutines/jvm/internal/SuspendLambda;
+.source "MainActivity.kt"
+
+# interfaces
+.implements Lkotlin/jvm/functions/Function2;
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingMethod;
+    value = Lcom/secaccu/clock/MainActivity;->runSync(Lcom/secaccu/clock/TimeSite;Z)V
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x18
+    name = null
+.end annotation
+
+.annotation system Ldalvik/annotation/Signature;
+    value = {
+        "Lkotlin/coroutines/jvm/internal/SuspendLambda;",
+        "Lkotlin/jvm/functions/Function2<",
+        "Lkotlinx/coroutines/CoroutineScope;",
+        "Lkotlin/coroutines/Continuation<",
+        "-",
+        "Lkotlin/Unit;",
+        ">;",
+        "Ljava/lang/Object;",
+        ">;"
+    }
+.end annotation
+
+.annotation runtime Lkotlin/Metadata;
+    d1 = {
+        "\u0000\n\n\u0000\n\u0002\u0010\u0002\n\u0002\u0018\u0002\u0010\u0000\u001a\u00020\u0001*\u00020\u0002H\u008a@"
+    }
+    d2 = {
+        "<anonymous>",
+        "",
+        "Lkotlinx/coroutines/CoroutineScope;"
+    }
+    k = 0x3
+    mv = {
+        0x1,
+        0x9,
+        0x0
+    }
+    xi = 0x30
+.end annotation
+
+.annotation runtime Lkotlin/coroutines/jvm/internal/DebugMetadata;
+    c = "com.secaccu.clock.MainActivity$runSync$1"
+    f = "MainActivity.kt"
+    i = {}
+    l = {
+        0xe6
+    }
+    m = "invokeSuspend"
+    n = {}
+    s = {}
+.end annotation
+
+
+# instance fields
+.field final synthetic $notify:Z
+
+.field final synthetic $site:Lcom/secaccu/clock/TimeSite;
+
+.field label:I
+
+.field final synthetic this$0:Lcom/secaccu/clock/MainActivity;
+
+
+# direct methods
+.method constructor <init>(Lcom/secaccu/clock/MainActivity;Lcom/secaccu/clock/TimeSite;ZLkotlin/coroutines/Continuation;)V
+    .locals 1
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Lcom/secaccu/clock/MainActivity;",
+            "Lcom/secaccu/clock/TimeSite;",
+            "Z",
+            "Lkotlin/coroutines/Continuation<",
+            "-",
+            "Lcom/secaccu/clock/MainActivity$runSync$1;",
+            ">;)V"
+        }
+    .end annotation
+
+    iput-object p1, p0, Lcom/secaccu/clock/MainActivity$runSync$1;->this$0:Lcom/secaccu/clock/MainActivity;
+
+    iput-object p2, p0, Lcom/secaccu/clock/MainActivity$runSync$1;->$site:Lcom/secaccu/clock/TimeSite;
+
+    iput-boolean p3, p0, Lcom/secaccu/clock/MainActivity$runSync$1;->$notify:Z
+
+    const/4 v0, 0x2
+
+    invoke-direct {p0, v0, p4}, Lkotlin/coroutines/jvm/internal/SuspendLambda;-><init>(ILkotlin/coroutines/Continuation;)V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public final create(Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Lkotlin/coroutines/Continuation;
+    .locals 4
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Ljava/lang/Object;",
+            "Lkotlin/coroutines/Continuation<",
+            "*>;)",
+            "Lkotlin/coroutines/Continuation<",
+            "Lkotlin/Unit;",
+            ">;"
+        }
+    .end annotation
+
+    new-instance v0, Lcom/secaccu/clock/MainActivity$runSync$1;
+
+    iget-object v1, p0, Lcom/secaccu/clock/MainActivity$runSync$1;->this$0:Lcom/secaccu/clock/MainActivity;
+
+    iget-object v2, p0, Lcom/secaccu/clock/MainActivity$runSync$1;->$site:Lcom/secaccu/clock/TimeSite;
+
+    iget-boolean v3, p0, Lcom/secaccu/clock/MainActivity$runSync$1;->$notify:Z
+
+    invoke-direct {v0, v1, v2, v3, p2}, Lcom/secaccu/clock/MainActivity$runSync$1;-><init>(Lcom/secaccu/clock/MainActivity;Lcom/secaccu/clock/TimeSite;ZLkotlin/coroutines/Continuation;)V
+
+    check-cast v0, Lkotlin/coroutines/Continuation;
+
+    return-object v0
+.end method
+
+.method public bridge synthetic invoke(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    .locals 1
+
+    check-cast p1, Lkotlinx/coroutines/CoroutineScope;
+
+    check-cast p2, Lkotlin/coroutines/Continuation;
+
+    invoke-virtual {p0, p1, p2}, Lcom/secaccu/clock/MainActivity$runSync$1;->invoke(Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public final invoke(Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+    .locals 2
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Lkotlinx/coroutines/CoroutineScope;",
+            "Lkotlin/coroutines/Continuation<",
+            "-",
+            "Lkotlin/Unit;",
+            ">;)",
+            "Ljava/lang/Object;"
+        }
+    .end annotation
+
+    invoke-virtual {p0, p1, p2}, Lcom/secaccu/clock/MainActivity$runSync$1;->create(Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Lkotlin/coroutines/Continuation;
+
+    move-result-object v0
+
+    check-cast v0, Lcom/secaccu/clock/MainActivity$runSync$1;
+
+    sget-object v1, Lkotlin/Unit;->INSTANCE:Lkotlin/Unit;
+
+    invoke-virtual {v0, v1}, Lcom/secaccu/clock/MainActivity$runSync$1;->invokeSuspend(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public final invokeSuspend(Ljava/lang/Object;)Ljava/lang/Object;
+    .locals 13
+
+    invoke-static {}, Lkotlin/coroutines/intrinsics/IntrinsicsKt;->getCOROUTINE_SUSPENDED()Ljava/lang/Object;
+
+    move-result-object v0
+
+    .line 229
+    iget v1, p0, Lcom/secaccu/clock/MainActivity$runSync$1;->label:I
+
+    const/4 v2, 0x1
+
+    const/4 v3, 0x0
+
+    packed-switch v1, :pswitch_data_0
+
+    new-instance p1, Ljava/lang/IllegalStateException;
+
+    const-string v0, "call to \'resume\' before \'invoke\' with coroutine"
+
+    invoke-direct {p1, v0}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+
+    throw p1
+
+    :pswitch_0
+    move-object v0, p0
+
+    .local v0, "this":Lcom/secaccu/clock/MainActivity$runSync$1;
+    .local p1, "$result":Ljava/lang/Object;
+    invoke-static {p1}, Lkotlin/ResultKt;->throwOnFailure(Ljava/lang/Object;)V
+
+    move-object v1, v0
+
+    move-object v0, p1
+
+    goto :goto_0
+
+    .end local v0    # "this":Lcom/secaccu/clock/MainActivity$runSync$1;
+    .end local p1    # "$result":Ljava/lang/Object;
+    :pswitch_1
+    invoke-static {p1}, Lkotlin/ResultKt;->throwOnFailure(Ljava/lang/Object;)V
+
+    move-object v1, p0
+
+    .line 230
+    .local v1, "this":Lcom/secaccu/clock/MainActivity$runSync$1;
+    .restart local p1    # "$result":Ljava/lang/Object;
+    invoke-static {}, Lkotlinx/coroutines/Dispatchers;->getIO()Lkotlinx/coroutines/CoroutineDispatcher;
+
+    move-result-object v4
+
+    check-cast v4, Lkotlin/coroutines/CoroutineContext;
+
+    new-instance v5, Lcom/secaccu/clock/MainActivity$runSync$1$result$1;
+
+    iget-object v6, v1, Lcom/secaccu/clock/MainActivity$runSync$1;->this$0:Lcom/secaccu/clock/MainActivity;
+
+    iget-object v7, v1, Lcom/secaccu/clock/MainActivity$runSync$1;->$site:Lcom/secaccu/clock/TimeSite;
+
+    invoke-direct {v5, v6, v7, v3}, Lcom/secaccu/clock/MainActivity$runSync$1$result$1;-><init>(Lcom/secaccu/clock/MainActivity;Lcom/secaccu/clock/TimeSite;Lkotlin/coroutines/Continuation;)V
+
+    check-cast v5, Lkotlin/jvm/functions/Function2;
+
+    move-object v6, v1
+
+    check-cast v6, Lkotlin/coroutines/Continuation;
+
+    iput v2, v1, Lcom/secaccu/clock/MainActivity$runSync$1;->label:I
+
+    invoke-static {v4, v5, v6}, Lkotlinx/coroutines/BuildersKt;->withContext(Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+
+    move-result-object v4
+
+    if-ne v4, v0, :cond_0
+
+    .line 229
+    return-object v0
+
+    .line 230
+    :cond_0
+    move-object v0, p1
+
+    move-object p1, v4
+
+    .end local p1    # "$result":Ljava/lang/Object;
+    .local v0, "$result":Ljava/lang/Object;
+    :goto_0
+    check-cast p1, Lkotlin/Result;
+
+    invoke-virtual {p1}, Lkotlin/Result;->unbox-impl()Ljava/lang/Object;
+
+    move-result-object p1
+
+    .line 233
+    .local p1, "result":Ljava/lang/Object;
+    iget-object v4, v1, Lcom/secaccu/clock/MainActivity$runSync$1;->this$0:Lcom/secaccu/clock/MainActivity;
+
+    const/4 v5, 0x0
+
+    invoke-static {v4, v5}, Lcom/secaccu/clock/MainActivity;->access$setSyncing$p(Lcom/secaccu/clock/MainActivity;Z)V
+
+    .line 234
+    iget-object v4, v1, Lcom/secaccu/clock/MainActivity$runSync$1;->this$0:Lcom/secaccu/clock/MainActivity;
+
+    invoke-static {v4}, Lcom/secaccu/clock/MainActivity;->access$getBinding$p(Lcom/secaccu/clock/MainActivity;)Lcom/secaccu/clock/databinding/ActivityMainBinding;
+
+    move-result-object v4
+
+    const-string v5, "binding"
+
+    if-nez v4, :cond_1
+
+    invoke-static {v5}, Lkotlin/jvm/internal/Intrinsics;->throwUninitializedPropertyAccessException(Ljava/lang/String;)V
+
+    move-object v4, v3
+
+    :cond_1
+    iget-object v4, v4, Lcom/secaccu/clock/databinding/ActivityMainBinding;->syncButton:Lcom/google/android/material/button/MaterialButton;
+
+    invoke-virtual {v4, v2}, Lcom/google/android/material/button/MaterialButton;->setEnabled(Z)V
+
+    .line 235
+    iget-object v2, v1, Lcom/secaccu/clock/MainActivity$runSync$1;->this$0:Lcom/secaccu/clock/MainActivity;
+
+    iget-boolean v4, v1, Lcom/secaccu/clock/MainActivity$runSync$1;->$notify:Z
+
+    iget-object v6, v1, Lcom/secaccu/clock/MainActivity$runSync$1;->this$0:Lcom/secaccu/clock/MainActivity;
+
+    .end local p1    # "result":Ljava/lang/Object;
+    invoke-static {p1}, Lkotlin/Result;->exceptionOrNull-impl(Ljava/lang/Object;)Ljava/lang/Throwable;
+
+    move-result-object v7
+
+    if-nez v7, :cond_6
+
+    check-cast p1, Lcom/secaccu/clock/SyncResult;
+
+    .local p1, "it":Lcom/secaccu/clock/SyncResult;
+    const/4 v6, 0x0
+
+    .line 237
+    .local v6, "$i$a$-fold-MainActivity$runSync$1$1":I
+    sget-object v7, Lcom/secaccu/clock/ServerClock;->INSTANCE:Lcom/secaccu/clock/ServerClock;
+
+    invoke-virtual {v7, p1}, Lcom/secaccu/clock/ServerClock;->apply(Lcom/secaccu/clock/SyncResult;)V
+
+    .line 238
+    invoke-virtual {p1}, Lcom/secaccu/clock/SyncResult;->getOffsetMs()D
+
+    move-result-wide v7
+
+    const-wide/16 v9, 0x0
+
+    cmpl-double v7, v7, v9
+
+    if-ltz v7, :cond_2
+
+    const-string v7, "+"
+
+    goto :goto_1
+
+    :cond_2
+    const-string v7, ""
+
+    .line 239
+    .local v7, "sign":Ljava/lang/String;
+    :goto_1
+    invoke-static {v2}, Lcom/secaccu/clock/MainActivity;->access$getBinding$p(Lcom/secaccu/clock/MainActivity;)Lcom/secaccu/clock/databinding/ActivityMainBinding;
+
+    move-result-object v8
+
+    if-nez v8, :cond_3
+
+    invoke-static {v5}, Lkotlin/jvm/internal/Intrinsics;->throwUninitializedPropertyAccessException(Ljava/lang/String;)V
+
+    move-object v8, v3
+
+    :cond_3
+    iget-object v8, v8, Lcom/secaccu/clock/databinding/ActivityMainBinding;->statusText:Landroid/widget/TextView;
+
+    .line 240
+    invoke-virtual {p1}, Lcom/secaccu/clock/SyncResult;->getSiteName()Ljava/lang/String;
+
+    move-result-object v9
+
+    invoke-virtual {p1}, Lcom/secaccu/clock/SyncResult;->getMode()Ljava/lang/String;
+
+    move-result-object v10
+
+    invoke-virtual {p1}, Lcom/secaccu/clock/SyncResult;->getSampleCount()I
+
+    move-result v11
+
+    new-instance v12, Ljava/lang/StringBuilder;
+
+    invoke-direct {v12}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v12, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v9
+
+    const-string v12, " \ub3d9\uae30\ud654 \uc644\ub8cc \u00b7 "
+
+    invoke-virtual {v9, v12}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v9
+
+    invoke-virtual {v9, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v9
+
+    const-string v10, " \u00b7 \uc0d8\ud50c "
+
+    invoke-virtual {v9, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v9
+
+    invoke-virtual {v9, v11}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v9
+
+    const-string v10, "\uac1c"
+
+    invoke-virtual {v9, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v9
+
+    invoke-virtual {v9}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v9
+
+    check-cast v9, Ljava/lang/CharSequence;
+
+    .line 239
+    invoke-virtual {v8, v9}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+
+    .line 241
+    invoke-static {v2}, Lcom/secaccu/clock/MainActivity;->access$getBinding$p(Lcom/secaccu/clock/MainActivity;)Lcom/secaccu/clock/databinding/ActivityMainBinding;
+
+    move-result-object v8
+
+    if-nez v8, :cond_4
+
+    invoke-static {v5}, Lkotlin/jvm/internal/Intrinsics;->throwUninitializedPropertyAccessException(Ljava/lang/String;)V
+
+    move-object v8, v3
+
+    :cond_4
+    iget-object v5, v8, Lcom/secaccu/clock/databinding/ActivityMainBinding;->metaText:Landroid/widget/TextView;
+
+    .line 242
+    invoke-virtual {p1}, Lcom/secaccu/clock/SyncResult;->getOffsetMs()D
+
+    move-result-wide v8
+
+    double-to-int v8, v8
+
+    invoke-virtual {p1}, Lcom/secaccu/clock/SyncResult;->getRttMs()D
+
+    move-result-wide v9
+
+    double-to-int v9, v9
+
+    invoke-virtual {p1}, Lcom/secaccu/clock/SyncResult;->getErrorMs()D
+
+    move-result-wide v10
+
+    double-to-int v10, v10
+
+    new-instance v11, Ljava/lang/StringBuilder;
+
+    invoke-direct {v11}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v12, "\uae30\uae30 \ub300\ube44 "
+
+    invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v11
+
+    invoke-virtual {v11, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v11
+
+    invoke-virtual {v11, v8}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v8
+
+    const-string v11, "ms  \u00b7  RTT "
+
+    invoke-virtual {v8, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v8
+
+    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v8
+
+    const-string v9, "ms  \u00b7  \ucd94\uc815\uc624\ucc28 \u00b1"
+
+    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v8
+
+    invoke-virtual {v8, v10}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v8
+
+    const-string v9, "ms"
+
+    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v8
+
+    invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v8
+
+    check-cast v8, Ljava/lang/CharSequence;
+
+    .line 241
+    .end local v7    # "sign":Ljava/lang/String;
+    .end local p1    # "it":Lcom/secaccu/clock/SyncResult;
+    invoke-virtual {v5, v8}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+
+    .line 243
+    invoke-static {v2}, Lcom/secaccu/clock/MainActivity;->access$renderClock(Lcom/secaccu/clock/MainActivity;)V
+
+    .line 244
+    if-eqz v4, :cond_5
+
+    const-string p1, "\uc11c\ubc84\uc2dc\uac04 \ub9de\ucda4"
+
+    invoke-static {v2, p1}, Lcom/secaccu/clock/MainActivity;->access$toast(Lcom/secaccu/clock/MainActivity;Ljava/lang/String;)V
+
+    .line 245
+    :cond_5
+    nop
+
+    .end local v6    # "$i$a$-fold-MainActivity$runSync$1$1":I
+    goto :goto_4
+
+    .line 235
+    :cond_6
+    move-object p1, v7
+
+    .local p1, "it":Ljava/lang/Throwable;
+    const/4 v2, 0x0
+
+    .line 247
+    .local v2, "$i$a$-fold-MainActivity$runSync$1$2":I
+    invoke-static {v6}, Lcom/secaccu/clock/MainActivity;->access$getBinding$p(Lcom/secaccu/clock/MainActivity;)Lcom/secaccu/clock/databinding/ActivityMainBinding;
+
+    move-result-object v4
+
+    if-nez v4, :cond_7
+
+    invoke-static {v5}, Lkotlin/jvm/internal/Intrinsics;->throwUninitializedPropertyAccessException(Ljava/lang/String;)V
+
+    move-object v4, v3
+
+    :cond_7
+    iget-object v4, v4, Lcom/secaccu/clock/databinding/ActivityMainBinding;->statusText:Landroid/widget/TextView;
+
+    invoke-virtual {p1}, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+
+    move-result-object v5
+
+    const-string v7, "\ub3d9\uae30\ud654 \uc2e4\ud328"
+
+    if-eqz v5, :cond_8
+
+    check-cast v5, Ljava/lang/CharSequence;
+
+    goto :goto_2
+
+    :cond_8
+    move-object v5, v7
+
+    check-cast v5, Ljava/lang/CharSequence;
+
+    :goto_2
+    invoke-virtual {v4, v5}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+
+    .line 248
+    invoke-virtual {p1}, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+
+    move-result-object v4
+
+    if-nez v4, :cond_9
+
+    .end local p1    # "it":Ljava/lang/Throwable;
+    goto :goto_3
+
+    .restart local p1    # "it":Ljava/lang/Throwable;
+    :cond_9
+    move-object v7, v4
+
+    .end local p1    # "it":Ljava/lang/Throwable;
+    :goto_3
+    invoke-static {v6, v7}, Lcom/secaccu/clock/MainActivity;->access$toast(Lcom/secaccu/clock/MainActivity;Ljava/lang/String;)V
+
+    .line 249
+    nop
+
+    .line 235
+    .end local v2    # "$i$a$-fold-MainActivity$runSync$1$2":I
+    :goto_4
+    nop
+
+    .line 251
+    iget-object p1, v1, Lcom/secaccu/clock/MainActivity$runSync$1;->this$0:Lcom/secaccu/clock/MainActivity;
+
+    invoke-static {p1}, Lcom/secaccu/clock/MainActivity;->access$getPendingSync$p(Lcom/secaccu/clock/MainActivity;)Lkotlin/Pair;
+
+    move-result-object p1
+
+    .line 252
+    .local p1, "next":Lkotlin/Pair;
+    iget-object v2, v1, Lcom/secaccu/clock/MainActivity$runSync$1;->this$0:Lcom/secaccu/clock/MainActivity;
+
+    invoke-static {v2, v3}, Lcom/secaccu/clock/MainActivity;->access$setPendingSync$p(Lcom/secaccu/clock/MainActivity;Lkotlin/Pair;)V
+
+    .line 253
+    if-eqz p1, :cond_a
+
+    iget-object v2, v1, Lcom/secaccu/clock/MainActivity$runSync$1;->this$0:Lcom/secaccu/clock/MainActivity;
+
+    invoke-virtual {p1}, Lkotlin/Pair;->getFirst()Ljava/lang/Object;
+
+    move-result-object v3
+
+    check-cast v3, Lcom/secaccu/clock/TimeSite;
+
+    invoke-virtual {p1}, Lkotlin/Pair;->getSecond()Ljava/lang/Object;
+
+    move-result-object v4
+
+    check-cast v4, Ljava/lang/Boolean;
+
+    invoke-virtual {v4}, Ljava/lang/Boolean;->booleanValue()Z
+
+    move-result v4
+
+    invoke-static {v2, v3, v4}, Lcom/secaccu/clock/MainActivity;->access$runSync(Lcom/secaccu/clock/MainActivity;Lcom/secaccu/clock/TimeSite;Z)V
+
+    .line 254
+    .end local p1    # "next":Lkotlin/Pair;
+    :cond_a
+    sget-object p1, Lkotlin/Unit;->INSTANCE:Lkotlin/Unit;
+
+    return-object p1
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
+.end method
