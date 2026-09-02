@@ -41,7 +41,7 @@
 
 .field public final siteCard:Lcom/google/android/material/card/MaterialCardView;
 
-.field public final siteList:Landroid/widget/LinearLayout;
+.field public final siteList:Lcom/google/android/material/chip/ChipGroup;
 
 .field public final siteListScroll:Landroid/widget/ScrollView;
 
@@ -53,7 +53,7 @@
 
 
 # direct methods
-.method private constructor <init>(Landroidx/core/widget/NestedScrollView;Landroid/widget/LinearLayout;Landroid/widget/TextView;Landroid/widget/TextView;Lcom/google/android/material/slider/Slider;Lcom/google/android/material/materialswitch/MaterialSwitch;Lcom/google/android/material/card/MaterialCardView;Landroid/widget/TextView;Landroid/widget/TextView;Landroid/widget/TextView;Landroid/widget/LinearLayout;Landroid/widget/TextView;Lcom/google/android/material/button/MaterialButton;Lcom/google/android/material/button/MaterialButton;Landroid/widget/TextView;Landroid/widget/TextView;Lcom/google/android/material/card/MaterialCardView;Landroid/widget/LinearLayout;Landroid/widget/ScrollView;Landroid/widget/TextView;Landroid/widget/TextView;Lcom/google/android/material/button/MaterialButton;)V
+.method private constructor <init>(Landroidx/core/widget/NestedScrollView;Landroid/widget/LinearLayout;Landroid/widget/TextView;Landroid/widget/TextView;Lcom/google/android/material/slider/Slider;Lcom/google/android/material/materialswitch/MaterialSwitch;Lcom/google/android/material/card/MaterialCardView;Landroid/widget/TextView;Landroid/widget/TextView;Landroid/widget/TextView;Landroid/widget/LinearLayout;Landroid/widget/TextView;Lcom/google/android/material/button/MaterialButton;Lcom/google/android/material/button/MaterialButton;Landroid/widget/TextView;Landroid/widget/TextView;Lcom/google/android/material/card/MaterialCardView;Lcom/google/android/material/chip/ChipGroup;Landroid/widget/ScrollView;Landroid/widget/TextView;Landroid/widget/TextView;Lcom/google/android/material/button/MaterialButton;)V
     .locals 16
     .param p1, "rootView"    # Landroidx/core/widget/NestedScrollView;
     .param p2, "actionsRow"    # Landroid/widget/LinearLayout;
@@ -72,7 +72,7 @@
     .param p15, "selectedSite"    # Landroid/widget/TextView;
     .param p16, "selectedUrl"    # Landroid/widget/TextView;
     .param p17, "siteCard"    # Lcom/google/android/material/card/MaterialCardView;
-    .param p18, "siteList"    # Landroid/widget/LinearLayout;
+    .param p18, "siteList"    # Lcom/google/android/material/chip/ChipGroup;
     .param p19, "siteListScroll"    # Landroid/widget/ScrollView;
     .param p20, "statusText"    # Landroid/widget/TextView;
     .param p21, "subtitle"    # Landroid/widget/TextView;
@@ -171,7 +171,7 @@
     .line 119
     move-object/from16 v1, p18
 
-    iput-object v1, v0, Lcom/secaccu/clock/databinding/ActivityMainBinding;->siteList:Landroid/widget/LinearLayout;
+    iput-object v1, v0, Lcom/secaccu/clock/databinding/ActivityMainBinding;->siteList:Lcom/google/android/material/chip/ChipGroup;
 
     .line 120
     move-object/from16 v1, p19
@@ -468,10 +468,10 @@
 
     move-object/from16 v41, v3
 
-    check-cast v41, Landroid/widget/LinearLayout;
+    check-cast v41, Lcom/google/android/material/chip/ChipGroup;
 
     .line 251
-    .local v41, "siteList":Landroid/widget/LinearLayout;
+    .local v41, "siteList":Lcom/google/android/material/chip/ChipGroup;
     if-eqz v41, :cond_4
 
     .line 255
@@ -589,7 +589,7 @@
 
     move-object/from16 v25, v45
 
-    invoke-direct/range {v3 .. v25}, Lcom/secaccu/clock/databinding/ActivityMainBinding;-><init>(Landroidx/core/widget/NestedScrollView;Landroid/widget/LinearLayout;Landroid/widget/TextView;Landroid/widget/TextView;Lcom/google/android/material/slider/Slider;Lcom/google/android/material/materialswitch/MaterialSwitch;Lcom/google/android/material/card/MaterialCardView;Landroid/widget/TextView;Landroid/widget/TextView;Landroid/widget/TextView;Landroid/widget/LinearLayout;Landroid/widget/TextView;Lcom/google/android/material/button/MaterialButton;Lcom/google/android/material/button/MaterialButton;Landroid/widget/TextView;Landroid/widget/TextView;Lcom/google/android/material/card/MaterialCardView;Landroid/widget/LinearLayout;Landroid/widget/ScrollView;Landroid/widget/TextView;Landroid/widget/TextView;Lcom/google/android/material/button/MaterialButton;)V
+    invoke-direct/range {v3 .. v25}, Lcom/secaccu/clock/databinding/ActivityMainBinding;-><init>(Landroidx/core/widget/NestedScrollView;Landroid/widget/LinearLayout;Landroid/widget/TextView;Landroid/widget/TextView;Lcom/google/android/material/slider/Slider;Lcom/google/android/material/materialswitch/MaterialSwitch;Lcom/google/android/material/card/MaterialCardView;Landroid/widget/TextView;Landroid/widget/TextView;Landroid/widget/TextView;Landroid/widget/LinearLayout;Landroid/widget/TextView;Lcom/google/android/material/button/MaterialButton;Lcom/google/android/material/button/MaterialButton;Landroid/widget/TextView;Landroid/widget/TextView;Lcom/google/android/material/card/MaterialCardView;Lcom/google/android/material/chip/ChipGroup;Landroid/widget/ScrollView;Landroid/widget/TextView;Landroid/widget/TextView;Lcom/google/android/material/button/MaterialButton;)V
 
     return-object v46
 
@@ -618,7 +618,7 @@
     goto :goto_0
 
     .line 246
-    .end local v41    # "siteList":Landroid/widget/LinearLayout;
+    .end local v41    # "siteList":Lcom/google/android/material/chip/ChipGroup;
     :cond_5
     goto :goto_0
 

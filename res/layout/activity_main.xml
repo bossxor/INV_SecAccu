@@ -18,7 +18,7 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
         <LinearLayout android:orientation="vertical" android:id="@id/actionsRow" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14.0dp">
-            <com.google.android.material.button.MaterialButton android:textSize="16.0sp" android:id="@id/syncButton" android:layout_width="match_parent" android:layout_height="56.0dp" android:text="@string/sync" app:backgroundTint="@color/accent" app:cornerRadius="16.0dp" />
+            <com.google.android.material.button.MaterialButton android:textSize="16.0sp" android:textColor="@color/sync_button_text" android:id="@id/syncButton" android:layout_width="match_parent" android:layout_height="56.0dp" android:text="@string/sync" app:backgroundTint="@color/sync_button_bg" app:cornerRadius="16.0dp" />
             <com.google.android.material.button.MaterialButton android:id="@id/overlayButton" android:layout_width="match_parent" android:layout_height="52.0dp" android:layout_marginTop="8.0dp" android:text="@string/overlay" app:cornerRadius="16.0dp" style="@style/Widget.Material3.Button.TonalButton" />
             <com.google.android.material.materialswitch.MaterialSwitch android:textSize="15.0sp" android:textColor="@color/text_primary" android:id="@id/alarmSwitch" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dp" android:checked="true" android:text="@string/alarm_title" />
             <TextView android:textSize="14.0sp" android:textColor="@color/text_primary" android:id="@id/alarmLeadLabel" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dp" android:text="@string/alarm_lead_label" />
@@ -31,8 +31,8 @@
                 <TextView android:textSize="16.0sp" android:textStyle="bold" android:textColor="@color/text_primary" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pick_site" />
                 <TextView android:textSize="14.0sp" android:textColor="@color/accent" android:id="@id/selectedSite" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dp" android:breakStrategy="simple" />
                 <TextView android:textSize="12.0sp" android:textColor="@color/text_secondary" android:id="@id/selectedUrl" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="2.0dp" android:breakStrategy="simple" />
-                <ScrollView android:id="@id/siteListScroll" android:scrollbars="vertical" android:layout_width="match_parent" android:layout_height="280.0dp" android:layout_marginTop="10.0dp" android:fillViewport="false" android:fadeScrollbars="false" android:overScrollMode="ifContentScrolls" android:nestedScrollingEnabled="true">
-                    <LinearLayout android:orientation="vertical" android:id="@id/siteList" android:layout_width="match_parent" android:layout_height="wrap_content" />
+                <ScrollView android:id="@id/siteListScroll" android:scrollbars="none" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dp" android:fillViewport="false" android:overScrollMode="never" android:nestedScrollingEnabled="false">
+                    <com.google.android.material.chip.ChipGroup android:id="@id/siteList" android:layout_width="match_parent" android:layout_height="wrap_content" app:chipSpacingHorizontal="8.0dp" app:chipSpacingVertical="8.0dp" />
                 </ScrollView>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

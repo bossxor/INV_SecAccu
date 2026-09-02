@@ -1447,9 +1447,9 @@
     move-object v0, v1
 
     :cond_8
-    iget-object v0, v0, Lcom/secaccu/clock/databinding/ActivityMainBinding;->siteList:Landroid/widget/LinearLayout;
+    iget-object v0, v0, Lcom/secaccu/clock/databinding/ActivityMainBinding;->siteList:Lcom/google/android/material/chip/ChipGroup;
 
-    invoke-virtual {v0}, Landroid/widget/LinearLayout;->removeAllViews()V
+    invoke-virtual {v0}, Lcom/google/android/material/chip/ChipGroup;->removeAllViews()V
 
     .line 197
     move-object v0, p0
@@ -1494,7 +1494,7 @@
     move-object v7, v1
 
     :cond_9
-    iget-object v7, v7, Lcom/secaccu/clock/databinding/ActivityMainBinding;->siteList:Landroid/widget/LinearLayout;
+    iget-object v7, v7, Lcom/secaccu/clock/databinding/ActivityMainBinding;->siteList:Lcom/google/android/material/chip/ChipGroup;
 
     check-cast v7, Landroid/view/ViewGroup;
 
@@ -1594,6 +1594,36 @@
 
     invoke-virtual {v8, v9}, Landroid/widget/ImageButton;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
+    .line 205
+    invoke-virtual {v4}, Lcom/secaccu/clock/TimeSite;->getFavorite()Z
+
+    move-result v9
+
+    if-nez v9, :goto_fav_done
+
+    sget v8, Lcom/secaccu/clock/R$id;->siteEdit:I
+
+    invoke-virtual {v6, v8}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object v8
+
+    check-cast v8, Landroid/widget/ImageButton;
+
+    const/4 v9, 0x0
+
+    invoke-virtual {v8, v9}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    sget v8, Lcom/secaccu/clock/R$id;->siteDelete:I
+
+    invoke-virtual {v6, v8}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object v8
+
+    check-cast v8, Landroid/widget/ImageButton;
+
+    invoke-virtual {v8, v9}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    :goto_fav_done
     .line 206
     invoke-virtual {v4}, Lcom/secaccu/clock/TimeSite;->getId()Ljava/lang/String;
 
@@ -1638,9 +1668,9 @@
     move-object v8, v1
 
     :cond_b
-    iget-object v8, v8, Lcom/secaccu/clock/databinding/ActivityMainBinding;->siteList:Landroid/widget/LinearLayout;
+    iget-object v8, v8, Lcom/secaccu/clock/databinding/ActivityMainBinding;->siteList:Lcom/google/android/material/chip/ChipGroup;
 
-    invoke-virtual {v8, v6}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
+    invoke-virtual {v8, v6}, Lcom/google/android/material/chip/ChipGroup;->addView(Landroid/view/View;)V
 
     .end local v4    # "site":Lcom/secaccu/clock/TimeSite;
     .end local v6    # "view":Landroid/view/View;
