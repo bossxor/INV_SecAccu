@@ -39,6 +39,14 @@ apktool b . -o SecAccu-built.apk
 adb install -r SecAccu-built.apk
 ```
 
+## 릴리스 APK (직접 설치)
+
+저장소에 포함된 **SecAccu-signed.apk**는 서명된 최종 설치용 APK입니다.
+
+`ash
+adb install -r SecAccu-signed.apk
+`
+
 ## 주요 컴포넌트
 
 - `com.secaccu.clock.MainActivity` — 메인 액티비티

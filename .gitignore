@@ -3,6 +3,7 @@ build/
 dist/
 *.unsigned.apk
 SecAccu-built.apk
+# SecAccu-signed.apk is tracked (release installable APK)
 
 # OS / IDE
 .DS_Store
