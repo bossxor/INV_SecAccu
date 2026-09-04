@@ -295,6 +295,12 @@
 
     invoke-virtual {v4, v2}, Lcom/google/android/material/button/MaterialButton;->setEnabled(Z)V
 
+    const-string v2, "\uc11c\ubc84\uc2dc\uac04 \ub9de\ucd94\uae30"
+
+    check-cast v2, Ljava/lang/CharSequence;
+
+    invoke-virtual {v4, v2}, Lcom/google/android/material/button/MaterialButton;->setText(Ljava/lang/CharSequence;)V
+
     .line 235
     iget-object v2, v1, Lcom/secaccu/clock/MainActivity$runSync$1;->this$0:Lcom/secaccu/clock/MainActivity;
 
@@ -320,27 +326,7 @@
 
     invoke-virtual {v7, p1}, Lcom/secaccu/clock/ServerClock;->apply(Lcom/secaccu/clock/SyncResult;)V
 
-    .line 238
-    invoke-virtual {p1}, Lcom/secaccu/clock/SyncResult;->getOffsetMs()D
-
-    move-result-wide v7
-
-    const-wide/16 v9, 0x0
-
-    cmpl-double v7, v7, v9
-
-    if-ltz v7, :cond_2
-
-    const-string v7, "+"
-
-    goto :goto_1
-
-    :cond_2
-    const-string v7, ""
-
     .line 239
-    .local v7, "sign":Ljava/lang/String;
-    :goto_1
     invoke-static {v2}, Lcom/secaccu/clock/MainActivity;->access$getBinding$p(Lcom/secaccu/clock/MainActivity;)Lcom/secaccu/clock/databinding/ActivityMainBinding;
 
     move-result-object v8
@@ -411,92 +397,8 @@
     invoke-virtual {v8, v9}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
     .line 241
-    invoke-static {v2}, Lcom/secaccu/clock/MainActivity;->access$getBinding$p(Lcom/secaccu/clock/MainActivity;)Lcom/secaccu/clock/databinding/ActivityMainBinding;
-
-    move-result-object v8
-
-    if-nez v8, :cond_4
-
-    invoke-static {v5}, Lkotlin/jvm/internal/Intrinsics;->throwUninitializedPropertyAccessException(Ljava/lang/String;)V
-
-    move-object v8, v3
-
-    :cond_4
-    iget-object v5, v8, Lcom/secaccu/clock/databinding/ActivityMainBinding;->metaText:Landroid/widget/TextView;
-
-    .line 242
-    invoke-virtual {p1}, Lcom/secaccu/clock/SyncResult;->getOffsetMs()D
-
-    move-result-wide v8
-
-    double-to-int v8, v8
-
-    invoke-virtual {p1}, Lcom/secaccu/clock/SyncResult;->getRttMs()D
-
-    move-result-wide v9
-
-    double-to-int v9, v9
-
-    invoke-virtual {p1}, Lcom/secaccu/clock/SyncResult;->getErrorMs()D
-
-    move-result-wide v10
-
-    double-to-int v10, v10
-
-    new-instance v11, Ljava/lang/StringBuilder;
-
-    invoke-direct {v11}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v12, "\uae30\uae30 \ub300\ube44 "
-
-    invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v11
-
-    invoke-virtual {v11, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v11
-
-    invoke-virtual {v11, v8}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    const-string v11, "ms  \u00b7  RTT "
-
-    invoke-virtual {v8, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    const-string v9, "ms  \u00b7  \ucd94\uc815\uc624\ucc28 \u00b1"
-
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8, v10}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    const-string v9, "ms"
-
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v8
-
-    check-cast v8, Ljava/lang/CharSequence;
-
-    .line 241
-    .end local v7    # "sign":Ljava/lang/String;
     .end local p1    # "it":Lcom/secaccu/clock/SyncResult;
-    invoke-virtual {v5, v8}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+    nop
 
     .line 243
     invoke-static {v2}, Lcom/secaccu/clock/MainActivity;->access$renderClock(Lcom/secaccu/clock/MainActivity;)V

@@ -141,7 +141,7 @@
 
     new-instance v0, Landroid/media/ToneGenerator;
 
-    const/4 v1, 0x4
+    const/4 v1, 0x3
 
     const/16 v2, 0x5a
 

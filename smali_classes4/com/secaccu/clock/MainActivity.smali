@@ -1093,7 +1093,7 @@
 .end method
 
 .method private final renderClock()V
-    .locals 9
+    .locals 12
 
     .line 258
     sget-object v0, Lcom/secaccu/clock/ServerClock;->INSTANCE:Lcom/secaccu/clock/ServerClock;
@@ -1233,7 +1233,41 @@
     :goto_2
     invoke-virtual {v3, v4}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
+    .line 266
+    if-nez v0, :cond_6
+
+    goto :goto_meta_done
+
+    :cond_6
+    iget-object v3, p0, Lcom/secaccu/clock/MainActivity;->binding:Lcom/secaccu/clock/databinding/ActivityMainBinding;
+
+    if-nez v3, :cond_7
+
+    invoke-static {v5}, Lkotlin/jvm/internal/Intrinsics;->throwUninitializedPropertyAccessException(Ljava/lang/String;)V
+
+    const/4 v3, 0x0
+
+    :cond_7
+    iget-object v3, v3, Lcom/secaccu/clock/databinding/ActivityMainBinding;->metaText:Landroid/widget/TextView;
+
+    invoke-virtual {v0}, Lcom/secaccu/clock/ServerClock$Snapshot;->getServerNowMs()D
+
+    move-result-wide v6
+
+    invoke-virtual {v0}, Lcom/secaccu/clock/ServerClock$Snapshot;->getRttMs()D
+
+    move-result-wide v8
+
+    invoke-static {v6, v7, v8, v9}, Lcom/secaccu/clock/PressHintFormatter;->format(DD)Ljava/lang/String;
+
+    move-result-object v10
+
+    check-cast v10, Ljava/lang/CharSequence;
+
+    invoke-virtual {v3, v10}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+
     .line 267
+    :goto_meta_done
     sget-object v3, Lcom/secaccu/clock/ExactHourAlarm;->INSTANCE:Lcom/secaccu/clock/ExactHourAlarm;
 
     move-object v4, p0
@@ -1793,6 +1827,12 @@
     const/4 v3, 0x0
 
     invoke-virtual {v0, v3}, Lcom/google/android/material/button/MaterialButton;->setEnabled(Z)V
+
+    const-string v3, "\uc11c\ubc84\uc2dc\uac04 \ub9de\ucd94\ub294 \uc911"
+
+    check-cast v3, Ljava/lang/CharSequence;
+
+    invoke-virtual {v0, v3}, Lcom/google/android/material/button/MaterialButton;->setText(Ljava/lang/CharSequence;)V
 
     .line 228
     iget-object v0, p0, Lcom/secaccu/clock/MainActivity;->binding:Lcom/secaccu/clock/databinding/ActivityMainBinding;

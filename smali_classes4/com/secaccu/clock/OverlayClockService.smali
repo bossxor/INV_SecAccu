@@ -1110,7 +1110,7 @@
 .end method
 
 .method private final render()V
-    .locals 8
+    .locals 9
 
     .line 128
     sget-object v0, Lcom/secaccu/clock/ServerClock;->INSTANCE:Lcom/secaccu/clock/ServerClock;
@@ -1198,72 +1198,22 @@
 
     .line 132
     :goto_1
-    invoke-virtual {v0}, Lcom/secaccu/clock/ServerClock$Snapshot;->getOffsetMs()D
-
-    move-result-wide v3
-
-    const-wide/16 v5, 0x0
-
-    cmpl-double v3, v3, v5
-
-    if-ltz v3, :cond_3
-
-    const-string v3, "+"
-
-    goto :goto_2
-
-    :cond_3
-    const-string v3, ""
-
-    .line 133
-    .local v3, "offsetSign":Ljava/lang/String;
-    :goto_2
     iget-object v4, p0, Lcom/secaccu/clock/OverlayClockService;->metaView:Landroid/widget/TextView;
 
-    if-nez v4, :cond_4
+    if-nez v4, :cond_3
 
     goto :goto_3
 
-    :cond_4
-    invoke-virtual {v0}, Lcom/secaccu/clock/ServerClock$Snapshot;->getSiteName()Ljava/lang/String;
+    :cond_3
+    invoke-virtual {v0}, Lcom/secaccu/clock/ServerClock$Snapshot;->getServerNowMs()D
 
-    move-result-object v5
+    move-result-wide v5
 
-    invoke-virtual {v0}, Lcom/secaccu/clock/ServerClock$Snapshot;->getOffsetMs()D
+    invoke-virtual {v0}, Lcom/secaccu/clock/ServerClock$Snapshot;->getRttMs()D
 
-    move-result-wide v6
+    move-result-wide v7
 
-    double-to-int v6, v6
-
-    new-instance v7, Ljava/lang/StringBuilder;
-
-    invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
-
-    invoke-virtual {v7, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    const-string v7, "  "
-
-    invoke-virtual {v5, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    invoke-virtual {v5, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    const-string v6, "ms"
-
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-static {v5, v6, v7, v8}, Lcom/secaccu/clock/PressHintFormatter;->formatShort(DD)Ljava/lang/String;
 
     move-result-object v5
 
