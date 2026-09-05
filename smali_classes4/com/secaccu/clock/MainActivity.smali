@@ -1276,6 +1276,10 @@
 
     invoke-virtual {v3, v4, v1, v2}, Lcom/secaccu/clock/ExactHourAlarm;->evaluate(Landroid/content/Context;J)V
 
+    sget-object v3, Lcom/secaccu/clock/AutoClickUi;->INSTANCE:Lcom/secaccu/clock/AutoClickUi;
+
+    invoke-virtual {v3, p0}, Lcom/secaccu/clock/AutoClickUi;->onTick(Landroid/app/Activity;)V
+
     .line 268
     return-void
 .end method
@@ -2869,6 +2873,10 @@
     :cond_10
     invoke-direct {p0}, Lcom/secaccu/clock/MainActivity;->renderClock()V
 
+    sget-object v1, Lcom/secaccu/clock/AutoClickUi;->INSTANCE:Lcom/secaccu/clock/AutoClickUi;
+
+    invoke-virtual {v1, p0}, Lcom/secaccu/clock/AutoClickUi;->attach(Landroid/app/Activity;)V
+
     .line 113
     return-void
 .end method
@@ -2887,6 +2895,10 @@
     check-cast v1, Ljava/lang/Runnable;
 
     invoke-virtual {v0, v1}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
+
+    sget-object v0, Lcom/secaccu/clock/AutoClickUi;->INSTANCE:Lcom/secaccu/clock/AutoClickUi;
+
+    invoke-virtual {v0, p0}, Lcom/secaccu/clock/AutoClickUi;->refresh(Landroid/app/Activity;)V
 
     .line 118
     return-void

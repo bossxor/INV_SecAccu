@@ -24,6 +24,18 @@
 
 .field public static alarmSwitch:I = 0x7f08004b
 
+.field public static autoClickA11yButton:I = 0x7f080217
+
+.field public static autoClickHint:I = 0x7f080218
+
+.field public static autoClickPickButton:I = 0x7f080219
+
+.field public static autoClickPosLabel:I = 0x7f08021a
+
+.field public static autoClickSwitch:I = 0x7f08021b
+
+.field public static autoClickTarget:I = 0x7f08021c
+
 .field public static clockCard:I = 0x7f08007b
 
 .field public static clockLabel:I = 0x7f08007c

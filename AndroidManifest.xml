@@ -17,6 +17,12 @@
         <service android:exported="false" android:foregroundServiceType="specialUse" android:name="com.secaccu.clock.OverlayClockService">
             <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE" android:value="Shows a compact server-time overlay while using other apps for ticketing."/>
         </service>
+        <service android:exported="true" android:label="@string/auto_click_title" android:name="com.secaccu.clock.AutoClickService" android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService"/>
+            </intent-filter>
+            <meta-data android:name="android.accessibilityservice" android:resource="@xml/auto_click_service"/>
+        </service>
         <provider android:authorities="com.secaccu.clock.debug.androidx-startup" android:exported="false" android:name="androidx.startup.InitializationProvider">
             <meta-data android:name="androidx.emoji2.text.EmojiCompatInitializer" android:value="androidx.startup"/>
             <meta-data android:name="androidx.lifecycle.ProcessLifecycleInitializer" android:value="androidx.startup"/>

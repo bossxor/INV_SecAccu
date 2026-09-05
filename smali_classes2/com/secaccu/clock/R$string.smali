@@ -24,6 +24,40 @@
 
 .field public static alarm_title:I = 0x7f0f001f
 
+.field public static auto_click_a11y:I = 0x7f0f00bd
+
+.field public static auto_click_a11y_on:I = 0x7f0f00be
+
+.field public static auto_click_armed:I = 0x7f0f00bf
+
+.field public static auto_click_done:I = 0x7f0f00c0
+
+.field public static auto_click_fail:I = 0x7f0f00c1
+
+.field public static auto_click_fired:I = 0x7f0f00c2
+
+.field public static auto_click_hint:I = 0x7f0f00c3
+
+.field public static auto_click_need_a11y:I = 0x7f0f00c4
+
+.field public static auto_click_need_overlay:I = 0x7f0f00c5
+
+.field public static auto_click_need_pos:I = 0x7f0f00c6
+
+.field public static auto_click_need_sync:I = 0x7f0f00c7
+
+.field public static auto_click_pick:I = 0x7f0f00c8
+
+.field public static auto_click_picker_hint:I = 0x7f0f00c9
+
+.field public static auto_click_pos_set:I = 0x7f0f00ca
+
+.field public static auto_click_pos_unset:I = 0x7f0f00cb
+
+.field public static auto_click_service_desc:I = 0x7f0f00cc
+
+.field public static auto_click_title:I = 0x7f0f00cd
+
 .field public static app_name:I = 0x7f0f0021
 
 .field public static cancel:I = 0x7f0f0030

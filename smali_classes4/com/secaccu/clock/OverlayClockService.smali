@@ -1275,6 +1275,10 @@
 
     invoke-virtual {v5, v6, v1, v2}, Lcom/secaccu/clock/ExactHourAlarm;->evaluate(Landroid/content/Context;J)V
 
+    sget-object v5, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
+
+    invoke-virtual {v5, v6}, Lcom/secaccu/clock/AutoClickEngine;->evaluate(Landroid/content/Context;)V
+
     .line 141
     return-void
 .end method

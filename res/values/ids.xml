@@ -88,6 +88,12 @@
     <id name="arc" />
     <id name="asConfigured" />
     <id name="async" />
+    <id name="autoClickA11yButton" />
+    <id name="autoClickHint" />
+    <id name="autoClickPickButton" />
+    <id name="autoClickPosLabel" />
+    <id name="autoClickSwitch" />
+    <id name="autoClickTarget" />
     <id name="auto" />
     <id name="autoComplete" />
     <id name="autoCompleteToEnd" />

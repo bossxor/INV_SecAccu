@@ -3690,6 +3690,12 @@
     <public type="id" name="wrap_content_constrained" id="0x7f080214" />
     <public type="id" name="x_left" id="0x7f080215" />
     <public type="id" name="x_right" id="0x7f080216" />
+    <public type="id" name="autoClickA11yButton" id="0x7f080217" />
+    <public type="id" name="autoClickHint" id="0x7f080218" />
+    <public type="id" name="autoClickPickButton" id="0x7f080219" />
+    <public type="id" name="autoClickPosLabel" id="0x7f08021a" />
+    <public type="id" name="autoClickSwitch" id="0x7f08021b" />
+    <public type="id" name="autoClickTarget" id="0x7f08021c" />
     <public type="integer" name="abc_config_activityDefaultDur" id="0x7f090000" />
     <public type="integer" name="abc_config_activityShortDur" id="0x7f090001" />
     <public type="integer" name="app_bar_elevation_anim_duration" id="0x7f090002" />
@@ -3887,6 +3893,7 @@
     <public type="layout" name="select_dialog_multichoice_material" id="0x7f0b006c" />
     <public type="layout" name="select_dialog_singlechoice_material" id="0x7f0b006d" />
     <public type="layout" name="support_simple_spinner_dropdown_item" id="0x7f0b006e" />
+    <public type="xml" name="auto_click_service" id="0x7f110000" />
     <public type="mipmap" name="ic_launcher" id="0x7f0d0000" />
     <public type="mipmap" name="ic_launcher_round" id="0x7f0d0001" />
     <public type="plurals" name="mtrl_badge_content_description" id="0x7f0e0000" />
@@ -3922,6 +3929,23 @@
     <public type="string" name="alarm_hint" id="0x7f0f001d" />
     <public type="string" name="alarm_lead_label" id="0x7f0f001e" />
     <public type="string" name="alarm_title" id="0x7f0f001f" />
+    <public type="string" name="auto_click_a11y" id="0x7f0f00bd" />
+    <public type="string" name="auto_click_a11y_on" id="0x7f0f00be" />
+    <public type="string" name="auto_click_armed" id="0x7f0f00bf" />
+    <public type="string" name="auto_click_done" id="0x7f0f00c0" />
+    <public type="string" name="auto_click_fail" id="0x7f0f00c1" />
+    <public type="string" name="auto_click_fired" id="0x7f0f00c2" />
+    <public type="string" name="auto_click_hint" id="0x7f0f00c3" />
+    <public type="string" name="auto_click_need_a11y" id="0x7f0f00c4" />
+    <public type="string" name="auto_click_need_overlay" id="0x7f0f00c5" />
+    <public type="string" name="auto_click_need_pos" id="0x7f0f00c6" />
+    <public type="string" name="auto_click_need_sync" id="0x7f0f00c7" />
+    <public type="string" name="auto_click_pick" id="0x7f0f00c8" />
+    <public type="string" name="auto_click_picker_hint" id="0x7f0f00c9" />
+    <public type="string" name="auto_click_pos_set" id="0x7f0f00ca" />
+    <public type="string" name="auto_click_pos_unset" id="0x7f0f00cb" />
+    <public type="string" name="auto_click_service_desc" id="0x7f0f00cc" />
+    <public type="string" name="auto_click_title" id="0x7f0f00cd" />
     <public type="string" name="androidx_startup" id="0x7f0f0020" />
     <public type="string" name="app_name" id="0x7f0f0021" />
     <public type="string" name="appbar_scrolling_view_behavior" id="0x7f0f0022" />

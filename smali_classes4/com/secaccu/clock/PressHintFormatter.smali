@@ -12,6 +12,46 @@
     return-void
 .end method
 
+.method public static final nextPressAtMs(DD)J
+    .locals 10
+    .param p0, "serverNowMs"    # D
+    .param p2, "rttMs"    # D
+
+    double-to-long v0, p0
+
+    const-wide/32 v2, 0x36ee80
+
+    div-long v4, v0, v2
+
+    const-wide/16 v6, 0x1
+
+    add-long/2addr v4, v6
+
+    mul-long/2addr v4, v2
+
+    const-wide/high16 v6, 0x4000000000000000L    # 2.0
+
+    div-double v6, p2, v6
+
+    double-to-long v6, v6
+
+    sub-long v8, v4, v6
+
+    :goto_0
+    cmp-long p0, v8, v0
+
+    if-gtz p0, :cond_0
+
+    add-long/2addr v4, v2
+
+    sub-long v8, v4, v6
+
+    goto :goto_0
+
+    :cond_0
+    return-wide v8
+.end method
+
 .method public static final format(DD)Ljava/lang/String;
     .locals 10
     .param p0, "serverNowMs"    # D
