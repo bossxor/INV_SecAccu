@@ -26,6 +26,8 @@
 
 .field public static auto_click_a11y:I = 0x7f0f00bd
 
+.field public static auto_click_close:I = 0x7f0f00ce
+
 .field public static auto_click_a11y_on:I = 0x7f0f00be
 
 .field public static auto_click_armed:I = 0x7f0f00bf

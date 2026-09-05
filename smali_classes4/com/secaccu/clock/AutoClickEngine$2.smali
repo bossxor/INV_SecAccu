@@ -32,7 +32,7 @@
         }
     .end annotation
 
-    .line 203
+    .line 204
     iput-object p1, p0, Lcom/secaccu/clock/AutoClickEngine$2;->this$0:Lcom/secaccu/clock/AutoClickEngine;
 
     iput-object p2, p0, Lcom/secaccu/clock/AutoClickEngine$2;->val$context:Landroid/content/Context;
@@ -47,7 +47,7 @@
 .method public run()V
     .locals 5
 
-    .line 206
+    .line 207
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickEngine$2;->this$0:Lcom/secaccu/clock/AutoClickEngine;
 
     iget-object v1, p0, Lcom/secaccu/clock/AutoClickEngine$2;->val$context:Landroid/content/Context;
@@ -58,7 +58,7 @@
 
     if-eqz v0, :cond_0
 
-    .line 207
+    .line 208
     sget-object v0, Lcom/secaccu/clock/AutoClickOverlay;->INSTANCE:Lcom/secaccu/clock/AutoClickOverlay;
 
     iget-object v1, p0, Lcom/secaccu/clock/AutoClickEngine$2;->val$context:Landroid/content/Context;
@@ -79,7 +79,7 @@
 
     invoke-virtual {v0, v1, v2, v3}, Lcom/secaccu/clock/AutoClickOverlay;->showMarker(Landroid/content/Context;FF)V
 
-    .line 209
+    .line 210
     :cond_0
     return-void
 .end method

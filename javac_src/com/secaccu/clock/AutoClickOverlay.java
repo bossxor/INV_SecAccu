@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public final class AutoClickOverlay {
@@ -21,6 +22,7 @@ public final class AutoClickOverlay {
     private View pickerView;
     private View markerView;
     private WindowManager.LayoutParams markerParams;
+    private int barBottom;
 
     private AutoClickOverlay() {}
 
@@ -32,44 +34,82 @@ public final class AutoClickOverlay {
                     app.getString(AutoClickEngine.id(app, "auto_click_need_overlay", "string")));
             return;
         }
-        hidePicker();
+        hideAll();
         ensureWm(app);
-        FrameLayout root = new FrameLayout(app);
-        root.setBackgroundColor(0x660B1020);
+
+        final FrameLayout root = new FrameLayout(app);
+        root.setBackgroundColor(0x440B1020);
+
+        LinearLayout bar = new LinearLayout(app);
+        bar.setOrientation(LinearLayout.HORIZONTAL);
+        bar.setGravity(Gravity.CENTER_VERTICAL);
+        GradientDrawable barBg = new GradientDrawable();
+        barBg.setColor(0xF2151C2E);
+        bar.setBackground(barBg);
+        int pad = dp(app, 12);
+        bar.setPadding(pad, dp(app, 36), pad, pad);
+
         TextView hint = new TextView(app);
         hint.setText(app.getString(AutoClickEngine.id(app, "auto_click_picker_hint", "string")));
         hint.setTextColor(0xFFF4F7FF);
-        hint.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f);
-        hint.setGravity(Gravity.CENTER);
-        hint.setPadding(dp(app, 20), dp(app, 28), dp(app, 20), dp(app, 16));
-        FrameLayout.LayoutParams hintLp = new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.WRAP_CONTENT,
-                Gravity.TOP);
-        root.addView(hint, hintLp);
+        hint.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
+        LinearLayout.LayoutParams hintLp = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
+        hintLp.rightMargin = dp(app, 8);
+        bar.addView(hint, hintLp);
 
-        TextView cancel = new TextView(app);
-        cancel.setText(app.getString(AutoClickEngine.id(app, "cancel", "string")));
-        cancel.setTextColor(0xFF7CFFD0);
-        cancel.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f);
-        cancel.setPadding(dp(app, 18), dp(app, 12), dp(app, 18), dp(app, 12));
-        FrameLayout.LayoutParams cancelLp = new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.WRAP_CONTENT,
-                FrameLayout.LayoutParams.WRAP_CONTENT,
-                Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL);
-        cancelLp.bottomMargin = dp(app, 36);
-        root.addView(cancel, cancelLp);
-        cancel.setOnClickListener(new View.OnClickListener() {
+        TextView close = new TextView(app);
+        close.setText(app.getString(AutoClickEngine.id(app, "auto_click_close", "string")));
+        close.setTextColor(0xFF0B1020);
+        close.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f);
+        close.setPadding(dp(app, 18), dp(app, 10), dp(app, 18), dp(app, 10));
+        GradientDrawable closeBg = new GradientDrawable();
+        closeBg.setColor(0xFF7CFFD0);
+        closeBg.setCornerRadius(dp(app, 12));
+        close.setBackground(closeBg);
+        close.setClickable(true);
+        close.setFocusable(true);
+        View.OnClickListener closeAction = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hidePicker();
+                hideAll();
+            }
+        };
+        close.setOnClickListener(closeAction);
+        close.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP
+                        || event.getAction() == MotionEvent.ACTION_CANCEL) {
+                    hideAll();
+                    return true;
+                }
+                return true;
             }
         });
+        bar.addView(close, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        bar.measure(
+                View.MeasureSpec.makeMeasureSpec(app.getResources().getDisplayMetrics().widthPixels, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        barBottom = bar.getMeasuredHeight();
+        if (barBottom < dp(app, 72)) {
+            barBottom = dp(app, 72);
+        }
+
+        root.addView(bar, new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                Gravity.TOP));
 
         root.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
+                if (event.getY() <= barBottom) {
+                    return false;
+                }
+                int action = event.getAction();
+                if (action == MotionEvent.ACTION_UP) {
                     AutoClickEngine.INSTANCE.setPosition(app, event.getRawX(), event.getRawY());
                     hidePicker();
                     AutoClickEngine.INSTANCE.toast(
@@ -80,7 +120,7 @@ public final class AutoClickOverlay {
                                     Math.round(event.getRawY())));
                     return true;
                 }
-                return event.getAction() == MotionEvent.ACTION_DOWN;
+                return action == MotionEvent.ACTION_DOWN;
             }
         });
 
@@ -104,9 +144,18 @@ public final class AutoClickOverlay {
         pickerView = null;
     }
 
+    public void hideAll() {
+        hidePicker();
+        hideMarker();
+    }
+
     public void showMarker(Context context, float x, float y) {
         Context app = context.getApplicationContext();
         if (!Settings.canDrawOverlays(app)) {
+            return;
+        }
+        if (!AutoClickEngine.INSTANCE.isEnabled(app)) {
+            hideMarker();
             return;
         }
         ensureWm(app);
@@ -153,7 +202,7 @@ public final class AutoClickOverlay {
     }
 
     public void syncMarker(Context context) {
-        if (AutoClickEngine.INSTANCE.hasPosition(context)) {
+        if (AutoClickEngine.INSTANCE.isEnabled(context) && AutoClickEngine.INSTANCE.hasPosition(context)) {
             showMarker(context, AutoClickEngine.INSTANCE.getX(context), AutoClickEngine.INSTANCE.getY(context));
         } else {
             hideMarker();
@@ -167,7 +216,16 @@ public final class AutoClickOverlay {
     }
 
     private void removeView(View view) {
-        if (view != null && windowManager != null) {
+        if (view == null) {
+            return;
+        }
+        ensureWm(view.getContext());
+        if (windowManager == null) {
+            return;
+        }
+        try {
+            windowManager.removeViewImmediate(view);
+        } catch (Throwable first) {
             try {
                 windowManager.removeView(view);
             } catch (Throwable ignored) {

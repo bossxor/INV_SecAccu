@@ -49,6 +49,7 @@ public final class AutoClickEngine {
         if (!enabled) {
             cancelSchedule();
             firedPressAt = -1L;
+            AutoClickOverlay.INSTANCE.hideAll();
         }
     }
 

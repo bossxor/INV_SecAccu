@@ -25,7 +25,7 @@
 .method constructor <init>(Lcom/secaccu/clock/AutoClickOverlay;)V
     .locals 0
 
-    .line 62
+    .line 71
     iput-object p1, p0, Lcom/secaccu/clock/AutoClickOverlay$1;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -38,11 +38,11 @@
 .method public onClick(Landroid/view/View;)V
     .locals 0
 
-    .line 65
+    .line 74
     iget-object p1, p0, Lcom/secaccu/clock/AutoClickOverlay$1;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
 
-    invoke-virtual {p1}, Lcom/secaccu/clock/AutoClickOverlay;->hidePicker()V
+    invoke-virtual {p1}, Lcom/secaccu/clock/AutoClickOverlay;->hideAll()V
 
-    .line 66
+    .line 75
     return-void
 .end method

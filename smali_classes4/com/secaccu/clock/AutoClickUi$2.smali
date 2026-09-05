@@ -32,7 +32,7 @@
         }
     .end annotation
 
-    .line 73
+    .line 75
     iput-object p1, p0, Lcom/secaccu/clock/AutoClickUi$2;->this$0:Lcom/secaccu/clock/AutoClickUi;
 
     iput-object p2, p0, Lcom/secaccu/clock/AutoClickUi$2;->val$activity:Landroid/app/Activity;
@@ -47,7 +47,7 @@
 .method public onClick(Landroid/view/View;)V
     .locals 3
 
-    .line 76
+    .line 78
     iget-object p1, p0, Lcom/secaccu/clock/AutoClickUi$2;->val$activity:Landroid/app/Activity;
 
     invoke-static {p1}, Landroid/provider/Settings;->canDrawOverlays(Landroid/content/Context;)Z
@@ -56,7 +56,7 @@
 
     if-nez p1, :cond_0
 
-    .line 77
+    .line 79
     new-instance p1, Landroid/content/Intent;
 
     new-instance v0, Ljava/lang/StringBuilder;
@@ -71,7 +71,7 @@
 
     iget-object v1, p0, Lcom/secaccu/clock/AutoClickUi$2;->val$activity:Landroid/app/Activity;
 
-    .line 79
+    .line 81
     invoke-virtual {v1}, Landroid/app/Activity;->getPackageName()Ljava/lang/String;
 
     move-result-object v1
@@ -92,17 +92,17 @@
 
     invoke-direct {p1, v1, v0}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
 
-    .line 80
+    .line 82
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi$2;->val$activity:Landroid/app/Activity;
 
     invoke-virtual {v0, p1}, Landroid/app/Activity;->startActivity(Landroid/content/Intent;)V
 
-    .line 81
+    .line 83
     sget-object p1, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
 
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi$2;->val$activity:Landroid/app/Activity;
 
-    .line 83
+    .line 85
     const-string v1, "auto_click_need_overlay"
 
     const-string v2, "string"
@@ -115,13 +115,13 @@
 
     move-result-object v1
 
-    .line 81
+    .line 83
     invoke-virtual {p1, v0, v1}, Lcom/secaccu/clock/AutoClickEngine;->toast(Landroid/content/Context;Ljava/lang/String;)V
 
-    .line 84
+    .line 86
     return-void
 
-    .line 86
+    .line 88
     :cond_0
     sget-object p1, Lcom/secaccu/clock/AutoClickOverlay;->INSTANCE:Lcom/secaccu/clock/AutoClickOverlay;
 
@@ -129,6 +129,6 @@
 
     invoke-virtual {p1, v0}, Lcom/secaccu/clock/AutoClickOverlay;->startPicker(Landroid/content/Context;)V
 
-    .line 87
+    .line 89
     return-void
 .end method

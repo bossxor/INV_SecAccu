@@ -1,0 +1,13 @@
+---
+description: After app changes, always reinstall via ADB then commit and push
+alwaysApply: true
+---
+
+# ADB 재설치 + 커밋 푸시
+
+앱을 고친 뒤에는 사용자에게 다시 묻지 말고 아래를 무조건 한다.
+
+1. `apktool`로 빌드하고 `zipalign` + 서명 후 `SecAccu-signed.apk`를 갱신한다.
+2. `C:\Users\OJT\AppData\Local\Android\Sdk\platform-tools\adb.exe`로 연결된 기기에 `adb install -r` 한다. `adb`는 PATH에 없을 수 있다. 서명 충돌이면 기존 패키지를 지운 뒤 다시 설치한다.
+3. 바로 커밋하고 `origin`의 현재 브랜치에 푸시한다. 커밋 메시지는 이 저장소처럼 한국어로 이유를 적는다.
+4. `git config`는 바꾸지 말고, 필요하면 기존 커밋 작성자를 환경 변수로만 쓴다.

@@ -91,7 +91,7 @@
 .method private fireAt(J)V
     .locals 9
 
-    .line 182
+    .line 183
     const-wide/16 v0, 0x0
 
     cmp-long v0, p1, v0
@@ -106,17 +106,17 @@
 
     goto/16 :goto_2
 
-    .line 185
+    .line 186
     :cond_0
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickEngine;->appContext:Landroid/content/Context;
 
-    .line 186
+    .line 187
     if-nez v0, :cond_1
 
-    .line 187
+    .line 188
     return-void
 
-    .line 189
+    .line 190
     :cond_1
     invoke-virtual {p0, v0}, Lcom/secaccu/clock/AutoClickEngine;->isEnabled(Landroid/content/Context;)Z
 
@@ -132,18 +132,18 @@
 
     goto :goto_1
 
-    .line 192
+    .line 193
     :cond_2
     invoke-static {}, Lcom/secaccu/clock/AutoClickService;->getInstance()Lcom/secaccu/clock/AutoClickService;
 
     move-result-object v1
 
-    .line 193
+    .line 194
     const-string v2, "string"
 
     if-nez v1, :cond_3
 
-    .line 194
+    .line 195
     const-string p1, "auto_click_need_a11y"
 
     invoke-static {v0, p1, v2}, Lcom/secaccu/clock/AutoClickEngine;->id(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)I
@@ -156,39 +156,39 @@
 
     invoke-virtual {p0, v0, p1}, Lcom/secaccu/clock/AutoClickEngine;->toast(Landroid/content/Context;Ljava/lang/String;)V
 
-    .line 195
+    .line 196
     return-void
 
-    .line 197
+    .line 198
     :cond_3
     iput-wide p1, p0, Lcom/secaccu/clock/AutoClickEngine;->firedPressAt:J
 
-    .line 198
+    .line 199
     const-wide/16 v3, -0x1
 
     iput-wide v3, p0, Lcom/secaccu/clock/AutoClickEngine;->scheduledPressAt:J
 
-    .line 199
+    .line 200
     invoke-virtual {p0, v0}, Lcom/secaccu/clock/AutoClickEngine;->getX(Landroid/content/Context;)F
 
     move-result v5
 
-    .line 200
+    .line 201
     invoke-virtual {p0, v0}, Lcom/secaccu/clock/AutoClickEngine;->getY(Landroid/content/Context;)F
 
     move-result v6
 
-    .line 201
+    .line 202
     sget-object v7, Lcom/secaccu/clock/AutoClickOverlay;->INSTANCE:Lcom/secaccu/clock/AutoClickOverlay;
 
     invoke-virtual {v7}, Lcom/secaccu/clock/AutoClickOverlay;->hideMarker()V
 
-    .line 202
+    .line 203
     invoke-virtual {v1, v5, v6}, Lcom/secaccu/clock/AutoClickService;->click(FF)Z
 
     move-result v1
 
-    .line 203
+    .line 204
     iget-object v5, p0, Lcom/secaccu/clock/AutoClickEngine;->handler:Landroid/os/Handler;
 
     new-instance v6, Lcom/secaccu/clock/AutoClickEngine$2;
@@ -199,10 +199,10 @@
 
     invoke-virtual {v5, v6, v7, v8}, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable;J)Z
 
-    .line 211
+    .line 212
     if-eqz v1, :cond_4
 
-    .line 212
+    .line 213
     const-string v1, "auto_click_fired"
 
     invoke-static {v0, v1, v2}, Lcom/secaccu/clock/AutoClickEngine;->id(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)I
@@ -225,11 +225,11 @@
 
     goto :goto_0
 
-    .line 214
+    .line 215
     :cond_4
     iput-wide v3, p0, Lcom/secaccu/clock/AutoClickEngine;->firedPressAt:J
 
-    .line 215
+    .line 216
     const-string p1, "auto_click_fail"
 
     invoke-static {v0, p1, v2}, Lcom/secaccu/clock/AutoClickEngine;->id(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)I
@@ -242,16 +242,16 @@
 
     invoke-virtual {p0, v0, p1}, Lcom/secaccu/clock/AutoClickEngine;->toast(Landroid/content/Context;Ljava/lang/String;)V
 
-    .line 217
+    .line 218
     :goto_0
     return-void
 
-    .line 190
+    .line 191
     :cond_5
     :goto_1
     return-void
 
-    .line 183
+    .line 184
     :cond_6
     :goto_2
     return-void
@@ -260,19 +260,19 @@
 .method private fireScheduled()V
     .locals 2
 
-    .line 178
+    .line 179
     iget-wide v0, p0, Lcom/secaccu/clock/AutoClickEngine;->scheduledPressAt:J
 
     invoke-direct {p0, v0, v1}, Lcom/secaccu/clock/AutoClickEngine;->fireAt(J)V
 
-    .line 179
+    .line 180
     return-void
 .end method
 
 .method static id(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)I
     .locals 1
 
-    .line 229
+    .line 230
     invoke-virtual {p0}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
     move-result-object v0
@@ -312,33 +312,33 @@
 .method public cancelSchedule()V
     .locals 2
 
-    .line 220
+    .line 221
     const-wide/16 v0, -0x1
 
     iput-wide v0, p0, Lcom/secaccu/clock/AutoClickEngine;->scheduledPressAt:J
 
-    .line 221
+    .line 222
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickEngine;->handler:Landroid/os/Handler;
 
     iget-object v1, p0, Lcom/secaccu/clock/AutoClickEngine;->scheduledClick:Ljava/lang/Runnable;
 
     invoke-virtual {v0, v1}, Landroid/os/Handler;->removeCallbacks(Ljava/lang/Runnable;)V
 
-    .line 222
+    .line 223
     return-void
 .end method
 
 .method public evaluate(Landroid/content/Context;)V
     .locals 8
 
-    .line 149
+    .line 150
     invoke-virtual {p1}, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
 
     move-result-object v0
 
     iput-object v0, p0, Lcom/secaccu/clock/AutoClickEngine;->appContext:Landroid/content/Context;
 
-    .line 150
+    .line 151
     invoke-virtual {p0, p1}, Lcom/secaccu/clock/AutoClickEngine;->isEnabled(Landroid/content/Context;)Z
 
     move-result v0
@@ -353,7 +353,7 @@
 
     goto :goto_0
 
-    .line 154
+    .line 155
     :cond_0
     sget-object p1, Lcom/secaccu/clock/ServerClock;->INSTANCE:Lcom/secaccu/clock/ServerClock;
 
@@ -361,13 +361,13 @@
 
     move-result-object p1
 
-    .line 155
+    .line 156
     if-nez p1, :cond_1
 
-    .line 156
+    .line 157
     return-void
 
-    .line 158
+    .line 159
     :cond_1
     invoke-virtual {p1}, Lcom/secaccu/clock/ServerClock$Snapshot;->getServerNowMs()D
 
@@ -375,7 +375,7 @@
 
     double-to-long v0, v0
 
-    .line 159
+    .line 160
     invoke-virtual {p1}, Lcom/secaccu/clock/ServerClock$Snapshot;->getServerNowMs()D
 
     move-result-wide v2
@@ -388,28 +388,28 @@
 
     move-result-wide v2
 
-    .line 160
+    .line 161
     iget-wide v4, p0, Lcom/secaccu/clock/AutoClickEngine;->firedPressAt:J
 
     cmp-long p1, v4, v2
 
     if-nez p1, :cond_2
 
-    .line 161
+    .line 162
     return-void
 
-    .line 163
+    .line 164
     :cond_2
     sub-long v4, v2, v0
 
-    .line 164
+    .line 165
     const-wide/16 v6, 0x0
 
     cmp-long p1, v4, v6
 
     if-gtz p1, :cond_4
 
-    .line 165
+    .line 166
     sub-long/2addr v0, v2
 
     const-wide/16 v4, 0x96
@@ -418,14 +418,14 @@
 
     if-gtz p1, :cond_3
 
-    .line 166
+    .line 167
     invoke-direct {p0, v2, v3}, Lcom/secaccu/clock/AutoClickEngine;->fireAt(J)V
 
-    .line 168
+    .line 169
     :cond_3
     return-void
 
-    .line 170
+    .line 171
     :cond_4
     const-wide/16 v0, 0x7d0
 
@@ -439,17 +439,17 @@
 
     if-eqz p1, :cond_5
 
-    .line 171
+    .line 172
     iput-wide v2, p0, Lcom/secaccu/clock/AutoClickEngine;->scheduledPressAt:J
 
-    .line 172
+    .line 173
     iget-object p1, p0, Lcom/secaccu/clock/AutoClickEngine;->handler:Landroid/os/Handler;
 
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickEngine;->scheduledClick:Ljava/lang/Runnable;
 
     invoke-virtual {p1, v0}, Landroid/os/Handler;->removeCallbacks(Ljava/lang/Runnable;)V
 
-    .line 173
+    .line 174
     iget-object p1, p0, Lcom/secaccu/clock/AutoClickEngine;->handler:Landroid/os/Handler;
 
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickEngine;->scheduledClick:Ljava/lang/Runnable;
@@ -462,23 +462,23 @@
 
     invoke-virtual {p1, v0, v1, v2}, Landroid/os/Handler;->postAtTime(Ljava/lang/Runnable;J)Z
 
-    .line 175
+    .line 176
     :cond_5
     return-void
 
-    .line 151
+    .line 152
     :cond_6
     :goto_0
     invoke-virtual {p0}, Lcom/secaccu/clock/AutoClickEngine;->cancelSchedule()V
 
-    .line 152
+    .line 153
     return-void
 .end method
 
 .method public formatPressAt(J)Ljava/lang/String;
     .locals 3
 
-    .line 109
+    .line 110
     new-instance v0, Ljava/text/SimpleDateFormat;
 
     const-string v1, "HH:mm:ss.SSS"
@@ -487,7 +487,7 @@
 
     invoke-direct {v0, v1, v2}, Ljava/text/SimpleDateFormat;-><init>(Ljava/lang/String;Ljava/util/Locale;)V
 
-    .line 110
+    .line 111
     const-string v1, "Asia/Seoul"
 
     invoke-static {v1}, Ljava/util/TimeZone;->getTimeZone(Ljava/lang/String;)Ljava/util/TimeZone;
@@ -496,7 +496,7 @@
 
     invoke-virtual {v0, v1}, Ljava/text/SimpleDateFormat;->setTimeZone(Ljava/util/TimeZone;)V
 
-    .line 111
+    .line 112
     new-instance v1, Ljava/util/Date;
 
     invoke-direct {v1, p1, p2}, Ljava/util/Date;-><init>(J)V
@@ -511,7 +511,7 @@
 .method public getX(Landroid/content/Context;)F
     .locals 2
 
-    .line 60
+    .line 61
     invoke-direct {p0, p1}, Lcom/secaccu/clock/AutoClickEngine;->prefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object p1
@@ -530,7 +530,7 @@
 .method public getY(Landroid/content/Context;)F
     .locals 2
 
-    .line 64
+    .line 65
     invoke-direct {p0, p1}, Lcom/secaccu/clock/AutoClickEngine;->prefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object p1
@@ -549,7 +549,7 @@
 .method public hasPosition(Landroid/content/Context;)Z
     .locals 2
 
-    .line 56
+    .line 57
     invoke-direct {p0, p1}, Lcom/secaccu/clock/AutoClickEngine;->prefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object p1
@@ -568,7 +568,7 @@
 .method public isAccessibilityEnabled(Landroid/content/Context;)Z
     .locals 5
 
-    .line 77
+    .line 78
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -601,10 +601,10 @@
 
     move-result-object v0
 
-    .line 79
+    .line 80
     nop
 
-    .line 80
+    .line 81
     const/4 v1, 0x1
 
     const/4 v2, 0x0
@@ -616,44 +616,44 @@
 
     const-string v4, "accessibility_enabled"
 
-    .line 79
+    .line 80
     invoke-static {v3, v4, v2}, Landroid/provider/Settings$Secure;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
 
     move-result v3
 
-    .line 83
+    .line 84
     if-eq v3, v1, :cond_0
 
-    .line 84
+    .line 85
     return v2
 
-    .line 86
+    .line 87
     :cond_0
     nop
 
-    .line 87
+    .line 88
     invoke-virtual {p1}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
 
     move-result-object p1
 
     const-string v3, "enabled_accessibility_services"
 
-    .line 86
+    .line 87
     invoke-static {p1, v3}, Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p1
 
-    .line 89
+    .line 90
     invoke-static {p1}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
 
     move-result v3
 
     if-eqz v3, :cond_1
 
-    .line 90
+    .line 91
     return v2
 
-    .line 92
+    .line 93
     :cond_1
     new-instance v3, Landroid/text/TextUtils$SimpleStringSplitter;
 
@@ -661,10 +661,10 @@
 
     invoke-direct {v3, v4}, Landroid/text/TextUtils$SimpleStringSplitter;-><init>(C)V
 
-    .line 93
+    .line 94
     invoke-virtual {v3, p1}, Landroid/text/TextUtils$SimpleStringSplitter;->setString(Ljava/lang/String;)V
 
-    .line 94
+    .line 95
     :cond_2
     invoke-virtual {v3}, Landroid/text/TextUtils$SimpleStringSplitter;->hasNext()Z
 
@@ -672,7 +672,7 @@
 
     if-eqz p1, :cond_3
 
-    .line 95
+    .line 96
     invoke-virtual {v3}, Landroid/text/TextUtils$SimpleStringSplitter;->next()Ljava/lang/String;
 
     move-result-object p1
@@ -685,18 +685,18 @@
 
     if-eqz p1, :cond_2
 
-    .line 96
+    .line 97
     return v1
 
-    .line 100
+    .line 101
     :cond_3
     goto :goto_0
 
-    .line 99
+    .line 100
     :catchall_0
     move-exception p1
 
-    .line 101
+    .line 102
     :goto_0
     invoke-static {}, Lcom/secaccu/clock/AutoClickService;->getInstance()Lcom/secaccu/clock/AutoClickService;
 
@@ -735,7 +735,7 @@
 .method public nextPressAtMs(DD)J
     .locals 0
 
-    .line 105
+    .line 106
     invoke-static {p1, p2, p3, p4}, Lcom/secaccu/clock/PressHintFormatter;->nextPressAtMs(DD)J
 
     move-result-wide p1
@@ -746,7 +746,7 @@
 .method public positionLine(Landroid/content/Context;)Ljava/lang/String;
     .locals 4
 
-    .line 140
+    .line 141
     invoke-virtual {p0, p1}, Lcom/secaccu/clock/AutoClickEngine;->hasPosition(Landroid/content/Context;)Z
 
     move-result v0
@@ -755,7 +755,7 @@
 
     if-nez v0, :cond_0
 
-    .line 141
+    .line 142
     const-string v0, "auto_click_pos_unset"
 
     invoke-static {p1, v0, v1}, Lcom/secaccu/clock/AutoClickEngine;->id(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)I
@@ -768,7 +768,7 @@
 
     return-object p1
 
-    .line 143
+    .line 144
     :cond_0
     invoke-virtual {p0, p1}, Lcom/secaccu/clock/AutoClickEngine;->getX(Landroid/content/Context;)F
 
@@ -778,7 +778,7 @@
 
     move-result v0
 
-    .line 144
+    .line 145
     invoke-virtual {p0, p1}, Lcom/secaccu/clock/AutoClickEngine;->getY(Landroid/content/Context;)F
 
     move-result v2
@@ -787,7 +787,7 @@
 
     move-result v2
 
-    .line 145
+    .line 146
     const-string v3, "auto_click_pos_set"
 
     invoke-static {p1, v3, v1}, Lcom/secaccu/clock/AutoClickEngine;->id(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)I
@@ -844,7 +844,12 @@
 
     iput-wide p1, p0, Lcom/secaccu/clock/AutoClickEngine;->firedPressAt:J
 
-    .line 53
+    .line 52
+    sget-object p1, Lcom/secaccu/clock/AutoClickOverlay;->INSTANCE:Lcom/secaccu/clock/AutoClickOverlay;
+
+    invoke-virtual {p1}, Lcom/secaccu/clock/AutoClickOverlay;->hideAll()V
+
+    .line 54
     :cond_0
     return-void
 .end method
@@ -852,7 +857,7 @@
 .method public setPosition(Landroid/content/Context;FF)V
     .locals 3
 
-    .line 68
+    .line 69
     invoke-direct {p0, p1}, Lcom/secaccu/clock/AutoClickEngine;->prefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object v0
@@ -861,7 +866,7 @@
 
     move-result-object v0
 
-    .line 69
+    .line 70
     const-string v1, "auto_click_has_pos"
 
     const/4 v2, 0x1
@@ -870,24 +875,24 @@
 
     move-result-object v0
 
-    .line 70
+    .line 71
     const-string v1, "auto_click_x"
 
     invoke-interface {v0, v1, p2}, Landroid/content/SharedPreferences$Editor;->putFloat(Ljava/lang/String;F)Landroid/content/SharedPreferences$Editor;
 
     move-result-object v0
 
-    .line 71
+    .line 72
     const-string v1, "auto_click_y"
 
     invoke-interface {v0, v1, p3}, Landroid/content/SharedPreferences$Editor;->putFloat(Ljava/lang/String;F)Landroid/content/SharedPreferences$Editor;
 
     move-result-object v0
 
-    .line 72
+    .line 73
     invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
 
-    .line 73
+    .line 74
     sget-object v0, Lcom/secaccu/clock/AutoClickOverlay;->INSTANCE:Lcom/secaccu/clock/AutoClickOverlay;
 
     invoke-virtual {p1}, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
@@ -896,14 +901,14 @@
 
     invoke-virtual {v0, p1, p2, p3}, Lcom/secaccu/clock/AutoClickOverlay;->showMarker(Landroid/content/Context;FF)V
 
-    .line 74
+    .line 75
     return-void
 .end method
 
 .method public statusLine(Landroid/content/Context;)Ljava/lang/String;
     .locals 6
 
-    .line 115
+    .line 116
     sget-object v0, Lcom/secaccu/clock/ServerClock;->INSTANCE:Lcom/secaccu/clock/ServerClock;
 
     invoke-virtual {v0}, Lcom/secaccu/clock/ServerClock;->isReady()Z
@@ -916,7 +921,7 @@
 
     if-nez v0, :cond_0
 
-    .line 116
+    .line 117
     invoke-static {p1, v1, v2}, Lcom/secaccu/clock/AutoClickEngine;->id(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)I
 
     move-result v0
@@ -927,7 +932,7 @@
 
     return-object p1
 
-    .line 118
+    .line 119
     :cond_0
     sget-object v0, Lcom/secaccu/clock/ServerClock;->INSTANCE:Lcom/secaccu/clock/ServerClock;
 
@@ -935,10 +940,10 @@
 
     move-result-object v0
 
-    .line 119
+    .line 120
     if-nez v0, :cond_1
 
-    .line 120
+    .line 121
     invoke-static {p1, v1, v2}, Lcom/secaccu/clock/AutoClickEngine;->id(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)I
 
     move-result v0
@@ -949,7 +954,7 @@
 
     return-object p1
 
-    .line 122
+    .line 123
     :cond_1
     invoke-virtual {v0}, Lcom/secaccu/clock/ServerClock$Snapshot;->getServerNowMs()D
 
@@ -963,12 +968,12 @@
 
     move-result-wide v0
 
-    .line 123
+    .line 124
     invoke-virtual {p0, v0, v1}, Lcom/secaccu/clock/AutoClickEngine;->formatPressAt(J)Ljava/lang/String;
 
     move-result-object v3
 
-    .line 124
+    .line 125
     invoke-virtual {p0, p1}, Lcom/secaccu/clock/AutoClickEngine;->hasPosition(Landroid/content/Context;)Z
 
     move-result v4
@@ -977,7 +982,7 @@
 
     if-nez v4, :cond_2
 
-    .line 125
+    .line 126
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1010,7 +1015,7 @@
 
     return-object p1
 
-    .line 127
+    .line 128
     :cond_2
     invoke-virtual {p0, p1}, Lcom/secaccu/clock/AutoClickEngine;->isAccessibilityEnabled(Landroid/content/Context;)Z
 
@@ -1018,7 +1023,7 @@
 
     if-nez v4, :cond_3
 
-    .line 128
+    .line 129
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1051,7 +1056,7 @@
 
     return-object p1
 
-    .line 130
+    .line 131
     :cond_3
     iget-wide v4, p0, Lcom/secaccu/clock/AutoClickEngine;->firedPressAt:J
 
@@ -1061,7 +1066,7 @@
 
     if-nez v0, :cond_4
 
-    .line 131
+    .line 132
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1094,7 +1099,7 @@
 
     return-object p1
 
-    .line 133
+    .line 134
     :cond_4
     invoke-virtual {p0, p1}, Lcom/secaccu/clock/AutoClickEngine;->isEnabled(Landroid/content/Context;)Z
 
@@ -1102,7 +1107,7 @@
 
     if-eqz v0, :cond_5
 
-    .line 134
+    .line 135
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1135,7 +1140,7 @@
 
     return-object p1
 
-    .line 136
+    .line 137
     :cond_5
     new-instance p1, Ljava/lang/StringBuilder;
 
@@ -1167,7 +1172,7 @@
 .method public toast(Landroid/content/Context;Ljava/lang/String;)V
     .locals 1
 
-    .line 225
+    .line 226
     invoke-virtual {p1}, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
 
     move-result-object p1
@@ -1180,6 +1185,6 @@
 
     invoke-virtual {p1}, Landroid/widget/Toast;->show()V
 
-    .line 226
+    .line 227
     return-void
 .end method

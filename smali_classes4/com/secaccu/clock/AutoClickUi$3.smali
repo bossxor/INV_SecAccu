@@ -32,7 +32,7 @@
         }
     .end annotation
 
-    .line 91
+    .line 93
     iput-object p1, p0, Lcom/secaccu/clock/AutoClickUi$3;->this$0:Lcom/secaccu/clock/AutoClickUi;
 
     iput-object p2, p0, Lcom/secaccu/clock/AutoClickUi$3;->val$activity:Landroid/app/Activity;
@@ -47,13 +47,13 @@
 .method public onClick(Landroid/view/View;)V
     .locals 1
 
-    .line 94
+    .line 96
     iget-object p1, p0, Lcom/secaccu/clock/AutoClickUi$3;->this$0:Lcom/secaccu/clock/AutoClickUi;
 
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi$3;->val$activity:Landroid/app/Activity;
 
     invoke-static {p1, v0}, Lcom/secaccu/clock/AutoClickUi;->access$100(Lcom/secaccu/clock/AutoClickUi;Landroid/app/Activity;)V
 
-    .line 95
+    .line 97
     return-void
 .end method

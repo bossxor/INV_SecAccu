@@ -35,6 +35,7 @@ public final class AutoClickUi {
                 AutoClickEngine.id(activity, "autoClickPickButton", "id"));
         a11yButton = (MaterialButton) activity.findViewById(
                 AutoClickEngine.id(activity, "autoClickA11yButton", "id"));
+        AutoClickOverlay.INSTANCE.hidePicker();
         if (enabledSwitch == null) {
             return;
         }
@@ -64,6 +65,7 @@ public final class AutoClickUi {
                     AutoClickOverlay.INSTANCE.syncMarker(activity);
                 } else {
                     AutoClickEngine.INSTANCE.setEnabled(activity, false);
+                    AutoClickOverlay.INSTANCE.hideAll();
                 }
                 refresh(activity);
             }
@@ -119,9 +121,7 @@ public final class AutoClickUi {
                             enabled ? "auto_click_a11y_on" : "auto_click_a11y",
                             "string")));
         }
-        if (AutoClickEngine.INSTANCE.hasPosition(activity)) {
-            AutoClickOverlay.INSTANCE.syncMarker(activity);
-        }
+        AutoClickOverlay.INSTANCE.syncMarker(activity);
     }
 
     public void onTick(Activity activity) {

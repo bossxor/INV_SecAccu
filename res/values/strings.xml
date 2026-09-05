@@ -33,6 +33,7 @@
     <string name="alarm_lead_label">10초 전부터</string>
     <string name="alarm_title">정각 알람</string>
     <string name="auto_click_a11y">접근성 켜기</string>
+    <string name="auto_click_close">닫기</string>
     <string name="auto_click_a11y_on">접근성 켜짐</string>
     <string name="auto_click_armed">대기 중 · 정각 접속</string>
     <string name="auto_click_done">방금 클릭함 ·</string>
@@ -44,7 +45,7 @@
     <string name="auto_click_need_pos">먼저 누를 위치를 지정하세요</string>
     <string name="auto_click_need_sync">서버시간을 맞추면 정각 접속 시각에 누릅니다</string>
     <string name="auto_click_pick">위치 지정</string>
-    <string name="auto_click_picker_hint">예매 화면을 연 뒤, 누를 버튼을 탭하세요</string>
+    <string name="auto_click_picker_hint">화면에 보이는 버튼을 그대로 탭하세요. 아래쪽 취소·확인도 됩니다.</string>
     <string name="auto_click_pos_set">위치 %1$d, %2$d</string>
     <string name="auto_click_pos_unset">위치 미지정</string>
     <string name="auto_click_service_desc">정각 접속 시각에 지정한 자리를 한 번 탭합니다</string>

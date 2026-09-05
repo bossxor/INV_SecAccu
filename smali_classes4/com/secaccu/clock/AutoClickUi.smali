@@ -211,20 +211,25 @@
     iput-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->a11yButton:Lcom/google/android/material/button/MaterialButton;
 
     .line 38
+    sget-object v0, Lcom/secaccu/clock/AutoClickOverlay;->INSTANCE:Lcom/secaccu/clock/AutoClickOverlay;
+
+    invoke-virtual {v0}, Lcom/secaccu/clock/AutoClickOverlay;->hidePicker()V
+
+    .line 39
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->enabledSwitch:Lcom/google/android/material/materialswitch/MaterialSwitch;
 
     if-nez v0, :cond_0
 
-    .line 39
+    .line 40
     return-void
 
-    .line 42
+    .line 43
     :cond_0
     const/4 v1, 0x0
 
     invoke-virtual {v0, v1}, Lcom/google/android/material/materialswitch/MaterialSwitch;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
 
-    .line 43
+    .line 44
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->enabledSwitch:Lcom/google/android/material/materialswitch/MaterialSwitch;
 
     sget-object v1, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
@@ -235,7 +240,7 @@
 
     invoke-virtual {v0, v1}, Lcom/google/android/material/materialswitch/MaterialSwitch;->setChecked(Z)V
 
-    .line 44
+    .line 45
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->enabledSwitch:Lcom/google/android/material/materialswitch/MaterialSwitch;
 
     new-instance v1, Lcom/secaccu/clock/AutoClickUi$1;
@@ -244,36 +249,36 @@
 
     invoke-virtual {v0, v1}, Lcom/google/android/material/materialswitch/MaterialSwitch;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
 
-    .line 72
+    .line 74
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->pickButton:Lcom/google/android/material/button/MaterialButton;
 
     if-eqz v0, :cond_1
 
-    .line 73
+    .line 75
     new-instance v1, Lcom/secaccu/clock/AutoClickUi$2;
 
     invoke-direct {v1, p0, p1}, Lcom/secaccu/clock/AutoClickUi$2;-><init>(Lcom/secaccu/clock/AutoClickUi;Landroid/app/Activity;)V
 
     invoke-virtual {v0, v1}, Lcom/google/android/material/button/MaterialButton;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    .line 90
+    .line 92
     :cond_1
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->a11yButton:Lcom/google/android/material/button/MaterialButton;
 
     if-eqz v0, :cond_2
 
-    .line 91
+    .line 93
     new-instance v1, Lcom/secaccu/clock/AutoClickUi$3;
 
     invoke-direct {v1, p0, p1}, Lcom/secaccu/clock/AutoClickUi$3;-><init>(Lcom/secaccu/clock/AutoClickUi;Landroid/app/Activity;)V
 
     invoke-virtual {v0, v1}, Lcom/google/android/material/button/MaterialButton;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    .line 98
+    .line 100
     :cond_2
     invoke-virtual {p0, p1}, Lcom/secaccu/clock/AutoClickUi;->refresh(Landroid/app/Activity;)V
 
-    .line 99
+    .line 101
     return-void
 .end method
 
@@ -307,12 +312,12 @@
 .method public refresh(Landroid/app/Activity;)V
     .locals 3
 
-    .line 102
+    .line 104
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->targetView:Landroid/widget/TextView;
 
     if-eqz v0, :cond_0
 
-    .line 103
+    .line 105
     sget-object v1, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
 
     invoke-virtual {v1, p1}, Lcom/secaccu/clock/AutoClickEngine;->statusLine(Landroid/content/Context;)Ljava/lang/String;
@@ -321,13 +326,13 @@
 
     invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 105
+    .line 107
     :cond_0
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->posView:Landroid/widget/TextView;
 
     if-eqz v0, :cond_1
 
-    .line 106
+    .line 108
     sget-object v1, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
 
     invoke-virtual {v1, p1}, Lcom/secaccu/clock/AutoClickEngine;->positionLine(Landroid/content/Context;)Ljava/lang/String;
@@ -336,13 +341,13 @@
 
     invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 108
+    .line 110
     :cond_1
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->enabledSwitch:Lcom/google/android/material/materialswitch/MaterialSwitch;
 
     if-eqz v0, :cond_2
 
-    .line 109
+    .line 111
     invoke-virtual {v0}, Lcom/google/android/material/materialswitch/MaterialSwitch;->isChecked()Z
 
     move-result v0
@@ -355,14 +360,14 @@
 
     if-eq v0, v1, :cond_2
 
-    .line 110
+    .line 112
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->enabledSwitch:Lcom/google/android/material/materialswitch/MaterialSwitch;
 
     const/4 v1, 0x0
 
     invoke-virtual {v0, v1}, Lcom/google/android/material/materialswitch/MaterialSwitch;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
 
-    .line 111
+    .line 113
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->enabledSwitch:Lcom/google/android/material/materialswitch/MaterialSwitch;
 
     sget-object v1, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
@@ -373,26 +378,26 @@
 
     invoke-virtual {v0, v1}, Lcom/google/android/material/materialswitch/MaterialSwitch;->setChecked(Z)V
 
-    .line 112
+    .line 114
     invoke-virtual {p0, p1}, Lcom/secaccu/clock/AutoClickUi;->attach(Landroid/app/Activity;)V
 
-    .line 114
+    .line 116
     :cond_2
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->a11yButton:Lcom/google/android/material/button/MaterialButton;
 
     if-eqz v0, :cond_4
 
-    .line 115
+    .line 117
     sget-object v0, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
 
     invoke-virtual {v0, p1}, Lcom/secaccu/clock/AutoClickEngine;->isAccessibilityEnabled(Landroid/content/Context;)Z
 
     move-result v0
 
-    .line 116
+    .line 118
     iget-object v1, p0, Lcom/secaccu/clock/AutoClickUi;->a11yButton:Lcom/google/android/material/button/MaterialButton;
 
-    .line 119
+    .line 121
     if-eqz v0, :cond_3
 
     const-string v0, "auto_click_a11y_on"
@@ -402,7 +407,7 @@
     :cond_3
     const-string v0, "auto_click_a11y"
 
-    .line 117
+    .line 119
     :goto_0
     const-string v2, "string"
 
@@ -410,29 +415,19 @@
 
     move-result v0
 
-    .line 116
+    .line 118
     invoke-virtual {p1, v0}, Landroid/app/Activity;->getString(I)Ljava/lang/String;
 
     move-result-object v0
 
     invoke-virtual {v1, v0}, Lcom/google/android/material/button/MaterialButton;->setText(Ljava/lang/CharSequence;)V
 
-    .line 122
+    .line 124
     :cond_4
-    sget-object v0, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
-
-    invoke-virtual {v0, p1}, Lcom/secaccu/clock/AutoClickEngine;->hasPosition(Landroid/content/Context;)Z
-
-    move-result v0
-
-    if-eqz v0, :cond_5
-
-    .line 123
     sget-object v0, Lcom/secaccu/clock/AutoClickOverlay;->INSTANCE:Lcom/secaccu/clock/AutoClickOverlay;
 
     invoke-virtual {v0, p1}, Lcom/secaccu/clock/AutoClickOverlay;->syncMarker(Landroid/content/Context;)V
 
     .line 125
-    :cond_5
     return-void
 .end method

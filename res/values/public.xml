@@ -3930,6 +3930,7 @@
     <public type="string" name="alarm_lead_label" id="0x7f0f001e" />
     <public type="string" name="alarm_title" id="0x7f0f001f" />
     <public type="string" name="auto_click_a11y" id="0x7f0f00bd" />
+    <public type="string" name="auto_click_close" id="0x7f0f00ce" />
     <public type="string" name="auto_click_a11y_on" id="0x7f0f00be" />
     <public type="string" name="auto_click_armed" id="0x7f0f00bf" />
     <public type="string" name="auto_click_done" id="0x7f0f00c0" />
