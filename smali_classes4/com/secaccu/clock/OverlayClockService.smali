@@ -1464,10 +1464,37 @@
     :cond_1
     iput-object v1, p0, Lcom/secaccu/clock/OverlayClockService;->overlayView:Landroid/view/View;
 
+    sget-object v0, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
+
+    invoke-virtual {v0}, Lcom/secaccu/clock/AutoClickEngine;->cancelSchedule()V
+
+    sget-object v0, Lcom/secaccu/clock/AutoClickOverlay;->INSTANCE:Lcom/secaccu/clock/AutoClickOverlay;
+
+    invoke-virtual {v0}, Lcom/secaccu/clock/AutoClickOverlay;->hideAll()V
+
     .line 91
     invoke-super {p0}, Landroid/app/Service;->onDestroy()V
 
     .line 92
+    return-void
+.end method
+
+.method public onTaskRemoved(Landroid/content/Intent;)V
+    .locals 1
+    .param p1, "rootIntent"    # Landroid/content/Intent;
+
+    sget-object v0, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
+
+    invoke-virtual {v0}, Lcom/secaccu/clock/AutoClickEngine;->cancelSchedule()V
+
+    sget-object v0, Lcom/secaccu/clock/AutoClickOverlay;->INSTANCE:Lcom/secaccu/clock/AutoClickOverlay;
+
+    invoke-virtual {v0}, Lcom/secaccu/clock/AutoClickOverlay;->hideAll()V
+
+    invoke-virtual {p0}, Lcom/secaccu/clock/OverlayClockService;->stopSelf()V
+
+    invoke-super {p0, p1}, Landroid/app/Service;->onTaskRemoved(Landroid/content/Intent;)V
+
     return-void
 .end method
 
@@ -1499,6 +1526,14 @@
     if-eqz v0, :cond_1
 
     .line 80
+    sget-object v0, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
+
+    invoke-virtual {v0}, Lcom/secaccu/clock/AutoClickEngine;->cancelSchedule()V
+
+    sget-object v0, Lcom/secaccu/clock/AutoClickOverlay;->INSTANCE:Lcom/secaccu/clock/AutoClickOverlay;
+
+    invoke-virtual {v0}, Lcom/secaccu/clock/AutoClickOverlay;->hideAll()V
+
     invoke-virtual {p0}, Lcom/secaccu/clock/OverlayClockService;->stopSelf()V
 
     .line 81

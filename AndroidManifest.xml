@@ -14,7 +14,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <service android:exported="false" android:foregroundServiceType="specialUse" android:name="com.secaccu.clock.OverlayClockService">
+        <service android:exported="false" android:stopWithTask="true" android:foregroundServiceType="specialUse" android:name="com.secaccu.clock.OverlayClockService">
             <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE" android:value="Shows a compact server-time overlay while using other apps for ticketing."/>
         </service>
         <service android:exported="true" android:label="@string/auto_click_title" android:name="com.secaccu.clock.AutoClickService" android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">

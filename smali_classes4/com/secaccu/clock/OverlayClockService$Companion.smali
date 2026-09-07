@@ -98,6 +98,14 @@
     invoke-static {p1, v0}, Lkotlin/jvm/internal/Intrinsics;->checkNotNullParameter(Ljava/lang/Object;Ljava/lang/String;)V
 
     .line 271
+    sget-object v0, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
+
+    invoke-virtual {v0}, Lcom/secaccu/clock/AutoClickEngine;->cancelSchedule()V
+
+    sget-object v0, Lcom/secaccu/clock/AutoClickOverlay;->INSTANCE:Lcom/secaccu/clock/AutoClickOverlay;
+
+    invoke-virtual {v0}, Lcom/secaccu/clock/AutoClickOverlay;->hideAll()V
+
     new-instance v0, Landroid/content/Intent;
 
     const-class v1, Lcom/secaccu/clock/OverlayClockService;
