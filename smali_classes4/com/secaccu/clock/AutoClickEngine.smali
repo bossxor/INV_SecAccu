@@ -338,6 +338,10 @@
 
     iput-object v0, p0, Lcom/secaccu/clock/AutoClickEngine;->appContext:Landroid/content/Context;
 
+    sget-object v0, Lcom/secaccu/clock/ExactHourAlarm;->INSTANCE:Lcom/secaccu/clock/ExactHourAlarm;
+
+    invoke-virtual {v0, p1}, Lcom/secaccu/clock/ExactHourAlarm;->syncTargetToFormatter(Landroid/content/Context;)V
+
     .line 151
     invoke-virtual {p0, p1}, Lcom/secaccu/clock/AutoClickEngine;->isEnabled(Landroid/content/Context;)Z
 

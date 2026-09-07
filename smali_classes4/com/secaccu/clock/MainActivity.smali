@@ -2398,13 +2398,45 @@
     :cond_0
     iget-object v0, v0, Lcom/secaccu/clock/databinding/ActivityMainBinding;->alarmLeadLabel:Landroid/widget/TextView;
 
-    new-instance v3, Ljava/lang/StringBuilder;
+    invoke-static {}, Lcom/secaccu/clock/PressHintFormatter;->isExactHourMode()Z
 
-    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
+    move-result v3
 
-    const-string v4, "\uc815\uac01 "
+    if-eqz v3, :cond_lead_exact
+
+    const-string v3, "\uc815\uac01 "
+
+    goto :goto_lead_prefix
+
+    :cond_lead_exact
+    invoke-static {}, Lcom/secaccu/clock/PressHintFormatter;->targetLabel()Ljava/lang/String;
+
+    move-result-object v3
+
+    new-instance v4, Ljava/lang/StringBuilder;
+
+    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v3
+
+    const-string v4, " "
 
     invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v3
+
+    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v3
+
+    :goto_lead_prefix
+    new-instance v4, Ljava/lang/StringBuilder;
+
+    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v3
 
@@ -2872,6 +2904,10 @@
     .line 112
     :cond_10
     invoke-direct {p0}, Lcom/secaccu/clock/MainActivity;->renderClock()V
+
+    sget-object v1, Lcom/secaccu/clock/AlarmTargetUi;->INSTANCE:Lcom/secaccu/clock/AlarmTargetUi;
+
+    invoke-virtual {v1, p0}, Lcom/secaccu/clock/AlarmTargetUi;->attach(Landroid/app/Activity;)V
 
     sget-object v1, Lcom/secaccu/clock/AutoClickUi;->INSTANCE:Lcom/secaccu/clock/AutoClickUi;
 

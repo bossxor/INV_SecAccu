@@ -1205,6 +1205,14 @@
     goto :goto_3
 
     :cond_3
+    sget-object v4, Lcom/secaccu/clock/ExactHourAlarm;->INSTANCE:Lcom/secaccu/clock/ExactHourAlarm;
+
+    move-object v5, p0
+
+    check-cast v5, Landroid/content/Context;
+
+    invoke-virtual {v4, v5}, Lcom/secaccu/clock/ExactHourAlarm;->syncTargetToFormatter(Landroid/content/Context;)V
+
     invoke-virtual {v0}, Lcom/secaccu/clock/ServerClock$Snapshot;->getServerNowMs()D
 
     move-result-wide v5

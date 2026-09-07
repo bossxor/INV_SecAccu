@@ -75,6 +75,10 @@
 
 .field private static final KEY_LEAD:Ljava/lang/String; = "alarm_lead_seconds"
 
+.field private static final KEY_TARGET_HOUR:Ljava/lang/String; = "alarm_target_hour"
+
+.field private static final KEY_TARGET_MINUTE:Ljava/lang/String; = "alarm_target_minute"
+
 .field public static final MAX_LEAD:I = 0x1e
 
 .field public static final MIN_LEAD:I = 0x1
@@ -269,7 +273,7 @@
 
 # virtual methods
 .method public final evaluate(Landroid/content/Context;J)V
-    .locals 9
+    .locals 12
     .param p1, "context"    # Landroid/content/Context;
     .param p2, "serverMs"    # J
 
@@ -277,7 +281,8 @@
 
     invoke-static {p1, v0}, Lkotlin/jvm/internal/Intrinsics;->checkNotNullParameter(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 68
+    invoke-virtual {p0, p1}, Lcom/secaccu/clock/ExactHourAlarm;->syncTargetToFormatter(Landroid/content/Context;)V
+
     invoke-virtual {p0, p1}, Lcom/secaccu/clock/ExactHourAlarm;->isEnabled(Landroid/content/Context;)Z
 
     move-result v0
@@ -286,128 +291,178 @@
 
     if-nez v0, :cond_0
 
-    .line 69
     sput v1, Lcom/secaccu/clock/ExactHourAlarm;->lastKey:I
 
-    .line 70
     return-void
 
-    .line 72
     :cond_0
     invoke-direct {p0, p2, p3}, Lcom/secaccu/clock/ExactHourAlarm;->calendar(J)Ljava/util/Calendar;
 
     move-result-object v0
 
-    .line 73
-    .local v0, "cal":Ljava/util/Calendar;
     const/16 v2, 0xb
 
     invoke-virtual {v0, v2}, Ljava/util/Calendar;->get(I)I
 
     move-result v2
 
-    .line 74
-    .local v2, "hour":I
     const/16 v3, 0xc
 
     invoke-virtual {v0, v3}, Ljava/util/Calendar;->get(I)I
 
     move-result v3
 
-    .line 75
-    .local v3, "minute":I
     const/16 v4, 0xd
 
     invoke-virtual {v0, v4}, Ljava/util/Calendar;->get(I)I
 
     move-result v4
 
-    .line 76
-    .local v4, "second":I
     invoke-virtual {p0, p1}, Lcom/secaccu/clock/ExactHourAlarm;->leadSeconds(Landroid/content/Context;)I
 
     move-result v5
 
-    .line 77
-    .local v5, "lead":I
-    rsub-int/lit8 v6, v5, 0x3c
+    mul-int/lit16 v6, v2, 0x2710
 
-    .line 78
-    .local v6, "startSecond":I
-    mul-int/lit16 v7, v2, 0x2710
+    mul-int/lit8 v7, v3, 0x64
 
-    mul-int/lit8 v8, v3, 0x64
+    add-int/2addr v6, v7
 
-    add-int/2addr v7, v8
+    add-int/2addr v6, v4
 
-    add-int/2addr v7, v4
+    invoke-virtual {p0, p1}, Lcom/secaccu/clock/ExactHourAlarm;->targetHour(Landroid/content/Context;)I
 
-    .line 79
-    .local v7, "key":I
-    nop
+    move-result v7
 
-    .line 80
+    if-gez v7, :cond_4
+
+    rsub-int/lit8 v8, v5, 0x3c
+
     if-nez v3, :cond_1
 
     if-nez v4, :cond_1
 
-    .line 81
     sget v1, Lcom/secaccu/clock/ExactHourAlarm;->lastKey:I
 
-    if-eq v1, v7, :cond_3
+    if-eq v1, v6, :cond_3
 
-    .line 82
-    sput v7, Lcom/secaccu/clock/ExactHourAlarm;->lastKey:I
+    sput v6, Lcom/secaccu/clock/ExactHourAlarm;->lastKey:I
 
-    .line 83
     const/4 v1, 0x1
 
     invoke-direct {p0, v1}, Lcom/secaccu/clock/ExactHourAlarm;->beep(Z)V
 
     goto :goto_0
 
-    .line 86
     :cond_1
-    const/16 v8, 0x3b
+    const/16 v9, 0x3b
 
-    if-ne v3, v8, :cond_2
+    if-ne v3, v9, :cond_2
 
-    if-lt v4, v6, :cond_2
+    if-lt v4, v8, :cond_2
 
-    .line 87
     sget v1, Lcom/secaccu/clock/ExactHourAlarm;->lastKey:I
 
-    if-eq v1, v7, :cond_3
+    if-eq v1, v6, :cond_3
 
-    .line 88
-    sput v7, Lcom/secaccu/clock/ExactHourAlarm;->lastKey:I
+    sput v6, Lcom/secaccu/clock/ExactHourAlarm;->lastKey:I
 
-    .line 89
     const/4 v1, 0x0
 
     invoke-direct {p0, v1}, Lcom/secaccu/clock/ExactHourAlarm;->beep(Z)V
 
     goto :goto_0
 
-    .line 92
     :cond_2
     sput v1, Lcom/secaccu/clock/ExactHourAlarm;->lastKey:I
 
-    .line 94
     :cond_3
     :goto_0
+    return-void
+
+    :cond_4
+    invoke-virtual {p0, p1}, Lcom/secaccu/clock/ExactHourAlarm;->targetMinute(Landroid/content/Context;)I
+
+    move-result v8
+
+    mul-int/lit16 v9, v2, 0xe10
+
+    mul-int/lit8 v10, v3, 0x3c
+
+    add-int/2addr v9, v10
+
+    add-int/2addr v9, v4
+
+    mul-int/lit16 v10, v7, 0xe10
+
+    mul-int/lit8 v11, v8, 0x3c
+
+    add-int/2addr v10, v11
+
+    sub-int v11, v10, v9
+
+    if-gez v11, :cond_5
+
+    const v9, 0x15180
+
+    add-int/2addr v11, v9
+
+    :cond_5
+    if-ne v2, v7, :cond_6
+
+    if-ne v3, v8, :cond_6
+
+    if-nez v4, :cond_6
+
+    sget v1, Lcom/secaccu/clock/ExactHourAlarm;->lastKey:I
+
+    if-eq v1, v6, :cond_8
+
+    sput v6, Lcom/secaccu/clock/ExactHourAlarm;->lastKey:I
+
+    const/4 v1, 0x1
+
+    invoke-direct {p0, v1}, Lcom/secaccu/clock/ExactHourAlarm;->beep(Z)V
+
+    goto :goto_1
+
+    :cond_6
+    if-lez v11, :cond_7
+
+    if-gt v11, v5, :cond_7
+
+    sget v1, Lcom/secaccu/clock/ExactHourAlarm;->lastKey:I
+
+    if-eq v1, v6, :cond_8
+
+    sput v6, Lcom/secaccu/clock/ExactHourAlarm;->lastKey:I
+
+    const/4 v1, 0x0
+
+    invoke-direct {p0, v1}, Lcom/secaccu/clock/ExactHourAlarm;->beep(Z)V
+
+    goto :goto_1
+
+    :cond_7
+    sput v1, Lcom/secaccu/clock/ExactHourAlarm;->lastKey:I
+
+    :cond_8
+    :goto_1
     return-void
 .end method
 
 .method public final hint(I)Ljava/lang/String;
-    .locals 3
+    .locals 4
     .param p1, "lead"    # I
 
-    .line 44
+    invoke-static {}, Lcom/secaccu/clock/PressHintFormatter;->isExactHourMode()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
     rsub-int/lit8 v0, p1, 0x3c
 
-    .line 45
-    .local v0, "startSecond":I
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
@@ -420,19 +475,64 @@
 
     invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
+    const-string v1, "\ucd08\ubd80\ud130 \ucd08\ub9c8\ub2e4 \uc091, 13:00\u00b714:00\ucc98\ub7fc \uc815\uac01\uc5d0 \ud55c \ubc88 \ub354 \ud06c\uac8c. \uc624\ubc84\ub808\uc774\ub3c4 \uc810\uc810 \ube68\uac1c\uc9d1\ub2c8\ub2e4."
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+
+    :cond_0
+    invoke-static {}, Lcom/secaccu/clock/PressHintFormatter;->targetLabel()Ljava/lang/String;
+
+    move-result-object v0
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
     move-result-object v1
 
-    const-string v2, "\ucd08\ubd80\ud130 \ucd08\ub9c8\ub2e4 \uc091, 13:00\u00b714:00\ucc98\ub7fc \uc815\uac01\uc5d0 \ud55c \ubc88 \ub354 \ud06c\uac8c. \uc624\ubc84\ub808\uc774\ub3c4 \uc810\uc810 \ube68\uac1c\uc9d1\ub2c8\ub2e4."
+    const-string v2, " \uc9c1\uc804 "
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v1
 
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
     move-result-object v1
 
-    return-object v1
+    const-string v2, "\ucd08\ubd80\ud130 \ucd08\ub9c8\ub2e4 \uc091, "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    const-string v1, " \uc5d0 \ud55c \ubc88 \ub354 \ud06c\uac8c. \uc624\ubc84\ub808\uc774\ub3c4 \uc810\uc810 \ube68\uac1c\uc9d1\ub2c8\ub2e4."
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
 .end method
 
 .method public final isEnabled(Landroid/content/Context;)Z
@@ -651,92 +751,248 @@
     return-void
 .end method
 
+.method public final setTargetTime(Landroid/content/Context;II)V
+    .locals 2
+    .param p1, "context"    # Landroid/content/Context;
+    .param p2, "hour"    # I
+    .param p3, "minute"    # I
+
+    const-string v0, "context"
+
+    invoke-static {p1, v0}, Lkotlin/jvm/internal/Intrinsics;->checkNotNullParameter(Ljava/lang/Object;Ljava/lang/String;)V
+
+    invoke-direct {p0, p1}, Lcom/secaccu/clock/ExactHourAlarm;->prefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "alarm_target_hour"
+
+    invoke-interface {v0, v1, p2}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "alarm_target_minute"
+
+    invoke-interface {v0, v1, p3}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    invoke-static {p2, p3}, Lcom/secaccu/clock/PressHintFormatter;->setTarget(II)V
+
+    const/4 v0, -0x1
+
+    sput v0, Lcom/secaccu/clock/ExactHourAlarm;->lastKey:I
+
+    sget-object v0, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
+
+    invoke-virtual {v0}, Lcom/secaccu/clock/AutoClickEngine;->cancelSchedule()V
+
+    return-void
+.end method
+
+.method public final syncTargetToFormatter(Landroid/content/Context;)V
+    .locals 2
+    .param p1, "context"    # Landroid/content/Context;
+
+    invoke-virtual {p0, p1}, Lcom/secaccu/clock/ExactHourAlarm;->targetHour(Landroid/content/Context;)I
+
+    move-result v0
+
+    invoke-virtual {p0, p1}, Lcom/secaccu/clock/ExactHourAlarm;->targetMinute(Landroid/content/Context;)I
+
+    move-result v1
+
+    invoke-static {v0, v1}, Lcom/secaccu/clock/PressHintFormatter;->setTarget(II)V
+
+    return-void
+.end method
+
+.method public final targetHour(Landroid/content/Context;)I
+    .locals 3
+    .param p1, "context"    # Landroid/content/Context;
+
+    invoke-direct {p0, p1}, Lcom/secaccu/clock/ExactHourAlarm;->prefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "alarm_target_hour"
+
+    const/4 v2, -0x1
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final targetMinute(Landroid/content/Context;)I
+    .locals 3
+    .param p1, "context"    # Landroid/content/Context;
+
+    invoke-direct {p0, p1}, Lcom/secaccu/clock/ExactHourAlarm;->prefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "alarm_target_minute"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
+
+    move-result v0
+
+    return v0
+.end method
+
 .method public final warningProgress(JI)F
-    .locals 9
+    .locals 11
     .param p1, "serverMs"    # J
     .param p3, "leadSeconds"    # I
 
-    .line 52
     invoke-direct {p0, p1, p2}, Lcom/secaccu/clock/ExactHourAlarm;->calendar(J)Ljava/util/Calendar;
 
     move-result-object v0
 
-    .line 53
-    .local v0, "cal":Ljava/util/Calendar;
-    const/16 v1, 0xc
+    const/16 v1, 0xb
 
     invoke-virtual {v0, v1}, Ljava/util/Calendar;->get(I)I
 
     move-result v1
 
-    .line 54
-    .local v1, "minute":I
-    const/16 v2, 0xd
+    const/16 v2, 0xc
 
     invoke-virtual {v0, v2}, Ljava/util/Calendar;->get(I)I
 
     move-result v2
 
-    .line 55
-    .local v2, "second":I
-    const/16 v3, 0x1e
+    const/16 v3, 0xd
 
-    const/4 v4, 0x1
-
-    invoke-static {p3, v4, v3}, Lkotlin/ranges/RangesKt;->coerceIn(III)I
+    invoke-virtual {v0, v3}, Ljava/util/Calendar;->get(I)I
 
     move-result v3
 
-    .line 56
-    .local v3, "lead":I
-    rsub-int/lit8 v5, v3, 0x3c
+    const/16 v4, 0x1e
 
-    .line 57
-    .local v5, "startSecond":I
-    nop
+    const/4 v5, 0x1
 
-    .line 58
+    invoke-static {p3, v5, v4}, Lkotlin/ranges/RangesKt;->coerceIn(III)I
+
+    move-result v4
+
     const/high16 v6, 0x3f800000    # 1.0f
 
-    if-nez v1, :cond_0
+    invoke-static {}, Lcom/secaccu/clock/PressHintFormatter;->isExactHourMode()Z
+
+    move-result v7
+
+    if-eqz v7, :cond_3
+
+    rsub-int/lit8 v7, v4, 0x3c
 
     if-nez v2, :cond_0
 
-    goto :goto_0
+    if-nez v3, :cond_0
 
-    .line 59
-    :cond_0
-    const/16 v7, 0x3b
-
-    if-ne v1, v7, :cond_1
-
-    if-lt v2, v5, :cond_1
-
-    .line 60
-    sub-int v7, v2, v5
-
-    add-int/2addr v7, v4
-
-    .line 61
-    .local v7, "elapsed":I
-    int-to-float v4, v7
-
-    int-to-float v8, v3
-
-    div-float/2addr v4, v8
-
-    invoke-static {v6, v4}, Ljava/lang/Math;->min(FF)F
-
-    move-result v6
-
-    .end local v7    # "elapsed":I
-    goto :goto_0
-
-    .line 63
-    :cond_1
-    const/4 v6, 0x0
-
-    .line 57
-    :goto_0
     return v6
+
+    :cond_0
+    const/16 v8, 0x3b
+
+    if-ne v2, v8, :cond_1
+
+    if-lt v3, v7, :cond_1
+
+    sub-int v8, v3, v7
+
+    add-int/2addr v8, v5
+
+    int-to-float v5, v8
+
+    int-to-float v7, v4
+
+    div-float/2addr v5, v7
+
+    invoke-static {v6, v5}, Ljava/lang/Math;->min(FF)F
+
+    move-result v5
+
+    return v5
+
+    :cond_1
+    const/4 v5, 0x0
+
+    return v5
+
+    :cond_3
+    invoke-static {}, Lcom/secaccu/clock/PressHintFormatter;->getTargetHour()I
+
+    move-result v7
+
+    invoke-static {}, Lcom/secaccu/clock/PressHintFormatter;->getTargetMinute()I
+
+    move-result v8
+
+    if-ne v1, v7, :cond_4
+
+    if-ne v2, v8, :cond_4
+
+    if-nez v3, :cond_4
+
+    return v6
+
+    :cond_4
+    mul-int/lit16 v9, v1, 0xe10
+
+    mul-int/lit8 v10, v2, 0x3c
+
+    add-int/2addr v9, v10
+
+    add-int/2addr v9, v3
+
+    mul-int/lit16 v10, v7, 0xe10
+
+    mul-int/lit8 v7, v8, 0x3c
+
+    add-int/2addr v10, v7
+
+    sub-int/2addr v10, v9
+
+    if-gez v10, :cond_5
+
+    const v7, 0x15180
+
+    add-int/2addr v10, v7
+
+    :cond_5
+    if-lez v10, :cond_6
+
+    if-gt v10, v4, :cond_6
+
+    sub-int v7, v4, v10
+
+    add-int/2addr v7, v5
+
+    int-to-float v5, v7
+
+    int-to-float v7, v4
+
+    div-float/2addr v5, v7
+
+    invoke-static {v6, v5}, Ljava/lang/Math;->min(FF)F
+
+    move-result v5
+
+    return v5
+
+    :cond_6
+    const/4 v5, 0x0
+
+    return v5
 .end method

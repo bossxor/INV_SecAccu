@@ -76,6 +76,7 @@
     <id name="alarmLeadLabel" />
     <id name="alarmLeadSlider" />
     <id name="alarmSwitch" />
+    <id name="alarmTargetButton" />
     <id name="alertTitle" />
     <id name="aligned" />
     <id name="all" />

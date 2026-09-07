@@ -3231,6 +3231,7 @@
     <public type="id" name="alarmLeadLabel" id="0x7f080049" />
     <public type="id" name="alarmLeadSlider" id="0x7f08004a" />
     <public type="id" name="alarmSwitch" id="0x7f08004b" />
+    <public type="id" name="alarmTargetButton" id="0x7f08021d" />
     <public type="id" name="alertTitle" id="0x7f08004c" />
     <public type="id" name="aligned" id="0x7f08004d" />
     <public type="id" name="all" id="0x7f08004e" />
@@ -3929,6 +3930,10 @@
     <public type="string" name="alarm_hint" id="0x7f0f001d" />
     <public type="string" name="alarm_lead_label" id="0x7f0f001e" />
     <public type="string" name="alarm_title" id="0x7f0f001f" />
+    <public type="string" name="alarm_target_custom" id="0x7f0f00cf" />
+    <public type="string" name="alarm_target_exact" id="0x7f0f00d0" />
+    <public type="string" name="alarm_target_picker_title" id="0x7f0f00d1" />
+    <public type="string" name="alarm_target_reset" id="0x7f0f00d2" />
     <public type="string" name="auto_click_a11y" id="0x7f0f00bd" />
     <public type="string" name="auto_click_close" id="0x7f0f00ce" />
     <public type="string" name="auto_click_a11y_on" id="0x7f0f00be" />
