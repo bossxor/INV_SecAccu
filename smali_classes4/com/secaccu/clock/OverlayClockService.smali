@@ -1110,7 +1110,7 @@
 .end method
 
 .method private final render()V
-    .locals 9
+    .locals 10
 
     .line 128
     sget-object v0, Lcom/secaccu/clock/ServerClock;->INSTANCE:Lcom/secaccu/clock/ServerClock;
@@ -1205,13 +1205,13 @@
     goto :goto_3
 
     :cond_3
-    sget-object v4, Lcom/secaccu/clock/ExactHourAlarm;->INSTANCE:Lcom/secaccu/clock/ExactHourAlarm;
+    sget-object v9, Lcom/secaccu/clock/ExactHourAlarm;->INSTANCE:Lcom/secaccu/clock/ExactHourAlarm;
 
     move-object v5, p0
 
     check-cast v5, Landroid/content/Context;
 
-    invoke-virtual {v4, v5}, Lcom/secaccu/clock/ExactHourAlarm;->syncTargetToFormatter(Landroid/content/Context;)V
+    invoke-virtual {v9, v5}, Lcom/secaccu/clock/ExactHourAlarm;->syncTargetToFormatter(Landroid/content/Context;)V
 
     invoke-virtual {v0}, Lcom/secaccu/clock/ServerClock$Snapshot;->getServerNowMs()D
 
