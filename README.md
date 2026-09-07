@@ -10,15 +10,14 @@
 | 버전 | 1.0.0-debug (versionCode: 1) |
 | minSdk | 26 |
 | targetSdk | 34 |
-| 저장소 | Public — https://github.com/bossxor/INV_SecAccu |
+| 저장소 | **Public** — https://github.com/bossxor/INV_SecAccu |
+| 최신 릴리스 | [v1.1.0](https://github.com/bossxor/INV_SecAccu/releases/tag/v1.1.0) |
 
 ## 다운로드 (지인 공유용)
 
-로그인 없이 APK 바로 설치:
+로그인 없이 APK 바로 받기:
 
 **https://github.com/bossxor/INV_SecAccu/releases/download/v1.1.0/SecAccu-signed.apk**
-
-릴리스 페이지: https://github.com/bossxor/INV_SecAccu/releases
 
 ```bash
 adb install -r SecAccu-signed.apk
@@ -31,6 +30,15 @@ adb install -r SecAccu-signed.apk
 - **접속 시각 지정** — 매시 정각 또는 `13:30`처럼 원하는 시:분 설정
 - **접속 알람** — 지정 시각 N초 전부터 초마다 삑, 해당 시각에 큰 알림
 - **자동 클릭** — 지정 시각(RTT 보정)에 화면 좌표를 한 번 탭 (접근성 필요)
+
+## 사용 팁
+
+| 동작 | 설명 |
+|------|------|
+| 오버레이 켜기 | 작은 시계를 띄우고 앱은 백그라운드로 보냄 |
+| 오버레이 길게 누르기 | 앱 화면으로 돌아옴 |
+| **앱 완전 종료** | 최근 앱 목록에서 SecAccu를 밀어 제거하면 **오버레이 시계 + 클릭 위치 표시**가 함께 사라짐 |
+| 홈만 누른 경우 | 다른 앱 사용 중이므로 오버레이는 **유지**됨 (의도된 동작) |
 
 ## 프로젝트 구조
 
@@ -69,8 +77,6 @@ adb install -r SecAccu-signed.apk
 
 ## 단위 테스트
 
-접속 시각·알람 리드 윈도우 로직 검증:
-
 ```bash
 cd tools
 javac PressTimingTest.java
@@ -84,10 +90,11 @@ java PressTimingTest
 | 클래스 | 역할 |
 |--------|------|
 | `MainActivity` | 메인 UI, 동기화·알람·자동클릭 설정 |
-| `OverlayClockService` | 오버레이 시계 포그라운드 서비스 |
+| `OverlayClockService` | 오버레이 시계 (`stopWithTask`, 종료 시 UI 정리) |
 | `ExactHourAlarm` | 지정/정각 알람 · 경고 진행도 |
 | `PressHintFormatter` | 다음 누르기 시각 계산 |
 | `AutoClickEngine` / `AutoClickService` | 지정 시각 자동 탭 |
+| `AutoClickOverlay` | 클릭 위치 표시 · 위치 지정 UI |
 | `AlarmTargetUi` | 접속 시각(정각/시:분) 선택 UI |
 | `SecAccuApp` | Application |
 
@@ -97,4 +104,4 @@ java PressTimingTest
 - 서버시간 맞추기 버튼 가독성 · 시간 서버 칩 그리드 UI
 - 접속 시각 지정 + 알람/자동클릭 연동
 - 오버레이 `VerifyError` 수정 (render 레지스터 충돌)
-- 앱 종료(최근 앱에서 제거) 시 오버레이·클릭 위치 표시 함께 제거
+- 앱 종료(최근 앱에서 제거) 시 오버레이·클릭 위치 표시 함께 제거 (`onTaskRemoved` / `stopWithTask`)
