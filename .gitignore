@@ -22,3 +22,7 @@ javac_classes/
 javac_out/
 javac_stub/
 *.idsig
+
+# Local signing key (do not commit)
+secaccu-debug.jks
+

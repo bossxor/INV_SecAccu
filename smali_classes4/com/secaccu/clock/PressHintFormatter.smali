@@ -55,12 +55,12 @@
 
     if-eqz v2, :cond_0
 
-    const-string v2, "\uc815\uac01 \uc811\uc18d "
+    const-string v2, "\uc815\uac01 "
 
     goto :goto_0
 
     :cond_0
-    const-string v2, "\uc9c0\uc815 \uc2dc\uac01 \uc811\uc18d "
+    const-string v2, "\uc9c0\uc815 \uc2dc\uac01 "
 
     :goto_0
     new-instance v3, Ljava/lang/StringBuilder;
@@ -75,19 +75,9 @@
 
     move-result-object v0
 
-    const-string v2, " \uc5d0 \ub204\ub974\uae30  \u00b7  RTT "
+    const-string v2, " \uc5d0 \ub204\ub974\uae30"
 
     invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v0
-
-    const-string v1, "ms"
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v0
 
@@ -201,14 +191,9 @@
     .locals 8
     .param p0, "serverNowMs"    # D
     .param p2, "rttMs"    # D
+    # rttMs is ignored: tap at exact target (:00.000), not RTT-early.
 
     double-to-long v0, p0
-
-    const-wide/high16 v2, 0x4000000000000000L    # 2.0
-
-    div-double v2, p2, v2
-
-    double-to-long v2, v2
 
     invoke-static {}, Lcom/secaccu/clock/PressHintFormatter;->isExactHourMode()Z
 
@@ -226,7 +211,7 @@
 
     mul-long/2addr v6, v4
 
-    sub-long p0, v6, v2
+    move-wide p0, v6
 
     :goto_0
     cmp-long p2, p0, v0
@@ -235,7 +220,7 @@
 
     add-long/2addr v6, v4
 
-    sub-long p0, v6, v2
+    move-wide p0, v6
 
     goto :goto_0
 
@@ -279,9 +264,7 @@
 
     invoke-virtual {v4}, Ljava/util/Calendar;->getTimeInMillis()J
 
-    move-result-wide v5
-
-    sub-long p0, v5, v2
+    move-result-wide p0
 
     :goto_1
     cmp-long p2, p0, v0
@@ -296,16 +279,13 @@
 
     invoke-virtual {v4}, Ljava/util/Calendar;->getTimeInMillis()J
 
-    move-result-wide v5
-
-    sub-long p0, v5, v2
+    move-result-wide p0
 
     goto :goto_1
 
     :cond_2
     return-wide p0
 .end method
-
 .method public static final setTarget(II)V
     .locals 1
     .param p0, "hour"    # I

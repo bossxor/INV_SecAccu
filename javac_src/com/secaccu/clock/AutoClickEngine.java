@@ -102,6 +102,7 @@ public final class AutoClickEngine {
         return AutoClickService.getInstance() != null;
     }
 
+    /** Exact target clock (:mm:00.000 / hour boundary). RTT is not applied. */
     public long nextPressAtMs(double serverNowMs, double rttMs) {
         return PressHintFormatter.nextPressAtMs(serverNowMs, rttMs);
     }
@@ -134,7 +135,7 @@ public final class AutoClickEngine {
         if (isEnabled(context)) {
             return context.getString(id(context, "auto_click_armed", "string")) + "  " + time;
         }
-        return "정각 접속 " + time + " 에 누르기";
+        return "정각 " + time + " 에 누르기";
     }
 
     public String positionLine(Context context) {
