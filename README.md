@@ -11,6 +11,7 @@
 | minSdk | 26 |
 | targetSdk | 34 |
 | 저장소 | **Public** — https://github.com/bossxor/INV_SecAccu |
+| 다른 작업물 | https://bossxor.netlify.app/ |
 | 최신 릴리스 | [v1.2.0](https://github.com/bossxor/INV_SecAccu/releases/tag/v1.2.0) |
 
 ## 다운로드 (지인 공유용)
