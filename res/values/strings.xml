@@ -49,7 +49,7 @@
     <string name="auto_click_need_pos">먼저 누를 위치를 지정하세요</string>
     <string name="auto_click_need_sync">서버시간을 맞추면 지정한 접속 시각에 누릅니다</string>
     <string name="auto_click_pick">위치 지정</string>
-    <string name="auto_click_picker_hint">누를 버튼 위를 탭하세요. 다시 탭하면 위치가 옮겨집니다. 끝나면 완료.</string>
+    <string name="auto_click_picker_hint">누를 위치를 터치하세요</string>
     <string name="auto_click_pos_set">위치 %1$d, %2$d</string>
     <string name="auto_click_pos_unset">위치 미지정</string>
     <string name="auto_click_service_desc">지정한 접속 시각에 지정한 자리를 한 번 탭합니다</string>

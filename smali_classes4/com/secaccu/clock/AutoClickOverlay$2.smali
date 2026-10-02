@@ -8,7 +8,7 @@
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lcom/secaccu/clock/AutoClickOverlay;->startPicker(Landroid/content/Context;)Z
+    value = Lcom/secaccu/clock/AutoClickOverlay;->showMarker(Landroid/content/Context;FF)V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -18,6 +18,10 @@
 
 
 # instance fields
+.field private offX:F
+
+.field private offY:F
+
 .field final synthetic this$0:Lcom/secaccu/clock/AutoClickOverlay;
 
 .field final synthetic val$app:Landroid/content/Context;
@@ -32,7 +36,7 @@
         }
     .end annotation
 
-    .line 112
+    .line 144
     iput-object p1, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
 
     iput-object p2, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->val$app:Landroid/content/Context;
@@ -45,251 +49,171 @@
 
 # virtual methods
 .method public onTouch(Landroid/view/View;Landroid/view/MotionEvent;)Z
-    .locals 13
+    .locals 5
 
-    .line 115
-    invoke-virtual {p2}, Landroid/view/MotionEvent;->getAction()I
-
-    move-result p1
-
-    .line 116
-    invoke-virtual {p2}, Landroid/view/MotionEvent;->getRawX()F
-
-    move-result v0
-
-    .line 117
-    invoke-virtual {p2}, Landroid/view/MotionEvent;->getRawY()F
-
-    move-result v1
-
-    .line 118
-    const/4 v2, 0x1
-
-    const/4 v3, 0x0
-
-    if-nez p1, :cond_4
-
-    .line 119
-    invoke-virtual {p2}, Landroid/view/MotionEvent;->getY()F
-
-    move-result p2
-
-    iget-object v4, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
-
-    invoke-static {v4}, Lcom/secaccu/clock/AutoClickOverlay;->access$100(Lcom/secaccu/clock/AutoClickOverlay;)I
-
-    move-result v4
-
-    int-to-float v4, v4
-
-    cmpg-float p2, p2, v4
-
-    if-gtz p2, :cond_0
-
-    .line 120
+    .line 150
     iget-object p1, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
 
-    invoke-static {p1, v3}, Lcom/secaccu/clock/AutoClickOverlay;->access$202(Lcom/secaccu/clock/AutoClickOverlay;Z)Z
+    invoke-static {p1}, Lcom/secaccu/clock/AutoClickOverlay;->access$200(Lcom/secaccu/clock/AutoClickOverlay;)Landroid/view/WindowManager$LayoutParams;
 
-    .line 121
-    return v3
+    move-result-object p1
 
-    .line 123
-    :cond_0
-    iget-object p2, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
+    .line 151
+    if-eqz p1, :cond_4
 
-    invoke-static {p2, v2}, Lcom/secaccu/clock/AutoClickOverlay;->access$202(Lcom/secaccu/clock/AutoClickOverlay;Z)Z
+    iget-object v0, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
 
-    .line 124
-    iget-object p2, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
+    invoke-static {v0}, Lcom/secaccu/clock/AutoClickOverlay;->access$300(Lcom/secaccu/clock/AutoClickOverlay;)Landroid/view/View;
 
-    invoke-static {p2}, Lcom/secaccu/clock/AutoClickOverlay;->access$300(Lcom/secaccu/clock/AutoClickOverlay;)F
+    move-result-object v0
 
-    move-result p2
-
-    sub-float/2addr p2, v0
-
-    .line 125
-    iget-object v4, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
-
-    invoke-static {v4}, Lcom/secaccu/clock/AutoClickOverlay;->access$400(Lcom/secaccu/clock/AutoClickOverlay;)F
-
-    move-result v4
-
-    sub-float/2addr v4, v1
-
-    .line 126
-    iget-object v5, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
-
-    invoke-static {v5}, Lcom/secaccu/clock/AutoClickOverlay;->access$300(Lcom/secaccu/clock/AutoClickOverlay;)F
-
-    move-result v5
-
-    const/4 v6, 0x0
-
-    cmpl-float v5, v5, v6
-
-    if-ltz v5, :cond_1
-
-    mul-float v5, p2, p2
-
-    mul-float v7, v4, v4
-
-    add-float/2addr v5, v7
-
-    float-to-double v7, v5
-
-    iget-object v5, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->val$app:Landroid/content/Context;
-
-    const/16 v9, 0x38
-
-    invoke-static {v5, v9}, Lcom/secaccu/clock/AutoClickOverlay;->access$500(Landroid/content/Context;I)I
-
-    move-result v5
-
-    int-to-double v9, v5
-
-    const-wide/high16 v11, 0x4000000000000000L    # 2.0
-
-    invoke-static {v9, v10, v11, v12}, Ljava/lang/Math;->pow(DD)D
-
-    move-result-wide v9
-
-    cmpg-double v5, v7, v9
-
-    if-gtz v5, :cond_1
-
-    move v5, v2
-
-    goto :goto_0
-
-    :cond_1
-    move v5, v3
-
-    .line 127
-    :goto_0
-    iget-object v7, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
-
-    if-eqz v5, :cond_2
-
-    goto :goto_1
-
-    :cond_2
-    move p2, v6
-
-    :goto_1
-    invoke-static {v7, p2}, Lcom/secaccu/clock/AutoClickOverlay;->access$602(Lcom/secaccu/clock/AutoClickOverlay;F)F
-
-    .line 128
-    iget-object p2, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
-
-    if-eqz v5, :cond_3
+    if-nez v0, :cond_0
 
     goto :goto_2
 
-    :cond_3
-    move v4, v6
+    .line 154
+    :cond_0
+    iget v0, p1, Landroid/view/WindowManager$LayoutParams;->width:I
 
-    :goto_2
-    invoke-static {p2, v4}, Lcom/secaccu/clock/AutoClickOverlay;->access$702(Lcom/secaccu/clock/AutoClickOverlay;F)F
+    int-to-float v0, v0
 
-    goto :goto_3
+    const/high16 v1, 0x40000000    # 2.0f
 
-    .line 129
-    :cond_4
-    iget-object p2, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
+    div-float/2addr v0, v1
 
-    invoke-static {p2}, Lcom/secaccu/clock/AutoClickOverlay;->access$200(Lcom/secaccu/clock/AutoClickOverlay;)Z
-
-    move-result p2
-
-    if-nez p2, :cond_5
-
-    .line 130
-    return v3
-
-    .line 129
-    :cond_5
-    :goto_3
-    nop
-
-    .line 132
-    iget-object p2, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
-
-    iget-object v4, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
-
-    invoke-static {v4}, Lcom/secaccu/clock/AutoClickOverlay;->access$600(Lcom/secaccu/clock/AutoClickOverlay;)F
-
-    move-result v4
-
-    add-float/2addr v0, v4
-
-    invoke-static {p2, v0}, Lcom/secaccu/clock/AutoClickOverlay;->access$302(Lcom/secaccu/clock/AutoClickOverlay;F)F
-
-    .line 133
-    iget-object p2, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
-
-    iget-object v0, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
-
-    invoke-static {v0}, Lcom/secaccu/clock/AutoClickOverlay;->access$700(Lcom/secaccu/clock/AutoClickOverlay;)F
-
-    move-result v0
-
-    add-float/2addr v1, v0
-
-    invoke-static {p2, v1}, Lcom/secaccu/clock/AutoClickOverlay;->access$402(Lcom/secaccu/clock/AutoClickOverlay;F)F
-
-    .line 134
-    if-ne p1, v2, :cond_6
-
-    .line 135
-    iget-object p1, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
-
-    invoke-static {p1, v3}, Lcom/secaccu/clock/AutoClickOverlay;->access$202(Lcom/secaccu/clock/AutoClickOverlay;Z)Z
-
-    .line 136
-    iget-object p1, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
-
-    iget-object p2, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->val$app:Landroid/content/Context;
-
-    invoke-static {p1, p2}, Lcom/secaccu/clock/AutoClickOverlay;->access$800(Lcom/secaccu/clock/AutoClickOverlay;Landroid/content/Context;)V
-
-    goto :goto_4
-
-    .line 137
-    :cond_6
-    const/4 p2, 0x3
-
-    if-ne p1, p2, :cond_7
-
-    .line 138
-    iget-object p1, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
-
-    invoke-static {p1, v3}, Lcom/secaccu/clock/AutoClickOverlay;->access$202(Lcom/secaccu/clock/AutoClickOverlay;Z)Z
-
-    goto :goto_4
-
-    .line 140
-    :cond_7
-    iget-object p1, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
-
-    iget-object p2, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->val$app:Landroid/content/Context;
-
-    iget-object v0, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
-
-    invoke-static {v0}, Lcom/secaccu/clock/AutoClickOverlay;->access$300(Lcom/secaccu/clock/AutoClickOverlay;)F
-
-    move-result v0
-
-    iget-object v1, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
-
-    invoke-static {v1}, Lcom/secaccu/clock/AutoClickOverlay;->access$400(Lcom/secaccu/clock/AutoClickOverlay;)F
+    .line 155
+    invoke-virtual {p2}, Landroid/view/MotionEvent;->getAction()I
 
     move-result v1
 
-    invoke-virtual {p1, p2, v0, v1}, Lcom/secaccu/clock/AutoClickOverlay;->showMarker(Landroid/content/Context;FF)V
+    .line 156
+    const/4 v2, 0x1
 
-    .line 142
-    :goto_4
+    if-nez v1, :cond_1
+
+    .line 157
+    iget v1, p1, Landroid/view/WindowManager$LayoutParams;->x:I
+
+    int-to-float v1, v1
+
+    add-float/2addr v1, v0
+
+    invoke-virtual {p2}, Landroid/view/MotionEvent;->getRawX()F
+
+    move-result v3
+
+    sub-float/2addr v1, v3
+
+    iput v1, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->offX:F
+
+    .line 158
+    iget p1, p1, Landroid/view/WindowManager$LayoutParams;->y:I
+
+    int-to-float p1, p1
+
+    add-float/2addr p1, v0
+
+    invoke-virtual {p2}, Landroid/view/MotionEvent;->getRawY()F
+
+    move-result p2
+
+    sub-float/2addr p1, p2
+
+    iput p1, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->offY:F
+
+    .line 159
     return v2
+
+    .line 161
+    :cond_1
+    invoke-virtual {p2}, Landroid/view/MotionEvent;->getRawX()F
+
+    move-result v3
+
+    iget v4, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->offX:F
+
+    add-float/2addr v3, v4
+
+    .line 162
+    invoke-virtual {p2}, Landroid/view/MotionEvent;->getRawY()F
+
+    move-result p2
+
+    iget v4, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->offY:F
+
+    add-float/2addr p2, v4
+
+    .line 163
+    const/4 v4, 0x2
+
+    if-ne v1, v4, :cond_2
+
+    .line 164
+    sub-float/2addr v3, v0
+
+    invoke-static {v3}, Ljava/lang/Math;->round(F)I
+
+    move-result v1
+
+    iput v1, p1, Landroid/view/WindowManager$LayoutParams;->x:I
+
+    .line 165
+    sub-float/2addr p2, v0
+
+    invoke-static {p2}, Ljava/lang/Math;->round(F)I
+
+    move-result p2
+
+    iput p2, p1, Landroid/view/WindowManager$LayoutParams;->y:I
+
+    .line 167
+    :try_start_0
+    iget-object p2, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
+
+    invoke-static {p2}, Lcom/secaccu/clock/AutoClickOverlay;->access$400(Lcom/secaccu/clock/AutoClickOverlay;)Landroid/view/WindowManager;
+
+    move-result-object p2
+
+    iget-object v0, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->this$0:Lcom/secaccu/clock/AutoClickOverlay;
+
+    invoke-static {v0}, Lcom/secaccu/clock/AutoClickOverlay;->access$300(Lcom/secaccu/clock/AutoClickOverlay;)Landroid/view/View;
+
+    move-result-object v0
+
+    invoke-interface {p2, v0, p1}, Landroid/view/WindowManager;->updateViewLayout(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    goto :goto_0
+
+    .line 168
+    :catchall_0
+    move-exception p1
+
+    .line 169
+    :goto_0
+    goto :goto_1
+
+    .line 170
+    :cond_2
+    if-ne v1, v2, :cond_3
+
+    .line 171
+    sget-object p1, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
+
+    iget-object v0, p0, Lcom/secaccu/clock/AutoClickOverlay$2;->val$app:Landroid/content/Context;
+
+    invoke-virtual {p1, v0, v3, p2}, Lcom/secaccu/clock/AutoClickEngine;->setPosition(Landroid/content/Context;FF)V
+
+    .line 173
+    :cond_3
+    :goto_1
+    return v2
+
+    .line 152
+    :cond_4
+    :goto_2
+    const/4 p1, 0x0
+
+    return p1
 .end method

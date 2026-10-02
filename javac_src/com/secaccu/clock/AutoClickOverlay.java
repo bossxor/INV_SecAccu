@@ -24,17 +24,10 @@ public final class AutoClickOverlay {
     private TextView pickerHint;
     private View markerView;
     private WindowManager.LayoutParams markerParams;
-    private int barBottom;
-    // picker drag state
-    private float curX;
-    private float curY;
-    private float offX;
-    private float offY;
-    private boolean tracking;
 
     private AutoClickOverlay() {}
 
-    /** Shows the pick bar over whatever app is below; returns false if it could not be shown. */
+    /** Transparent full-screen touch layer over the target app; releasing the finger saves the spot and returns to the app. */
     public boolean startPicker(Context context) {
         final Context app = context.getApplicationContext();
         if (!Settings.canDrawOverlays(app)) {
@@ -45,99 +38,45 @@ public final class AutoClickOverlay {
         }
         hideAll();
         ensureWm(app);
-        if (AutoClickEngine.INSTANCE.hasPosition(app)) {
-            curX = AutoClickEngine.INSTANCE.getX(app);
-            curY = AutoClickEngine.INSTANCE.getY(app);
-        } else {
-            curX = -1f;
-            curY = -1f;
-        }
 
         final FrameLayout root = new FrameLayout(app);
         root.setBackgroundColor(0x1A000000);
 
-        LinearLayout bar = new LinearLayout(app);
-        bar.setOrientation(LinearLayout.VERTICAL);
-        GradientDrawable barBg = new GradientDrawable();
-        barBg.setColor(0xF2151C2E);
-        bar.setBackground(barBg);
-        int pad = dp(app, 12);
-        bar.setPadding(pad, dp(app, 36), pad, pad);
-
-        LinearLayout row1 = new LinearLayout(app);
-        row1.setOrientation(LinearLayout.HORIZONTAL);
-        row1.setGravity(Gravity.CENTER_VERTICAL);
-
-        TextView hint = new TextView(app);
-        hint.setText(app.getString(AutoClickEngine.id(app, "auto_click_picker_hint", "string")));
-        hint.setTextColor(0xFFF4F7FF);
-        hint.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
-        pickerHint = hint;
-        LinearLayout.LayoutParams hintLp = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
-        hintLp.rightMargin = dp(app, 8);
-        row1.addView(hint, hintLp);
-
-        row1.addView(button(app, app.getString(AutoClickEngine.id(app, "auto_click_close", "string")), 0xFF7CFFD0, 16f,
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        finishPicker(app);
-                    }
-                }));
-        bar.addView(row1, new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-
-        LinearLayout row2 = new LinearLayout(app);
-        row2.setOrientation(LinearLayout.HORIZONTAL);
-        row2.setGravity(Gravity.CENTER);
-        row2.setPadding(0, dp(app, 8), 0, 0);
-        row2.addView(nudge(app, "◀", -1, 0));
-        row2.addView(nudge(app, "▲", 0, -1));
-        row2.addView(nudge(app, "▼", 0, 1));
-        row2.addView(nudge(app, "▶", 1, 0));
-        bar.addView(row2, new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-
-        bar.measure(
-                View.MeasureSpec.makeMeasureSpec(app.getResources().getDisplayMetrics().widthPixels, View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-        barBottom = Math.max(bar.getMeasuredHeight(), dp(app, 72));
-
-        root.addView(bar, new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
+        final TextView info = new TextView(app);
+        info.setText(app.getString(AutoClickEngine.id(app, "auto_click_picker_hint", "string")));
+        info.setTextColor(0xFFF4F7FF);
+        info.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
+        info.setPadding(dp(app, 12), dp(app, 6), dp(app, 12), dp(app, 6));
+        GradientDrawable infoBg = new GradientDrawable();
+        infoBg.setColor(0xCC151C2E);
+        infoBg.setCornerRadius(dp(app, 12));
+        info.setBackground(infoBg);
+        FrameLayout.LayoutParams infoLp = new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.WRAP_CONTENT,
-                Gravity.TOP));
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                Gravity.TOP | Gravity.CENTER_HORIZONTAL);
+        infoLp.topMargin = dp(app, 40);
+        root.addView(info, infoLp);
+        pickerHint = info;
 
-        // Touch near the ring drags it (keeps the finger offset); touch elsewhere moves it there.
         root.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 int action = event.getAction();
                 float rx = event.getRawX();
                 float ry = event.getRawY();
-                if (action == MotionEvent.ACTION_DOWN) {
-                    if (event.getY() <= barBottom) {
-                        tracking = false;
-                        return false;
-                    }
-                    tracking = true;
-                    float dx = curX - rx;
-                    float dy = curY - ry;
-                    boolean onRing = curX >= 0f && dx * dx + dy * dy <= Math.pow(dp(app, 56), 2);
-                    offX = onRing ? dx : 0f;
-                    offY = onRing ? dy : 0f;
-                } else if (!tracking) {
-                    return false;
+                if (action == MotionEvent.ACTION_CANCEL) {
+                    hideMarker();
+                    return true;
                 }
-                curX = rx + offX;
-                curY = ry + offY;
+                if (pickerHint != null) {
+                    pickerHint.setText(Math.round(rx) + ", " + Math.round(ry));
+                }
                 if (action == MotionEvent.ACTION_UP) {
-                    tracking = false;
-                    commit(app);
-                } else if (action == MotionEvent.ACTION_CANCEL) {
-                    tracking = false;
+                    AutoClickEngine.INSTANCE.setPosition(app, rx, ry);
+                    finishPicker(app);
                 } else {
-                    showMarker(app, curX, curY);
+                    showMarker(app, rx, ry);
                 }
                 return true;
             }
@@ -154,73 +93,16 @@ public final class AutoClickOverlay {
         try {
             windowManager.addView(root, params);
             pickerView = root;
-            if (curX >= 0f) {
-                showMarker(app, curX, curY);
-            }
             return true;
         } catch (Throwable ignored) {
             return false;
         }
     }
 
-    /** Save the dragged position and show the coordinates in the bar. */
-    private void commit(Context app) {
-        AutoClickEngine.INSTANCE.setPosition(app, curX, curY);
-        if (pickerHint != null) {
-            pickerHint.setText(AutoClickEngine.INSTANCE.positionLine(app)
-                    + "  ·  " + app.getString(AutoClickEngine.id(app, "auto_click_picker_hint", "string")));
-        }
-    }
-
-    private View nudge(final Context app, String label, final int dx, final int dy) {
-        View b = button(app, label, 0xFFDDE6FF, 18f, new Runnable() {
-            @Override
-            public void run() {
-                if (curX < 0f) {
-                    curX = app.getResources().getDisplayMetrics().widthPixels / 2f;
-                    curY = app.getResources().getDisplayMetrics().heightPixels / 2f;
-                }
-                curX += dx;
-                curY += dy;
-                commit(app);
-            }
-        });
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
-        lp.leftMargin = dp(app, 4);
-        lp.rightMargin = dp(app, 4);
-        b.setLayoutParams(lp);
-        return b;
-    }
-
-    private View button(Context app, String label, int color, float sp, final Runnable action) {
-        TextView t = new TextView(app);
-        t.setText(label);
-        t.setGravity(Gravity.CENTER);
-        t.setTextColor(0xFF0B1020);
-        t.setTextSize(TypedValue.COMPLEX_UNIT_SP, sp);
-        t.setPadding(dp(app, 18), dp(app, 10), dp(app, 18), dp(app, 10));
-        GradientDrawable bg = new GradientDrawable();
-        bg.setColor(color);
-        bg.setCornerRadius(dp(app, 12));
-        t.setBackground(bg);
-        t.setClickable(true);
-        t.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    action.run();
-                }
-                return true;
-            }
-        });
-        return t;
-    }
-
     public void hidePicker() {
         removeView(pickerView);
         pickerView = null;
         pickerHint = null;
-        tracking = false;
     }
 
     private void finishPicker(Context app) {
@@ -259,12 +141,43 @@ public final class AutoClickOverlay {
             ring.setColor(Color.TRANSPARENT);
             ring.setStroke(dp(app, 2), 0xE07CFFD0);
             cross.setBackground(ring);
+            cross.setOnTouchListener(new View.OnTouchListener() {
+                private float offX;
+                private float offY;
+
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    WindowManager.LayoutParams p = markerParams;
+                    if (p == null || markerView == null) {
+                        return false;
+                    }
+                    float half = p.width / 2f;
+                    int action = event.getAction();
+                    if (action == MotionEvent.ACTION_DOWN) {
+                        offX = p.x + half - event.getRawX();
+                        offY = p.y + half - event.getRawY();
+                        return true;
+                    }
+                    float cx = event.getRawX() + offX;
+                    float cy = event.getRawY() + offY;
+                    if (action == MotionEvent.ACTION_MOVE) {
+                        p.x = Math.round(cx - half);
+                        p.y = Math.round(cy - half);
+                        try {
+                            windowManager.updateViewLayout(markerView, p);
+                        } catch (Throwable ignored) {
+                        }
+                    } else if (action == MotionEvent.ACTION_UP) {
+                        AutoClickEngine.INSTANCE.setPosition(app, cx, cy);
+                    }
+                    return true;
+                }
+            });
             WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                     size,
                     size,
                     overlayType(),
                     WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                            | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
                             | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
                             | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                     PixelFormat.TRANSLUCENT);
