@@ -32,7 +32,7 @@
         }
     .end annotation
 
-    .line 143
+    .line 134
     iput-object p1, p0, Lcom/secaccu/clock/AutoClickUi$4;->this$0:Lcom/secaccu/clock/AutoClickUi;
 
     iput-object p2, p0, Lcom/secaccu/clock/AutoClickUi$4;->val$activity:Landroid/app/Activity;
@@ -45,22 +45,30 @@
 
 # virtual methods
 .method public onClick(Landroid/view/View;)V
-    .locals 1
+    .locals 2
 
-    .line 146
-    sget-object p1, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
+    .line 138
+    :try_start_0
+    iget-object p1, p0, Lcom/secaccu/clock/AutoClickUi$4;->val$activity:Landroid/app/Activity;
 
-    iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi$4;->val$activity:Landroid/app/Activity;
+    new-instance v0, Landroid/content/Intent;
 
-    invoke-virtual {p1, v0}, Lcom/secaccu/clock/AutoClickEngine;->startTest(Landroid/content/Context;)V
+    const-string v1, "android.settings.IGNORE_BATTERY_OPTIMIZATION_SETTINGS"
 
-    .line 147
-    iget-object p1, p0, Lcom/secaccu/clock/AutoClickUi$4;->this$0:Lcom/secaccu/clock/AutoClickUi;
+    invoke-direct {v0, v1}, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
 
-    iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi$4;->val$activity:Landroid/app/Activity;
+    invoke-virtual {p1, v0}, Landroid/app/Activity;->startActivity(Landroid/content/Intent;)V
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    invoke-virtual {p1, v0}, Lcom/secaccu/clock/AutoClickUi;->refresh(Landroid/app/Activity;)V
+    .line 140
+    goto :goto_0
 
-    .line 148
+    .line 139
+    :catchall_0
+    move-exception p1
+
+    .line 141
+    :goto_0
     return-void
 .end method

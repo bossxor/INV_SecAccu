@@ -32,7 +32,7 @@
         }
     .end annotation
 
-    .line 89
+    .line 84
     iput-object p1, p0, Lcom/secaccu/clock/AutoClickUi$2;->this$0:Lcom/secaccu/clock/AutoClickUi;
 
     iput-object p2, p0, Lcom/secaccu/clock/AutoClickUi$2;->val$activity:Landroid/app/Activity;
@@ -47,7 +47,7 @@
 .method public onClick(Landroid/view/View;)V
     .locals 5
 
-    .line 92
+    .line 87
     iget-object p1, p0, Lcom/secaccu/clock/AutoClickUi$2;->val$activity:Landroid/app/Activity;
 
     invoke-static {p1}, Landroid/provider/Settings;->canDrawOverlays(Landroid/content/Context;)Z
@@ -56,7 +56,7 @@
 
     if-nez p1, :cond_0
 
-    .line 93
+    .line 88
     new-instance p1, Landroid/content/Intent;
 
     new-instance v0, Ljava/lang/StringBuilder;
@@ -71,7 +71,7 @@
 
     iget-object v1, p0, Lcom/secaccu/clock/AutoClickUi$2;->val$activity:Landroid/app/Activity;
 
-    .line 95
+    .line 90
     invoke-virtual {v1}, Landroid/app/Activity;->getPackageName()Ljava/lang/String;
 
     move-result-object v1
@@ -92,12 +92,12 @@
 
     invoke-direct {p1, v1, v0}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
 
-    .line 96
+    .line 91
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi$2;->val$activity:Landroid/app/Activity;
 
     invoke-virtual {v0, p1}, Landroid/app/Activity;->startActivity(Landroid/content/Intent;)V
 
-    .line 97
+    .line 92
     sget-object p1, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
 
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi$2;->val$activity:Landroid/app/Activity;
@@ -106,7 +106,7 @@
 
     iget-object v2, p0, Lcom/secaccu/clock/AutoClickUi$2;->val$activity:Landroid/app/Activity;
 
-    .line 99
+    .line 94
     const-string v3, "auto_click_need_overlay"
 
     const-string v4, "string"
@@ -119,13 +119,13 @@
 
     move-result-object v1
 
-    .line 97
+    .line 92
     invoke-virtual {p1, v0, v1}, Lcom/secaccu/clock/AutoClickEngine;->toast(Landroid/content/Context;Ljava/lang/String;)V
 
-    .line 100
+    .line 95
     return-void
 
-    .line 103
+    .line 98
     :cond_0
     sget-object p1, Lcom/secaccu/clock/AutoClickOverlay;->INSTANCE:Lcom/secaccu/clock/AutoClickOverlay;
 
@@ -137,14 +137,14 @@
 
     if-eqz p1, :cond_1
 
-    .line 104
+    .line 99
     iget-object p1, p0, Lcom/secaccu/clock/AutoClickUi$2;->val$activity:Landroid/app/Activity;
 
     const/4 v0, 0x1
 
     invoke-virtual {p1, v0}, Landroid/app/Activity;->moveTaskToBack(Z)Z
 
-    .line 106
+    .line 101
     :cond_1
     return-void
 .end method

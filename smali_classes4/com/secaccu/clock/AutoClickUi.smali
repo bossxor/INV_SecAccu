@@ -4,11 +4,7 @@
 
 
 # static fields
-.field private static final ADJ:I = 0x1
-
 .field public static final INSTANCE:Lcom/secaccu/clock/AutoClickUi;
-
-.field private static final PCT:I
 
 
 # instance fields
@@ -24,8 +20,6 @@
     .end annotation
 .end field
 
-.field private adjView:Landroid/widget/TextView;
-
 .field private calcView:Landroid/widget/TextView;
 
 .field private checkView:Landroid/widget/TextView;
@@ -35,8 +29,6 @@
 .field private hintView:Landroid/widget/TextView;
 
 .field private logView:Landroid/widget/TextView;
-
-.field private pctView:Landroid/widget/TextView;
 
 .field private pickButton:Landroid/widget/Button;
 
@@ -62,7 +54,7 @@
 .method private constructor <init>()V
     .locals 0
 
-    .line 35
+    .line 30
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     return-void
@@ -87,9 +79,9 @@
 .end method
 
 .method private addExtraBlock(Landroid/app/Activity;)V
-    .locals 10
+    .locals 5
 
-    .line 122
+    .line 117
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->hintView:Landroid/widget/TextView;
 
     if-eqz v0, :cond_2
@@ -104,11 +96,9 @@
 
     if-nez v0, :cond_0
 
-    move-object v3, p0
+    goto :goto_0
 
-    goto/16 :goto_0
-
-    .line 125
+    .line 120
     :cond_0
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->hintView:Landroid/widget/TextView;
 
@@ -118,34 +108,34 @@
 
     check-cast v0, Landroid/view/ViewGroup;
 
-    .line 126
+    .line 121
     const-string v1, "extraBlock"
 
     invoke-virtual {v0, v1}, Landroid/view/ViewGroup;->findViewWithTag(Ljava/lang/Object;)Landroid/view/View;
 
     move-result-object v2
 
-    .line 127
+    .line 122
     if-eqz v2, :cond_1
 
-    .line 128
+    .line 123
     invoke-virtual {v0, v2}, Landroid/view/ViewGroup;->removeView(Landroid/view/View;)V
 
-    .line 130
+    .line 125
     :cond_1
     new-instance v2, Landroid/widget/LinearLayout;
 
     invoke-direct {v2, p1}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V
 
-    .line 131
+    .line 126
     invoke-virtual {v2, v1}, Landroid/widget/LinearLayout;->setTag(Ljava/lang/Object;)V
 
-    .line 132
+    .line 127
     const/4 v1, 0x1
 
     invoke-virtual {v2, v1}, Landroid/widget/LinearLayout;->setOrientation(I)V
 
-    .line 134
+    .line 129
     const/high16 v3, 0x41500000    # 13.0f
 
     invoke-direct {p0, p1, v3}, Lcom/secaccu/clock/AutoClickUi;->text(Landroid/app/Activity;F)Landroid/widget/TextView;
@@ -154,140 +144,65 @@
 
     iput-object v3, p0, Lcom/secaccu/clock/AutoClickUi;->calcView:Landroid/widget/TextView;
 
-    .line 135
+    .line 130
     iget-object v3, p0, Lcom/secaccu/clock/AutoClickUi;->calcView:Landroid/widget/TextView;
 
     invoke-virtual {v2, v3}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
 
-    .line 136
-    new-instance v3, Landroid/widget/TextView;
+    .line 131
+    const/high16 v3, 0x41400000    # 12.0f
 
-    invoke-direct {v3, p1}, Landroid/widget/TextView;-><init>(Landroid/content/Context;)V
+    invoke-direct {p0, p1, v3}, Lcom/secaccu/clock/AutoClickUi;->text(Landroid/app/Activity;F)Landroid/widget/TextView;
 
-    iput-object v3, p0, Lcom/secaccu/clock/AutoClickUi;->pctView:Landroid/widget/TextView;
+    move-result-object v4
 
-    .line 137
-    const/16 v8, 0xa
+    iput-object v4, p0, Lcom/secaccu/clock/AutoClickUi;->logView:Landroid/widget/TextView;
 
-    iget-object v9, p0, Lcom/secaccu/clock/AutoClickUi;->pctView:Landroid/widget/TextView;
+    .line 132
+    iget-object v4, p0, Lcom/secaccu/clock/AutoClickUi;->logView:Landroid/widget/TextView;
 
-    const-string v6, "\ubc18\uc601 \ube44\uc728 (RTT/2\uc758)"
+    invoke-virtual {v2, v4}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
 
-    const/4 v7, 0x0
+    .line 133
+    invoke-direct {p0, p1, v3}, Lcom/secaccu/clock/AutoClickUi;->text(Landroid/app/Activity;F)Landroid/widget/TextView;
 
-    move-object v4, p0
+    move-result-object v3
 
-    move-object v5, p1
+    iput-object v3, p0, Lcom/secaccu/clock/AutoClickUi;->checkView:Landroid/widget/TextView;
 
-    invoke-direct/range {v4 .. v9}, Lcom/secaccu/clock/AutoClickUi;->stepRow(Landroid/app/Activity;Ljava/lang/String;IILandroid/widget/TextView;)Landroid/view/View;
+    .line 134
+    iget-object v3, p0, Lcom/secaccu/clock/AutoClickUi;->checkView:Landroid/widget/TextView;
 
-    move-result-object p1
+    new-instance v4, Lcom/secaccu/clock/AutoClickUi$4;
 
-    move-object v3, v4
+    invoke-direct {v4, p0, p1}, Lcom/secaccu/clock/AutoClickUi$4;-><init>(Lcom/secaccu/clock/AutoClickUi;Landroid/app/Activity;)V
 
-    move-object v4, v5
-
-    invoke-virtual {v2, p1}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
-
-    .line 138
-    new-instance p1, Landroid/widget/TextView;
-
-    invoke-direct {p1, v4}, Landroid/widget/TextView;-><init>(Landroid/content/Context;)V
-
-    iput-object p1, v3, Lcom/secaccu/clock/AutoClickUi;->adjView:Landroid/widget/TextView;
-
-    .line 139
-    const/4 v7, 0x1
-
-    iget-object v8, v3, Lcom/secaccu/clock/AutoClickUi;->adjView:Landroid/widget/TextView;
-
-    const-string v5, "\ubcf4\uc815(ms)"
-
-    const/4 v6, 0x1
-
-    invoke-direct/range {v3 .. v8}, Lcom/secaccu/clock/AutoClickUi;->stepRow(Landroid/app/Activity;Ljava/lang/String;IILandroid/widget/TextView;)Landroid/view/View;
-
-    move-result-object p1
-
-    invoke-virtual {v2, p1}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
-
-    .line 141
-    new-instance p1, Landroid/widget/Button;
-
-    invoke-direct {p1, v4}, Landroid/widget/Button;-><init>(Landroid/content/Context;)V
-
-    .line 142
-    const-string v5, "\uc5f0\uc2b5 \ud0ed (10\ucd08 \ub2e8\uc704 \uc815\uac01\uc5d0 \uc9c0\uc815 \uc704\uce58 \ud0ed)"
-
-    invoke-virtual {p1, v5}, Landroid/widget/Button;->setText(Ljava/lang/CharSequence;)V
+    invoke-virtual {v3, v4}, Landroid/widget/TextView;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
     .line 143
-    new-instance v5, Lcom/secaccu/clock/AutoClickUi$4;
+    iget-object v3, p0, Lcom/secaccu/clock/AutoClickUi;->checkView:Landroid/widget/TextView;
 
-    invoke-direct {v5, p0, v4}, Lcom/secaccu/clock/AutoClickUi$4;-><init>(Lcom/secaccu/clock/AutoClickUi;Landroid/app/Activity;)V
+    invoke-virtual {v2, v3}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
 
-    invoke-virtual {p1, v5}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+    .line 145
+    iget-object v3, p0, Lcom/secaccu/clock/AutoClickUi;->hintView:Landroid/widget/TextView;
 
-    .line 150
-    invoke-virtual {v2, p1}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
+    invoke-virtual {v0, v3}, Landroid/view/ViewGroup;->indexOfChild(Landroid/view/View;)I
 
-    .line 152
-    const/high16 p1, 0x41400000    # 12.0f
+    move-result v3
 
-    invoke-direct {p0, v4, p1}, Lcom/secaccu/clock/AutoClickUi;->text(Landroid/app/Activity;F)Landroid/widget/TextView;
+    add-int/2addr v3, v1
 
-    move-result-object v5
+    invoke-virtual {v0, v2, v3}, Landroid/view/ViewGroup;->addView(Landroid/view/View;I)V
 
-    iput-object v5, v3, Lcom/secaccu/clock/AutoClickUi;->logView:Landroid/widget/TextView;
+    .line 146
+    invoke-direct {p0, p1}, Lcom/secaccu/clock/AutoClickUi;->showExtra(Landroid/app/Activity;)V
 
-    .line 153
-    iget-object v5, v3, Lcom/secaccu/clock/AutoClickUi;->logView:Landroid/widget/TextView;
-
-    invoke-virtual {v2, v5}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
-
-    .line 154
-    invoke-direct {p0, v4, p1}, Lcom/secaccu/clock/AutoClickUi;->text(Landroid/app/Activity;F)Landroid/widget/TextView;
-
-    move-result-object p1
-
-    iput-object p1, v3, Lcom/secaccu/clock/AutoClickUi;->checkView:Landroid/widget/TextView;
-
-    .line 155
-    iget-object p1, v3, Lcom/secaccu/clock/AutoClickUi;->checkView:Landroid/widget/TextView;
-
-    new-instance v5, Lcom/secaccu/clock/AutoClickUi$5;
-
-    invoke-direct {v5, p0, v4}, Lcom/secaccu/clock/AutoClickUi$5;-><init>(Lcom/secaccu/clock/AutoClickUi;Landroid/app/Activity;)V
-
-    invoke-virtual {p1, v5}, Landroid/widget/TextView;->setOnClickListener(Landroid/view/View$OnClickListener;)V
-
-    .line 164
-    iget-object p1, v3, Lcom/secaccu/clock/AutoClickUi;->checkView:Landroid/widget/TextView;
-
-    invoke-virtual {v2, p1}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
-
-    .line 166
-    iget-object p1, v3, Lcom/secaccu/clock/AutoClickUi;->hintView:Landroid/widget/TextView;
-
-    invoke-virtual {v0, p1}, Landroid/view/ViewGroup;->indexOfChild(Landroid/view/View;)I
-
-    move-result p1
-
-    add-int/2addr p1, v1
-
-    invoke-virtual {v0, v2, p1}, Landroid/view/ViewGroup;->addView(Landroid/view/View;I)V
-
-    .line 167
-    invoke-direct {p0, v4}, Lcom/secaccu/clock/AutoClickUi;->showExtra(Landroid/app/Activity;)V
-
-    .line 168
+    .line 147
     return-void
 
-    .line 122
+    .line 118
     :cond_2
-    move-object v3, p0
-
-    .line 123
     :goto_0
     return-void
 .end method
@@ -295,7 +210,7 @@
 .method private static dp(Landroid/app/Activity;I)I
     .locals 0
 
-    .line 247
+    .line 185
     int-to-float p1, p1
 
     invoke-virtual {p0}, Landroid/app/Activity;->getResources()Landroid/content/res/Resources;
@@ -320,7 +235,7 @@
 .method private openAccessibilitySettings(Landroid/app/Activity;)V
     .locals 2
 
-    .line 285
+    .line 223
     :try_start_0
     new-instance v0, Landroid/content/Intent;
 
@@ -332,111 +247,30 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    .line 287
+    .line 225
     goto :goto_0
 
-    .line 286
+    .line 224
     :catchall_0
     move-exception p1
 
-    .line 288
+    .line 226
     :goto_0
     return-void
 .end method
 
 .method private showExtra(Landroid/app/Activity;)V
-    .locals 5
+    .locals 3
 
-    .line 213
+    .line 158
     sget-object v0, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
 
-    .line 214
-    iget-object v1, p0, Lcom/secaccu/clock/AutoClickUi;->pctView:Landroid/widget/TextView;
+    .line 159
+    iget-object v1, p0, Lcom/secaccu/clock/AutoClickUi;->calcView:Landroid/widget/TextView;
 
     if-eqz v1, :cond_0
 
-    .line 215
-    iget-object v1, p0, Lcom/secaccu/clock/AutoClickUi;->pctView:Landroid/widget/TextView;
-
-    new-instance v2, Ljava/lang/StringBuilder;
-
-    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
-
-    invoke-virtual {v0, p1}, Lcom/secaccu/clock/AutoClickEngine;->getPct(Landroid/content/Context;)I
-
-    move-result v3
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    const-string v3, "%"
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v2
-
-    invoke-virtual {v1, v2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
-
-    .line 217
-    :cond_0
-    iget-object v1, p0, Lcom/secaccu/clock/AutoClickUi;->adjView:Landroid/widget/TextView;
-
-    if-eqz v1, :cond_2
-
-    .line 218
-    invoke-virtual {v0, p1}, Lcom/secaccu/clock/AutoClickEngine;->getAdj(Landroid/content/Context;)I
-
-    move-result v1
-
-    .line 219
-    iget-object v2, p0, Lcom/secaccu/clock/AutoClickUi;->adjView:Landroid/widget/TextView;
-
-    new-instance v3, Ljava/lang/StringBuilder;
-
-    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
-
-    if-lez v1, :cond_1
-
-    const-string v4, "+"
-
-    goto :goto_0
-
-    :cond_1
-    const-string v4, ""
-
-    :goto_0
-    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v3
-
-    invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    const-string v3, "ms"
-
-    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
-
-    invoke-virtual {v2, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
-
-    .line 221
-    :cond_2
-    iget-object v1, p0, Lcom/secaccu/clock/AutoClickUi;->calcView:Landroid/widget/TextView;
-
-    if-eqz v1, :cond_3
-
-    .line 222
+    .line 160
     iget-object v1, p0, Lcom/secaccu/clock/AutoClickUi;->calcView:Landroid/widget/TextView;
 
     invoke-virtual {v0, p1}, Lcom/secaccu/clock/AutoClickEngine;->calcLine(Landroid/content/Context;)Ljava/lang/String;
@@ -445,13 +279,13 @@
 
     invoke-virtual {v1, v2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 224
-    :cond_3
+    .line 162
+    :cond_0
     iget-object v1, p0, Lcom/secaccu/clock/AutoClickUi;->logView:Landroid/widget/TextView;
 
-    if-eqz v1, :cond_4
+    if-eqz v1, :cond_1
 
-    .line 225
+    .line 163
     iget-object v1, p0, Lcom/secaccu/clock/AutoClickUi;->logView:Landroid/widget/TextView;
 
     invoke-virtual {v0, p1}, Lcom/secaccu/clock/AutoClickEngine;->historyLine(Landroid/content/Context;)Ljava/lang/String;
@@ -460,13 +294,13 @@
 
     invoke-virtual {v1, v2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 227
-    :cond_4
+    .line 165
+    :cond_1
     iget-object v1, p0, Lcom/secaccu/clock/AutoClickUi;->checkView:Landroid/widget/TextView;
 
-    if-eqz v1, :cond_5
+    if-eqz v1, :cond_2
 
-    .line 228
+    .line 166
     iget-object v1, p0, Lcom/secaccu/clock/AutoClickUi;->checkView:Landroid/widget/TextView;
 
     invoke-virtual {v0, p1}, Lcom/secaccu/clock/AutoClickEngine;->checkLine(Landroid/content/Context;)Ljava/lang/String;
@@ -475,137 +309,20 @@
 
     invoke-virtual {v1, p1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 230
-    :cond_5
+    .line 168
+    :cond_2
     return-void
-.end method
-
-.method private stepButton(Landroid/app/Activity;Ljava/lang/String;II)Landroid/widget/Button;
-    .locals 1
-
-    .line 195
-    new-instance v0, Landroid/widget/Button;
-
-    invoke-direct {v0, p1}, Landroid/widget/Button;-><init>(Landroid/content/Context;)V
-
-    .line 196
-    invoke-virtual {v0, p2}, Landroid/widget/Button;->setText(Ljava/lang/CharSequence;)V
-
-    .line 197
-    new-instance p2, Lcom/secaccu/clock/AutoClickUi$6;
-
-    invoke-direct {p2, p0, p3, p1, p4}, Lcom/secaccu/clock/AutoClickUi$6;-><init>(Lcom/secaccu/clock/AutoClickUi;ILandroid/app/Activity;I)V
-
-    invoke-virtual {v0, p2}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
-
-    .line 209
-    return-object v0
-.end method
-
-.method private stepRow(Landroid/app/Activity;Ljava/lang/String;IILandroid/widget/TextView;)Landroid/view/View;
-    .locals 5
-
-    .line 179
-    new-instance v0, Landroid/widget/LinearLayout;
-
-    invoke-direct {v0, p1}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V
-
-    .line 180
-    const/4 v1, 0x0
-
-    invoke-virtual {v0, v1}, Landroid/widget/LinearLayout;->setOrientation(I)V
-
-    .line 181
-    const/16 v2, 0x10
-
-    invoke-virtual {v0, v2}, Landroid/widget/LinearLayout;->setGravity(I)V
-
-    .line 182
-    const/high16 v2, 0x41500000    # 13.0f
-
-    invoke-direct {p0, p1, v2}, Lcom/secaccu/clock/AutoClickUi;->text(Landroid/app/Activity;F)Landroid/widget/TextView;
-
-    move-result-object v2
-
-    .line 183
-    invoke-virtual {v2, p2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
-
-    .line 184
-    new-instance p2, Landroid/widget/LinearLayout$LayoutParams;
-
-    const/high16 v3, 0x3f800000    # 1.0f
-
-    const/4 v4, -0x2
-
-    invoke-direct {p2, v1, v4, v3}, Landroid/widget/LinearLayout$LayoutParams;-><init>(IIF)V
-
-    invoke-virtual {v0, v2, p2}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
-
-    .line 185
-    const-string p2, "\u2212"
-
-    neg-int v1, p4
-
-    invoke-direct {p0, p1, p2, p3, v1}, Lcom/secaccu/clock/AutoClickUi;->stepButton(Landroid/app/Activity;Ljava/lang/String;II)Landroid/widget/Button;
-
-    move-result-object p2
-
-    invoke-virtual {v0, p2}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
-
-    .line 186
-    iget-object p2, p0, Lcom/secaccu/clock/AutoClickUi;->posView:Landroid/widget/TextView;
-
-    invoke-virtual {p2}, Landroid/widget/TextView;->getTextColors()Landroid/content/res/ColorStateList;
-
-    move-result-object p2
-
-    invoke-virtual {p5, p2}, Landroid/widget/TextView;->setTextColor(Landroid/content/res/ColorStateList;)V
-
-    .line 187
-    const/high16 p2, 0x41700000    # 15.0f
-
-    invoke-virtual {p5, p2}, Landroid/widget/TextView;->setTextSize(F)V
-
-    .line 188
-    const/16 p2, 0x11
-
-    invoke-virtual {p5, p2}, Landroid/widget/TextView;->setGravity(I)V
-
-    .line 189
-    new-instance p2, Landroid/widget/LinearLayout$LayoutParams;
-
-    const/16 v1, 0x40
-
-    invoke-static {p1, v1}, Lcom/secaccu/clock/AutoClickUi;->dp(Landroid/app/Activity;I)I
-
-    move-result v1
-
-    invoke-direct {p2, v1, v4}, Landroid/widget/LinearLayout$LayoutParams;-><init>(II)V
-
-    invoke-virtual {v0, p5, p2}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
-
-    .line 190
-    const-string p2, "+"
-
-    invoke-direct {p0, p1, p2, p3, p4}, Lcom/secaccu/clock/AutoClickUi;->stepButton(Landroid/app/Activity;Ljava/lang/String;II)Landroid/widget/Button;
-
-    move-result-object p1
-
-    invoke-virtual {v0, p1}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
-
-    .line 191
-    return-object v0
 .end method
 
 .method private text(Landroid/app/Activity;F)Landroid/widget/TextView;
     .locals 2
 
-    .line 171
+    .line 150
     new-instance v0, Landroid/widget/TextView;
 
     invoke-direct {v0, p1}, Landroid/widget/TextView;-><init>(Landroid/content/Context;)V
 
-    .line 172
+    .line 151
     iget-object v1, p0, Lcom/secaccu/clock/AutoClickUi;->posView:Landroid/widget/TextView;
 
     invoke-virtual {v1}, Landroid/widget/TextView;->getTextColors()Landroid/content/res/ColorStateList;
@@ -614,10 +331,10 @@
 
     invoke-virtual {v0, v1}, Landroid/widget/TextView;->setTextColor(Landroid/content/res/ColorStateList;)V
 
-    .line 173
+    .line 152
     invoke-virtual {v0, p2}, Landroid/widget/TextView;->setTextSize(F)V
 
-    .line 174
+    .line 153
     const/4 p2, 0x4
 
     invoke-static {p1, p2}, Lcom/secaccu/clock/AutoClickUi;->dp(Landroid/app/Activity;I)I
@@ -632,7 +349,7 @@
 
     invoke-virtual {v0, p2, v1, p2, p1}, Landroid/widget/TextView;->setPadding(IIII)V
 
-    .line 175
+    .line 154
     return-object v0
 .end method
 
@@ -641,17 +358,17 @@
 .method public attach(Landroid/app/Activity;)V
     .locals 2
 
-    .line 38
+    .line 33
     new-instance v0, Ljava/lang/ref/WeakReference;
 
     invoke-direct {v0, p1}, Ljava/lang/ref/WeakReference;-><init>(Ljava/lang/Object;)V
 
     iput-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->activityRef:Ljava/lang/ref/WeakReference;
 
-    .line 39
+    .line 34
     nop
 
-    .line 40
+    .line 35
     const-string v0, "autoClickSwitch"
 
     const-string v1, "id"
@@ -660,7 +377,7 @@
 
     move-result v0
 
-    .line 39
+    .line 34
     invoke-virtual {p1, v0}, Landroid/app/Activity;->findViewById(I)Landroid/view/View;
 
     move-result-object v0
@@ -669,17 +386,17 @@
 
     iput-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->enabledSwitch:Landroid/widget/CompoundButton;
 
-    .line 41
+    .line 36
     nop
 
-    .line 42
+    .line 37
     const-string v0, "autoClickTarget"
 
     invoke-static {p1, v0, v1}, Lcom/secaccu/clock/AutoClickEngine;->id(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)I
 
     move-result v0
 
-    .line 41
+    .line 36
     invoke-virtual {p1, v0}, Landroid/app/Activity;->findViewById(I)Landroid/view/View;
 
     move-result-object v0
@@ -688,17 +405,17 @@
 
     iput-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->targetView:Landroid/widget/TextView;
 
-    .line 43
+    .line 38
     nop
 
-    .line 44
+    .line 39
     const-string v0, "autoClickPosLabel"
 
     invoke-static {p1, v0, v1}, Lcom/secaccu/clock/AutoClickEngine;->id(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)I
 
     move-result v0
 
-    .line 43
+    .line 38
     invoke-virtual {p1, v0}, Landroid/app/Activity;->findViewById(I)Landroid/view/View;
 
     move-result-object v0
@@ -707,17 +424,17 @@
 
     iput-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->posView:Landroid/widget/TextView;
 
-    .line 45
+    .line 40
     nop
 
-    .line 46
+    .line 41
     const-string v0, "autoClickHint"
 
     invoke-static {p1, v0, v1}, Lcom/secaccu/clock/AutoClickEngine;->id(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)I
 
     move-result v0
 
-    .line 45
+    .line 40
     invoke-virtual {p1, v0}, Landroid/app/Activity;->findViewById(I)Landroid/view/View;
 
     move-result-object v0
@@ -726,17 +443,17 @@
 
     iput-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->hintView:Landroid/widget/TextView;
 
-    .line 47
+    .line 42
     nop
 
-    .line 48
+    .line 43
     const-string v0, "autoClickPickButton"
 
     invoke-static {p1, v0, v1}, Lcom/secaccu/clock/AutoClickEngine;->id(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)I
 
     move-result v0
 
-    .line 47
+    .line 42
     invoke-virtual {p1, v0}, Landroid/app/Activity;->findViewById(I)Landroid/view/View;
 
     move-result-object v0
@@ -745,17 +462,17 @@
 
     iput-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->pickButton:Landroid/widget/Button;
 
-    .line 49
+    .line 44
     nop
 
-    .line 50
+    .line 45
     const-string v0, "autoClickA11yButton"
 
     invoke-static {p1, v0, v1}, Lcom/secaccu/clock/AutoClickEngine;->id(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)I
 
     move-result v0
 
-    .line 49
+    .line 44
     invoke-virtual {p1, v0}, Landroid/app/Activity;->findViewById(I)Landroid/view/View;
 
     move-result-object v0
@@ -764,31 +481,31 @@
 
     iput-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->a11yButton:Landroid/widget/Button;
 
-    .line 51
+    .line 46
     sget-object v0, Lcom/secaccu/clock/AutoClickOverlay;->INSTANCE:Lcom/secaccu/clock/AutoClickOverlay;
 
     invoke-virtual {v0}, Lcom/secaccu/clock/AutoClickOverlay;->hidePicker()V
 
-    .line 52
+    .line 47
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->enabledSwitch:Landroid/widget/CompoundButton;
 
     if-nez v0, :cond_0
 
-    .line 53
+    .line 48
     return-void
 
-    .line 55
+    .line 50
     :cond_0
     invoke-direct {p0, p1}, Lcom/secaccu/clock/AutoClickUi;->addExtraBlock(Landroid/app/Activity;)V
 
-    .line 57
+    .line 52
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->enabledSwitch:Landroid/widget/CompoundButton;
 
     const/4 v1, 0x0
 
     invoke-virtual {v0, v1}, Landroid/widget/CompoundButton;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
 
-    .line 58
+    .line 53
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->enabledSwitch:Landroid/widget/CompoundButton;
 
     sget-object v1, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
@@ -799,7 +516,7 @@
 
     invoke-virtual {v0, v1}, Landroid/widget/CompoundButton;->setChecked(Z)V
 
-    .line 59
+    .line 54
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->enabledSwitch:Landroid/widget/CompoundButton;
 
     new-instance v1, Lcom/secaccu/clock/AutoClickUi$1;
@@ -808,12 +525,12 @@
 
     invoke-virtual {v0, v1}, Landroid/widget/CompoundButton;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
 
-    .line 88
+    .line 83
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->pickButton:Landroid/widget/Button;
 
     if-eqz v0, :cond_1
 
-    .line 89
+    .line 84
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->pickButton:Landroid/widget/Button;
 
     new-instance v1, Lcom/secaccu/clock/AutoClickUi$2;
@@ -822,13 +539,13 @@
 
     invoke-virtual {v0, v1}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    .line 109
+    .line 104
     :cond_1
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->a11yButton:Landroid/widget/Button;
 
     if-eqz v0, :cond_2
 
-    .line 110
+    .line 105
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->a11yButton:Landroid/widget/Button;
 
     new-instance v1, Lcom/secaccu/clock/AutoClickUi$3;
@@ -837,28 +554,28 @@
 
     invoke-virtual {v0, v1}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    .line 117
+    .line 112
     :cond_2
     invoke-virtual {p0, p1}, Lcom/secaccu/clock/AutoClickUi;->refresh(Landroid/app/Activity;)V
 
-    .line 118
+    .line 113
     return-void
 .end method
 
 .method public onTick(Landroid/app/Activity;)V
     .locals 2
 
-    .line 276
+    .line 214
     sget-object v0, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
 
     invoke-virtual {v0, p1}, Lcom/secaccu/clock/AutoClickEngine;->evaluate(Landroid/content/Context;)V
 
-    .line 277
+    .line 215
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->targetView:Landroid/widget/TextView;
 
     if-eqz v0, :cond_0
 
-    .line 278
+    .line 216
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->targetView:Landroid/widget/TextView;
 
     sget-object v1, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
@@ -869,23 +586,23 @@
 
     invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 280
+    .line 218
     :cond_0
     invoke-direct {p0, p1}, Lcom/secaccu/clock/AutoClickUi;->showExtra(Landroid/app/Activity;)V
 
-    .line 281
+    .line 219
     return-void
 .end method
 
 .method public refresh(Landroid/app/Activity;)V
     .locals 3
 
-    .line 251
+    .line 189
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->targetView:Landroid/widget/TextView;
 
     if-eqz v0, :cond_0
 
-    .line 252
+    .line 190
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->targetView:Landroid/widget/TextView;
 
     sget-object v1, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
@@ -896,13 +613,13 @@
 
     invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 254
+    .line 192
     :cond_0
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->posView:Landroid/widget/TextView;
 
     if-eqz v0, :cond_1
 
-    .line 255
+    .line 193
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->posView:Landroid/widget/TextView;
 
     sget-object v1, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
@@ -913,7 +630,7 @@
 
     invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 257
+    .line 195
     :cond_1
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->enabledSwitch:Landroid/widget/CompoundButton;
 
@@ -921,7 +638,7 @@
 
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->enabledSwitch:Landroid/widget/CompoundButton;
 
-    .line 258
+    .line 196
     invoke-virtual {v0}, Landroid/widget/CompoundButton;->isChecked()Z
 
     move-result v0
@@ -934,14 +651,14 @@
 
     if-eq v0, v1, :cond_2
 
-    .line 259
+    .line 197
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->enabledSwitch:Landroid/widget/CompoundButton;
 
     const/4 v1, 0x0
 
     invoke-virtual {v0, v1}, Landroid/widget/CompoundButton;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
 
-    .line 260
+    .line 198
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->enabledSwitch:Landroid/widget/CompoundButton;
 
     sget-object v1, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
@@ -952,26 +669,26 @@
 
     invoke-virtual {v0, v1}, Landroid/widget/CompoundButton;->setChecked(Z)V
 
-    .line 261
+    .line 199
     invoke-virtual {p0, p1}, Lcom/secaccu/clock/AutoClickUi;->attach(Landroid/app/Activity;)V
 
-    .line 263
+    .line 201
     :cond_2
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->a11yButton:Landroid/widget/Button;
 
     if-eqz v0, :cond_4
 
-    .line 264
+    .line 202
     sget-object v0, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
 
     invoke-virtual {v0, p1}, Lcom/secaccu/clock/AutoClickEngine;->isAccessibilityEnabled(Landroid/content/Context;)Z
 
     move-result v0
 
-    .line 265
+    .line 203
     iget-object v1, p0, Lcom/secaccu/clock/AutoClickUi;->a11yButton:Landroid/widget/Button;
 
-    .line 268
+    .line 206
     if-eqz v0, :cond_3
 
     const-string v0, "auto_click_a11y_on"
@@ -981,7 +698,7 @@
     :cond_3
     const-string v0, "auto_click_a11y"
 
-    .line 266
+    .line 204
     :goto_0
     const-string v2, "string"
 
@@ -989,30 +706,30 @@
 
     move-result v0
 
-    .line 265
+    .line 203
     invoke-virtual {p1, v0}, Landroid/app/Activity;->getString(I)Ljava/lang/String;
 
     move-result-object v0
 
     invoke-virtual {v1, v0}, Landroid/widget/Button;->setText(Ljava/lang/CharSequence;)V
 
-    .line 271
+    .line 209
     :cond_4
     invoke-direct {p0, p1}, Lcom/secaccu/clock/AutoClickUi;->showExtra(Landroid/app/Activity;)V
 
-    .line 272
+    .line 210
     sget-object v0, Lcom/secaccu/clock/AutoClickOverlay;->INSTANCE:Lcom/secaccu/clock/AutoClickOverlay;
 
     invoke-virtual {v0, p1}, Lcom/secaccu/clock/AutoClickOverlay;->syncMarker(Landroid/content/Context;)V
 
-    .line 273
+    .line 211
     return-void
 .end method
 
 .method public syncNow()V
     .locals 5
 
-    .line 234
+    .line 172
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi;->activityRef:Ljava/lang/ref/WeakReference;
 
     if-eqz v0, :cond_0
@@ -1030,14 +747,14 @@
     :cond_0
     const/4 v0, 0x0
 
-    .line 235
+    .line 173
     :goto_0
     if-nez v0, :cond_1
 
-    .line 236
+    .line 174
     return-void
 
-    .line 239
+    .line 177
     :cond_1
     :try_start_0
     invoke-virtual {v0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
@@ -1054,26 +771,26 @@
 
     move-result-object v1
 
-    .line 240
+    .line 178
     const/4 v2, 0x1
 
     invoke-virtual {v1, v2}, Ljava/lang/reflect/Method;->setAccessible(Z)V
 
-    .line 241
+    .line 179
     new-array v2, v3, [Ljava/lang/Object;
 
     invoke-virtual {v1, v0, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    .line 243
+    .line 181
     goto :goto_1
 
-    .line 242
+    .line 180
     :catchall_0
     move-exception v0
 
-    .line 244
+    .line 182
     :goto_1
     return-void
 .end method

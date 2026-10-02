@@ -16,17 +16,12 @@ import java.lang.ref.WeakReference;
 public final class AutoClickUi {
     public static final AutoClickUi INSTANCE = new AutoClickUi();
 
-    private static final int PCT = 0;
-    private static final int ADJ = 1;
-
     private CompoundButton enabledSwitch;
     private TextView targetView;
     private TextView posView;
     private TextView hintView;
     private Button pickButton;
     private Button a11yButton;
-    private TextView pctView;
-    private TextView adjView;
     private TextView calcView;
     private TextView logView;
     private TextView checkView;
@@ -117,7 +112,7 @@ public final class AutoClickUi {
         refresh(activity);
     }
 
-    /** Lead calculation, calibration knobs, practice tap, result log and checklist under the hint. */
+    /** Press-time calculation, result log and checklist under the hint. */
     private void addExtraBlock(final Activity activity) {
         if (hintView == null || !(hintView.getParent() instanceof ViewGroup)) {
             return;
@@ -133,22 +128,6 @@ public final class AutoClickUi {
 
         calcView = text(activity, 13f);
         box.addView(calcView);
-        pctView = new TextView(activity);
-        box.addView(stepRow(activity, "반영 비율 (RTT/2의)", PCT, 10, pctView));
-        adjView = new TextView(activity);
-        box.addView(stepRow(activity, "보정(ms)", ADJ, 1, adjView));
-
-        Button test = new Button(activity);
-        test.setText("연습 탭 (10초 단위 정각에 지정 위치 탭)");
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AutoClickEngine.INSTANCE.startTest(activity);
-                refresh(activity);
-            }
-        });
-        box.addView(test);
-
         logView = text(activity, 12f);
         box.addView(logView);
         checkView = text(activity, 12f);
@@ -175,49 +154,8 @@ public final class AutoClickUi {
         return t;
     }
 
-    private View stepRow(final Activity activity, String label, final int which, final int step, TextView value) {
-        LinearLayout row = new LinearLayout(activity);
-        row.setOrientation(LinearLayout.HORIZONTAL);
-        row.setGravity(Gravity.CENTER_VERTICAL);
-        TextView l = text(activity, 13f);
-        l.setText(label);
-        row.addView(l, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
-        row.addView(stepButton(activity, "−", which, -step));
-        value.setTextColor(posView.getTextColors());
-        value.setTextSize(15f);
-        value.setGravity(Gravity.CENTER);
-        row.addView(value, new LinearLayout.LayoutParams(dp(activity, 64), ViewGroup.LayoutParams.WRAP_CONTENT));
-        row.addView(stepButton(activity, "+", which, step));
-        return row;
-    }
-
-    private Button stepButton(final Activity activity, String label, final int which, final int delta) {
-        Button b = new Button(activity);
-        b.setText(label);
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AutoClickEngine e = AutoClickEngine.INSTANCE;
-                if (which == PCT) {
-                    e.setPct(activity, e.getPct(activity) + delta);
-                } else {
-                    e.setAdj(activity, e.getAdj(activity) + delta);
-                }
-                refresh(activity);
-            }
-        });
-        return b;
-    }
-
     private void showExtra(Activity activity) {
         AutoClickEngine e = AutoClickEngine.INSTANCE;
-        if (pctView != null) {
-            pctView.setText(e.getPct(activity) + "%");
-        }
-        if (adjView != null) {
-            int a = e.getAdj(activity);
-            adjView.setText((a > 0 ? "+" : "") + a + "ms");
-        }
         if (calcView != null) {
             calcView.setText(e.calcLine(activity));
         }

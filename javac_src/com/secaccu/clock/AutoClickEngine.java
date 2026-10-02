@@ -24,10 +24,7 @@ public final class AutoClickEngine {
     private static final String KEY_X = "auto_click_x";
     private static final String KEY_Y = "auto_click_y";
     private static final String KEY_HAS_POS = "auto_click_has_pos";
-    private static final String KEY_PCT = "auto_click_pct";
-    private static final String KEY_ADJ = "auto_click_adj";
     private static final String KEY_LOG = "auto_click_log";
-    public static final int DEFAULT_PCT = 50;
     private static final int LOG_LINES = 5;
 
     private final Handler handler = new Handler(Looper.getMainLooper());
@@ -44,7 +41,6 @@ public final class AutoClickEngine {
     private volatile long scheduledPressAt = -1L;
     private volatile long preAlertExact = -1L;
     private volatile long resyncExact = -1L;
-    private volatile long testExact = -1L;
     private volatile Context appContext;
 
     private AutoClickEngine() {}
@@ -62,7 +58,6 @@ public final class AutoClickEngine {
         if (!enabled) {
             cancelSchedule();
             firedExact = -1L;
-            testExact = -1L;
             AutoClickOverlay.INSTANCE.hideAll();
         }
     }
@@ -116,38 +111,15 @@ public final class AutoClickEngine {
         return AutoClickService.getInstance() != null;
     }
 
-    // ---- press time: exact target minus a lead computed from the measured RTT ----
+    // ---- press time: halfway between the exact target and the moment a click arrives exactly on it ----
 
-    /** Percent of the one-way delay (RTT/2) to send early: 0 = at exact time, 100 = arrives exactly on time. */
-    public int getPct(Context context) {
-        return prefs(context).getInt(KEY_PCT, DEFAULT_PCT);
+    /** Arrival-on-time needs RTT/2 of lead; the press goes out at half of that (RTT/4) to stay safely before the target. */
+    private static long leadMs(double rttMs) {
+        return Math.max(0L, Math.round(rttMs / 4.0));
     }
 
-    public void setPct(Context context, int pct) {
-        prefs(context).edit().putInt(KEY_PCT, Math.max(0, Math.min(100, pct))).apply();
-    }
-
-    /** Manual calibration (ms, may be negative) for the gesture-dispatch delay of this phone. */
-    public int getAdj(Context context) {
-        return prefs(context).getInt(KEY_ADJ, 0);
-    }
-
-    public void setAdj(Context context, int adj) {
-        prefs(context).edit().putInt(KEY_ADJ, Math.max(-50, Math.min(50, adj))).apply();
-    }
-
-    public static long leadFor(double rttMs, int pct, int adj) {
-        return Math.max(0L, Math.round(rttMs / 2.0 * pct / 100.0) + adj);
-    }
-
-    private long leadMs(Context context, double rttMs) {
-        return leadFor(rttMs, getPct(context), getAdj(context));
-    }
-
-    /** Next target on the server clock: the exact one, or the practice one while a test is pending. */
     private long nextExact(double serverNowMs, double rttMs) {
-        long t = testExact;
-        return t > 0L ? t : PressHintFormatter.nextPressAtMs(serverNowMs, rttMs);
+        return PressHintFormatter.nextPressAtMs(serverNowMs, rttMs);
     }
 
     public String formatPressAt(long pressAtMs) {
@@ -156,7 +128,7 @@ public final class AutoClickEngine {
         return fmt.format(new Date(pressAtMs));
     }
 
-    /** Pressing at "arrive" makes the server see exactly the target; the app presses at "press". */
+    /** "Pressing at arrive makes the server see exactly the target; the app presses at press, between that and the target." */
     public String calcLine(Context context) {
         ServerClock.Snapshot snap = ServerClock.INSTANCE.isReady() ? ServerClock.INSTANCE.snapshot() : null;
         if (snap == null) {
@@ -164,31 +136,15 @@ public final class AutoClickEngine {
         }
         long exact = nextExact(snap.getServerNowMs(), snap.getRttMs());
         long arrive = exact - Math.round(snap.getRttMs() / 2.0);
-        long press = exact - leadMs(context, snap.getRttMs());
-        return "RTT " + Math.round(snap.getRttMs()) + "ms  ·  서버 정각 도착 "
-                + formatPressAt(arrive) + "\n누름 " + formatPressAt(press);
+        long press = exact - leadMs(snap.getRttMs());
+        return "지금 누르면 서버 정각 도착: " + formatPressAt(arrive)
+                + "  (RTT " + Math.round(snap.getRttMs()) + "ms)\n\uC815\uAC01\uACFC \uADF8 \uC0AC\uC774 \uB204\uB984: " + formatPressAt(press);
     }
 
-    // ---- practice tap / result log / checklist ----
+    // ---- result log / checklist ----
 
-    /** Tap the saved position at the next 10s boundary (at least 8s away) to measure the real timing. */
-    public void startTest(Context context) {
-        ServerClock.Snapshot snap = ServerClock.INSTANCE.isReady() ? ServerClock.INSTANCE.snapshot() : null;
-        if (snap == null || !hasPosition(context)) {
-            toast(context, context.getString(id(context, snap == null ? "auto_click_need_sync" : "auto_click_need_pos", "string")));
-            return;
-        }
-        long now = (long) snap.getServerNowMs();
-        long t = (now / 10000L + 1L) * 10000L;
-        if (t - now < 8000L) {
-            t += 10000L;
-        }
-        testExact = t;
-        toast(context, "연습 탭 " + formatPressAt(t));
-    }
-
-    private void record(Context context, long pressAt, long actual, boolean test) {
-        String line = (test ? "[연습] " : "") + "목표 " + formatPressAt(pressAt)
+    private void record(Context context, long pressAt, long actual) {
+        String line = "목표 " + formatPressAt(pressAt)
                 + " → 실제 " + formatPressAt(actual)
                 + " (" + (actual >= pressAt ? "+" : "") + (actual - pressAt) + "ms)";
         SharedPreferences p = prefs(context);
@@ -231,7 +187,7 @@ public final class AutoClickEngine {
             return context.getString(id(context, "auto_click_need_sync", "string"));
         }
         long exact = nextExact(snap.getServerNowMs(), snap.getRttMs());
-        long pressAt = exact - leadMs(context, snap.getRttMs());
+        long pressAt = exact - leadMs(snap.getRttMs());
         String time = formatPressAt(pressAt);
         if (!hasPosition(context)) {
             return context.getString(id(context, "auto_click_need_pos", "string")) + "  ·  " + time;
@@ -241,9 +197,6 @@ public final class AutoClickEngine {
         }
         if (firedExact == exact) {
             return context.getString(id(context, "auto_click_done", "string")) + "  " + time;
-        }
-        if (testExact > 0L) {
-            return "연습 탭 대기  " + time;
         }
         if (isEnabled(context)) {
             return context.getString(id(context, "auto_click_armed", "string")) + "  " + time;
@@ -262,8 +215,7 @@ public final class AutoClickEngine {
 
     public void evaluate(Context context) {
         appContext = context.getApplicationContext();
-        boolean test = testExact > 0L;
-        if (!hasPosition(context) || (!test && !isEnabled(context))) {
+        if (!hasPosition(context) || !isEnabled(context)) {
             cancelSchedule();
             return;
         }
@@ -277,7 +229,7 @@ public final class AutoClickEngine {
             return;
         }
         long untilExact = exact - now;
-        if (!test) {
+        {
             if (untilExact <= 300000L && untilExact > 240000L && preAlertExact != exact) {
                 preAlertExact = exact;
                 alertFiveMin(context);
@@ -287,13 +239,11 @@ public final class AutoClickEngine {
                 AutoClickUi.INSTANCE.syncNow();
             }
         }
-        long pressAt = exact - leadMs(context, snap.getRttMs());
+        long pressAt = exact - leadMs(snap.getRttMs());
         long remain = pressAt - now;
         if (remain <= 0) {
             if (now - pressAt <= 150L) {
                 fireAt(exact, pressAt);
-            } else if (test) {
-                testExact = -1L;
             }
             return;
         }
@@ -321,23 +271,16 @@ public final class AutoClickEngine {
         if (context == null) {
             return;
         }
-        boolean test = exact == testExact;
-        if (!hasPosition(context) || (!test && !isEnabled(context))) {
+        if (!hasPosition(context) || !isEnabled(context)) {
             return;
         }
         AutoClickService service = AutoClickService.getInstance();
         if (service == null) {
             toast(context, context.getString(id(context, "auto_click_need_a11y", "string")));
-            if (test) {
-                testExact = -1L;
-            }
             return;
         }
         firedExact = exact;
         scheduledExact = -1L;
-        if (test) {
-            testExact = -1L;
-        }
         ServerClock.Snapshot snap = ServerClock.INSTANCE.snapshot();
         long actual = snap != null ? (long) snap.getServerNowMs() : pressAt;
         float x = getX(context);
@@ -351,7 +294,7 @@ public final class AutoClickEngine {
             }
         }, 400L);
         if (ok) {
-            record(context, pressAt, actual, test);
+            record(context, pressAt, actual);
             toast(context, context.getString(id(context, "auto_click_fired", "string"), formatPressAt(actual)));
         } else {
             firedExact = -1L;

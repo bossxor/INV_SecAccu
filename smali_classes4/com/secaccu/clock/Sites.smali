@@ -70,7 +70,7 @@
     nop
 
     .line 20
-    const/16 v0, 0xf
+    const/4 v0, 0x6
 
     new-array v0, v0, [Lcom/secaccu/clock/TimeSite;
 
@@ -213,11 +213,11 @@
 
     sget-object v7, Lcom/secaccu/clock/SyncKind;->HTTP_DATE:Lcom/secaccu/clock/SyncKind;
 
-    const-string v4, "weverse"
+    const-string v4, "lotteon"
 
-    const-string v5, "Weverse Concerts"
+    const-string v5, "롯데ON"
 
-    const-string v6, "https://weverse.io/"
+    const-string v6, "https://www.lotteon.com/"
 
     const-string v8, "\ud2f0\ucf13"
 
@@ -226,222 +226,6 @@
     invoke-direct/range {v3 .. v11}, Lcom/secaccu/clock/TimeSite;-><init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/secaccu/clock/SyncKind;Ljava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
 
     const/4 v2, 0x5
-
-    aput-object v1, v0, v2
-
-    .line 20
-    nop
-
-    .line 26
-    new-instance v1, Lcom/secaccu/clock/TimeSite;
-
-    sget-object v7, Lcom/secaccu/clock/SyncKind;->HTTP_DATE:Lcom/secaccu/clock/SyncKind;
-
-    const-string v4, "weverseshop"
-
-    const-string v5, "Weverse Shop"
-
-    const-string v6, "https://shop.weverse.io/"
-
-    const-string v8, "\ud2f0\ucf13"
-
-    move-object v3, v1
-
-    invoke-direct/range {v3 .. v11}, Lcom/secaccu/clock/TimeSite;-><init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/secaccu/clock/SyncKind;Ljava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
-
-    const/4 v2, 0x6
-
-    aput-object v1, v0, v2
-
-    .line 20
-    nop
-
-    .line 27
-    new-instance v1, Lcom/secaccu/clock/TimeSite;
-
-    sget-object v7, Lcom/secaccu/clock/SyncKind;->HTTP_DATE:Lcom/secaccu/clock/SyncKind;
-
-    const-string v4, "naver"
-
-    const-string v5, "\ub124\uc774\ubc84 \uc608\uc57d"
-
-    const-string v6, "https://booking.naver.com/"
-
-    const-string v8, "\ud2f0\ucf13"
-
-    move-object v3, v1
-
-    invoke-direct/range {v3 .. v11}, Lcom/secaccu/clock/TimeSite;-><init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/secaccu/clock/SyncKind;Ljava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
-
-    const/4 v2, 0x7
-
-    aput-object v1, v0, v2
-
-    .line 20
-    nop
-
-    .line 28
-    new-instance v1, Lcom/secaccu/clock/TimeSite;
-
-    sget-object v7, Lcom/secaccu/clock/SyncKind;->HTTP_DATE:Lcom/secaccu/clock/SyncKind;
-
-    const-string v4, "cgv"
-
-    const-string v5, "CGV"
-
-    const-string v6, "https://cgv.co.kr/cnm/movieBook"
-
-    const-string v8, "\uc601\ud654\u00b7\ud14c\ub9c8\ud30c\ud06c"
-
-    move-object v3, v1
-
-    invoke-direct/range {v3 .. v11}, Lcom/secaccu/clock/TimeSite;-><init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/secaccu/clock/SyncKind;Ljava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
-
-    const/16 v2, 0x8
-
-    aput-object v1, v0, v2
-
-    .line 20
-    nop
-
-    .line 29
-    new-instance v1, Lcom/secaccu/clock/TimeSite;
-
-    sget-object v7, Lcom/secaccu/clock/SyncKind;->HTTP_DATE:Lcom/secaccu/clock/SyncKind;
-
-    const-string v4, "lottecinema"
-
-    const-string v5, "\ub86f\ub370\uc2dc\ub124\ub9c8"
-
-    const-string v6, "https://www.lottecinema.co.kr/NLCHS/Ticketing"
-
-    const-string v8, "\uc601\ud654\u00b7\ud14c\ub9c8\ud30c\ud06c"
-
-    move-object v3, v1
-
-    invoke-direct/range {v3 .. v11}, Lcom/secaccu/clock/TimeSite;-><init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/secaccu/clock/SyncKind;Ljava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
-
-    const/16 v2, 0x9
-
-    aput-object v1, v0, v2
-
-    .line 20
-    nop
-
-    .line 30
-    new-instance v1, Lcom/secaccu/clock/TimeSite;
-
-    sget-object v7, Lcom/secaccu/clock/SyncKind;->HTTP_DATE:Lcom/secaccu/clock/SyncKind;
-
-    const-string v4, "megabox"
-
-    const-string v5, "\uba54\uac00\ubc15\uc2a4"
-
-    const-string v6, "https://www.megabox.co.kr/booking"
-
-    const-string v8, "\uc601\ud654\u00b7\ud14c\ub9c8\ud30c\ud06c"
-
-    move-object v3, v1
-
-    invoke-direct/range {v3 .. v11}, Lcom/secaccu/clock/TimeSite;-><init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/secaccu/clock/SyncKind;Ljava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
-
-    const/16 v2, 0xa
-
-    aput-object v1, v0, v2
-
-    .line 20
-    nop
-
-    .line 31
-    new-instance v1, Lcom/secaccu/clock/TimeSite;
-
-    sget-object v7, Lcom/secaccu/clock/SyncKind;->HTTP_DATE:Lcom/secaccu/clock/SyncKind;
-
-    const-string v4, "everland"
-
-    const-string v5, "\uc5d0\ubc84\ub79c\ub4dc"
-
-    const-string v6, "https://reservation.everland.com/"
-
-    const-string v8, "\uc601\ud654\u00b7\ud14c\ub9c8\ud30c\ud06c"
-
-    move-object v3, v1
-
-    invoke-direct/range {v3 .. v11}, Lcom/secaccu/clock/TimeSite;-><init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/secaccu/clock/SyncKind;Ljava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
-
-    const/16 v2, 0xb
-
-    aput-object v1, v0, v2
-
-    .line 20
-    nop
-
-    .line 32
-    new-instance v1, Lcom/secaccu/clock/TimeSite;
-
-    sget-object v7, Lcom/secaccu/clock/SyncKind;->NTP:Lcom/secaccu/clock/SyncKind;
-
-    const-string v4, "kriss"
-
-    const-string v5, "KRISS \ub300\ud55c\ubbfc\uad6d \ud45c\uc900\uc2dc"
-
-    const-string v6, "ntp://ntp.kriss.re.kr"
-
-    const-string v8, "\ud45c\uc900\uc2dc"
-
-    move-object v3, v1
-
-    invoke-direct/range {v3 .. v11}, Lcom/secaccu/clock/TimeSite;-><init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/secaccu/clock/SyncKind;Ljava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
-
-    const/16 v2, 0xc
-
-    aput-object v1, v0, v2
-
-    .line 20
-    nop
-
-    .line 33
-    new-instance v1, Lcom/secaccu/clock/TimeSite;
-
-    sget-object v7, Lcom/secaccu/clock/SyncKind;->NTP:Lcom/secaccu/clock/SyncKind;
-
-    const-string v4, "google-ntp"
-
-    const-string v5, "Google NTP"
-
-    const-string v6, "ntp://time.google.com"
-
-    const-string v8, "\ud45c\uc900\uc2dc"
-
-    move-object v3, v1
-
-    invoke-direct/range {v3 .. v11}, Lcom/secaccu/clock/TimeSite;-><init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/secaccu/clock/SyncKind;Ljava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
-
-    const/16 v2, 0xd
-
-    aput-object v1, v0, v2
-
-    .line 20
-    nop
-
-    .line 34
-    new-instance v1, Lcom/secaccu/clock/TimeSite;
-
-    sget-object v7, Lcom/secaccu/clock/SyncKind;->NTP:Lcom/secaccu/clock/SyncKind;
-
-    const-string v4, "cloudflare"
-
-    const-string v5, "Cloudflare Time"
-
-    const-string v6, "ntp://time.cloudflare.com"
-
-    const-string v8, "\ud45c\uc900\uc2dc"
-
-    move-object v3, v1
-
-    invoke-direct/range {v3 .. v11}, Lcom/secaccu/clock/TimeSite;-><init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/secaccu/clock/SyncKind;Ljava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
-
-    const/16 v2, 0xe
 
     aput-object v1, v0, v2
 

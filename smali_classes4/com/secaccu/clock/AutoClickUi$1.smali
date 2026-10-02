@@ -32,7 +32,7 @@
         }
     .end annotation
 
-    .line 59
+    .line 54
     iput-object p1, p0, Lcom/secaccu/clock/AutoClickUi$1;->this$0:Lcom/secaccu/clock/AutoClickUi;
 
     iput-object p2, p0, Lcom/secaccu/clock/AutoClickUi$1;->val$activity:Landroid/app/Activity;
@@ -47,12 +47,12 @@
 .method public onCheckedChanged(Landroid/widget/CompoundButton;Z)V
     .locals 4
 
-    .line 62
+    .line 57
     const/4 p1, 0x0
 
     if-eqz p2, :cond_2
 
-    .line 63
+    .line 58
     sget-object p2, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
 
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickUi$1;->val$activity:Landroid/app/Activity;
@@ -65,7 +65,7 @@
 
     if-nez p2, :cond_0
 
-    .line 64
+    .line 59
     iget-object p2, p0, Lcom/secaccu/clock/AutoClickUi$1;->this$0:Lcom/secaccu/clock/AutoClickUi;
 
     invoke-static {p2}, Lcom/secaccu/clock/AutoClickUi;->access$000(Lcom/secaccu/clock/AutoClickUi;)Landroid/widget/CompoundButton;
@@ -74,7 +74,7 @@
 
     invoke-virtual {p2, p1}, Landroid/widget/CompoundButton;->setChecked(Z)V
 
-    .line 65
+    .line 60
     sget-object p1, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
 
     iget-object p2, p0, Lcom/secaccu/clock/AutoClickUi$1;->val$activity:Landroid/app/Activity;
@@ -83,7 +83,7 @@
 
     iget-object v2, p0, Lcom/secaccu/clock/AutoClickUi$1;->val$activity:Landroid/app/Activity;
 
-    .line 67
+    .line 62
     const-string v3, "auto_click_need_pos"
 
     invoke-static {v2, v3, v0}, Lcom/secaccu/clock/AutoClickEngine;->id(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)I
@@ -94,13 +94,13 @@
 
     move-result-object v0
 
-    .line 65
+    .line 60
     invoke-virtual {p1, p2, v0}, Lcom/secaccu/clock/AutoClickEngine;->toast(Landroid/content/Context;Ljava/lang/String;)V
 
-    .line 68
+    .line 63
     return-void
 
-    .line 70
+    .line 65
     :cond_0
     sget-object p2, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
 
@@ -112,7 +112,7 @@
 
     if-nez p2, :cond_1
 
-    .line 71
+    .line 66
     iget-object p2, p0, Lcom/secaccu/clock/AutoClickUi$1;->this$0:Lcom/secaccu/clock/AutoClickUi;
 
     invoke-static {p2}, Lcom/secaccu/clock/AutoClickUi;->access$000(Lcom/secaccu/clock/AutoClickUi;)Landroid/widget/CompoundButton;
@@ -121,14 +121,14 @@
 
     invoke-virtual {p2, p1}, Landroid/widget/CompoundButton;->setChecked(Z)V
 
-    .line 72
+    .line 67
     iget-object p1, p0, Lcom/secaccu/clock/AutoClickUi$1;->this$0:Lcom/secaccu/clock/AutoClickUi;
 
     iget-object p2, p0, Lcom/secaccu/clock/AutoClickUi$1;->val$activity:Landroid/app/Activity;
 
     invoke-static {p1, p2}, Lcom/secaccu/clock/AutoClickUi;->access$100(Lcom/secaccu/clock/AutoClickUi;Landroid/app/Activity;)V
 
-    .line 73
+    .line 68
     sget-object p1, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
 
     iget-object p2, p0, Lcom/secaccu/clock/AutoClickUi$1;->val$activity:Landroid/app/Activity;
@@ -137,7 +137,7 @@
 
     iget-object v2, p0, Lcom/secaccu/clock/AutoClickUi$1;->val$activity:Landroid/app/Activity;
 
-    .line 75
+    .line 70
     const-string v3, "auto_click_need_a11y"
 
     invoke-static {v2, v3, v0}, Lcom/secaccu/clock/AutoClickEngine;->id(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)I
@@ -148,13 +148,13 @@
 
     move-result-object v0
 
-    .line 73
+    .line 68
     invoke-virtual {p1, p2, v0}, Lcom/secaccu/clock/AutoClickEngine;->toast(Landroid/content/Context;Ljava/lang/String;)V
 
-    .line 76
+    .line 71
     return-void
 
-    .line 78
+    .line 73
     :cond_1
     sget-object p1, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
 
@@ -164,7 +164,7 @@
 
     invoke-virtual {p1, p2, v0}, Lcom/secaccu/clock/AutoClickEngine;->setEnabled(Landroid/content/Context;Z)V
 
-    .line 79
+    .line 74
     sget-object p1, Lcom/secaccu/clock/AutoClickOverlay;->INSTANCE:Lcom/secaccu/clock/AutoClickOverlay;
 
     iget-object p2, p0, Lcom/secaccu/clock/AutoClickUi$1;->val$activity:Landroid/app/Activity;
@@ -173,7 +173,7 @@
 
     goto :goto_0
 
-    .line 81
+    .line 76
     :cond_2
     sget-object p2, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
 
@@ -181,12 +181,12 @@
 
     invoke-virtual {p2, v0, p1}, Lcom/secaccu/clock/AutoClickEngine;->setEnabled(Landroid/content/Context;Z)V
 
-    .line 82
+    .line 77
     sget-object p1, Lcom/secaccu/clock/AutoClickOverlay;->INSTANCE:Lcom/secaccu/clock/AutoClickOverlay;
 
     invoke-virtual {p1}, Lcom/secaccu/clock/AutoClickOverlay;->hideAll()V
 
-    .line 84
+    .line 79
     :goto_0
     iget-object p1, p0, Lcom/secaccu/clock/AutoClickUi$1;->this$0:Lcom/secaccu/clock/AutoClickUi;
 
@@ -194,6 +194,6 @@
 
     invoke-virtual {p1, p2}, Lcom/secaccu/clock/AutoClickUi;->refresh(Landroid/app/Activity;)V
 
-    .line 85
+    .line 80
     return-void
 .end method

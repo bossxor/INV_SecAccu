@@ -25,7 +25,7 @@
 .method constructor <init>(Lcom/secaccu/clock/AutoClickEngine;)V
     .locals 0
 
-    .line 34
+    .line 31
     iput-object p1, p0, Lcom/secaccu/clock/AutoClickEngine$1;->this$0:Lcom/secaccu/clock/AutoClickEngine;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -38,7 +38,7 @@
 .method public run()V
     .locals 5
 
-    .line 37
+    .line 34
     iget-object v0, p0, Lcom/secaccu/clock/AutoClickEngine$1;->this$0:Lcom/secaccu/clock/AutoClickEngine;
 
     iget-object v1, p0, Lcom/secaccu/clock/AutoClickEngine$1;->this$0:Lcom/secaccu/clock/AutoClickEngine;
@@ -55,6 +55,6 @@
 
     invoke-static {v0, v1, v2, v3, v4}, Lcom/secaccu/clock/AutoClickEngine;->access$200(Lcom/secaccu/clock/AutoClickEngine;JJ)V
 
-    .line 38
+    .line 35
     return-void
 .end method
