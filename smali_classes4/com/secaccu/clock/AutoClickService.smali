@@ -96,23 +96,21 @@
     invoke-virtual {v2, p1, p2}, Landroid/graphics/Path;->moveTo(FF)V
 
     .line 58
-    new-instance p1, Landroid/accessibilityservice/GestureDescription$StrokeDescription;
+    new-instance v1, Landroid/accessibilityservice/GestureDescription$StrokeDescription;
 
     const-wide/16 v3, 0x0
 
     const-wide/16 v5, 0x10
 
-    move-object v1, p1
-
     invoke-direct/range {v1 .. v6}, Landroid/accessibilityservice/GestureDescription$StrokeDescription;-><init>(Landroid/graphics/Path;JJ)V
 
     .line 60
-    new-instance p2, Landroid/accessibilityservice/GestureDescription$Builder;
+    new-instance p1, Landroid/accessibilityservice/GestureDescription$Builder;
 
-    invoke-direct {p2}, Landroid/accessibilityservice/GestureDescription$Builder;-><init>()V
+    invoke-direct {p1}, Landroid/accessibilityservice/GestureDescription$Builder;-><init>()V
 
     .line 61
-    invoke-virtual {p2, p1}, Landroid/accessibilityservice/GestureDescription$Builder;->addStroke(Landroid/accessibilityservice/GestureDescription$StrokeDescription;)Landroid/accessibilityservice/GestureDescription$Builder;
+    invoke-virtual {p1, v1}, Landroid/accessibilityservice/GestureDescription$Builder;->addStroke(Landroid/accessibilityservice/GestureDescription$StrokeDescription;)Landroid/accessibilityservice/GestureDescription$Builder;
 
     move-result-object p1
 

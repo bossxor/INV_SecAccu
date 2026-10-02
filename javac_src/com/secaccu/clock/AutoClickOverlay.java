@@ -1,6 +1,7 @@
 package com.secaccu.clock;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.GradientDrawable;
@@ -20,107 +21,125 @@ public final class AutoClickOverlay {
 
     private WindowManager windowManager;
     private View pickerView;
+    private TextView pickerHint;
     private View markerView;
     private WindowManager.LayoutParams markerParams;
     private int barBottom;
+    // picker drag state
+    private float curX;
+    private float curY;
+    private float offX;
+    private float offY;
+    private boolean tracking;
 
     private AutoClickOverlay() {}
 
-    public void startPicker(Context context) {
-        Context app = context.getApplicationContext();
+    /** Shows the pick bar over whatever app is below; returns false if it could not be shown. */
+    public boolean startPicker(Context context) {
+        final Context app = context.getApplicationContext();
         if (!Settings.canDrawOverlays(app)) {
             AutoClickEngine.INSTANCE.toast(
                     app,
                     app.getString(AutoClickEngine.id(app, "auto_click_need_overlay", "string")));
-            return;
+            return false;
         }
         hideAll();
         ensureWm(app);
+        if (AutoClickEngine.INSTANCE.hasPosition(app)) {
+            curX = AutoClickEngine.INSTANCE.getX(app);
+            curY = AutoClickEngine.INSTANCE.getY(app);
+        } else {
+            curX = -1f;
+            curY = -1f;
+        }
 
         final FrameLayout root = new FrameLayout(app);
-        root.setBackgroundColor(0x440B1020);
+        root.setBackgroundColor(0x1A000000);
 
         LinearLayout bar = new LinearLayout(app);
-        bar.setOrientation(LinearLayout.HORIZONTAL);
-        bar.setGravity(Gravity.CENTER_VERTICAL);
+        bar.setOrientation(LinearLayout.VERTICAL);
         GradientDrawable barBg = new GradientDrawable();
         barBg.setColor(0xF2151C2E);
         bar.setBackground(barBg);
         int pad = dp(app, 12);
         bar.setPadding(pad, dp(app, 36), pad, pad);
 
+        LinearLayout row1 = new LinearLayout(app);
+        row1.setOrientation(LinearLayout.HORIZONTAL);
+        row1.setGravity(Gravity.CENTER_VERTICAL);
+
         TextView hint = new TextView(app);
         hint.setText(app.getString(AutoClickEngine.id(app, "auto_click_picker_hint", "string")));
         hint.setTextColor(0xFFF4F7FF);
         hint.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
+        pickerHint = hint;
         LinearLayout.LayoutParams hintLp = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
         hintLp.rightMargin = dp(app, 8);
-        bar.addView(hint, hintLp);
+        row1.addView(hint, hintLp);
 
-        TextView close = new TextView(app);
-        close.setText(app.getString(AutoClickEngine.id(app, "auto_click_close", "string")));
-        close.setTextColor(0xFF0B1020);
-        close.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f);
-        close.setPadding(dp(app, 18), dp(app, 10), dp(app, 18), dp(app, 10));
-        GradientDrawable closeBg = new GradientDrawable();
-        closeBg.setColor(0xFF7CFFD0);
-        closeBg.setCornerRadius(dp(app, 12));
-        close.setBackground(closeBg);
-        close.setClickable(true);
-        close.setFocusable(true);
-        View.OnClickListener closeAction = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideAll();
-            }
-        };
-        close.setOnClickListener(closeAction);
-        close.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP
-                        || event.getAction() == MotionEvent.ACTION_CANCEL) {
-                    hideAll();
-                    return true;
-                }
-                return true;
-            }
-        });
-        bar.addView(close, new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT));
+        row1.addView(button(app, app.getString(AutoClickEngine.id(app, "auto_click_close", "string")), 0xFF7CFFD0, 16f,
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        finishPicker(app);
+                    }
+                }));
+        bar.addView(row1, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+        LinearLayout row2 = new LinearLayout(app);
+        row2.setOrientation(LinearLayout.HORIZONTAL);
+        row2.setGravity(Gravity.CENTER);
+        row2.setPadding(0, dp(app, 8), 0, 0);
+        row2.addView(nudge(app, "◀", -1, 0));
+        row2.addView(nudge(app, "▲", 0, -1));
+        row2.addView(nudge(app, "▼", 0, 1));
+        row2.addView(nudge(app, "▶", 1, 0));
+        bar.addView(row2, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
         bar.measure(
                 View.MeasureSpec.makeMeasureSpec(app.getResources().getDisplayMetrics().widthPixels, View.MeasureSpec.EXACTLY),
                 View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-        barBottom = bar.getMeasuredHeight();
-        if (barBottom < dp(app, 72)) {
-            barBottom = dp(app, 72);
-        }
+        barBottom = Math.max(bar.getMeasuredHeight(), dp(app, 72));
 
         root.addView(bar, new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.WRAP_CONTENT,
                 Gravity.TOP));
 
+        // Touch near the ring drags it (keeps the finger offset); touch elsewhere moves it there.
         root.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getY() <= barBottom) {
+                int action = event.getAction();
+                float rx = event.getRawX();
+                float ry = event.getRawY();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    if (event.getY() <= barBottom) {
+                        tracking = false;
+                        return false;
+                    }
+                    tracking = true;
+                    float dx = curX - rx;
+                    float dy = curY - ry;
+                    boolean onRing = curX >= 0f && dx * dx + dy * dy <= Math.pow(dp(app, 56), 2);
+                    offX = onRing ? dx : 0f;
+                    offY = onRing ? dy : 0f;
+                } else if (!tracking) {
                     return false;
                 }
-                int action = event.getAction();
+                curX = rx + offX;
+                curY = ry + offY;
                 if (action == MotionEvent.ACTION_UP) {
-                    AutoClickEngine.INSTANCE.setPosition(app, event.getRawX(), event.getRawY());
-                    hidePicker();
-                    AutoClickEngine.INSTANCE.toast(
-                            app,
-                            app.getString(
-                                    AutoClickEngine.id(app, "auto_click_pos_set", "string"),
-                                    Math.round(event.getRawX()),
-                                    Math.round(event.getRawY())));
-                    return true;
+                    tracking = false;
+                    commit(app);
+                } else if (action == MotionEvent.ACTION_CANCEL) {
+                    tracking = false;
+                } else {
+                    showMarker(app, curX, curY);
                 }
-                return action == MotionEvent.ACTION_DOWN;
+                return true;
             }
         });
 
@@ -135,13 +154,86 @@ public final class AutoClickOverlay {
         try {
             windowManager.addView(root, params);
             pickerView = root;
+            if (curX >= 0f) {
+                showMarker(app, curX, curY);
+            }
+            return true;
         } catch (Throwable ignored) {
+            return false;
         }
+    }
+
+    /** Save the dragged position and show the coordinates in the bar. */
+    private void commit(Context app) {
+        AutoClickEngine.INSTANCE.setPosition(app, curX, curY);
+        if (pickerHint != null) {
+            pickerHint.setText(AutoClickEngine.INSTANCE.positionLine(app)
+                    + "  ·  " + app.getString(AutoClickEngine.id(app, "auto_click_picker_hint", "string")));
+        }
+    }
+
+    private View nudge(final Context app, String label, final int dx, final int dy) {
+        View b = button(app, label, 0xFFDDE6FF, 18f, new Runnable() {
+            @Override
+            public void run() {
+                if (curX < 0f) {
+                    curX = app.getResources().getDisplayMetrics().widthPixels / 2f;
+                    curY = app.getResources().getDisplayMetrics().heightPixels / 2f;
+                }
+                curX += dx;
+                curY += dy;
+                commit(app);
+            }
+        });
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
+        lp.leftMargin = dp(app, 4);
+        lp.rightMargin = dp(app, 4);
+        b.setLayoutParams(lp);
+        return b;
+    }
+
+    private View button(Context app, String label, int color, float sp, final Runnable action) {
+        TextView t = new TextView(app);
+        t.setText(label);
+        t.setGravity(Gravity.CENTER);
+        t.setTextColor(0xFF0B1020);
+        t.setTextSize(TypedValue.COMPLEX_UNIT_SP, sp);
+        t.setPadding(dp(app, 18), dp(app, 10), dp(app, 18), dp(app, 10));
+        GradientDrawable bg = new GradientDrawable();
+        bg.setColor(color);
+        bg.setCornerRadius(dp(app, 12));
+        t.setBackground(bg);
+        t.setClickable(true);
+        t.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    action.run();
+                }
+                return true;
+            }
+        });
+        return t;
     }
 
     public void hidePicker() {
         removeView(pickerView);
         pickerView = null;
+        pickerHint = null;
+        tracking = false;
+    }
+
+    private void finishPicker(Context app) {
+        hidePicker();
+        syncMarker(app);
+        try {
+            Intent intent = app.getPackageManager().getLaunchIntentForPackage(app.getPackageName());
+            if (intent != null) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                app.startActivity(intent);
+            }
+        } catch (Throwable ignored) {
+        }
     }
 
     public void hideAll() {
@@ -154,7 +246,7 @@ public final class AutoClickOverlay {
         if (!Settings.canDrawOverlays(app)) {
             return;
         }
-        if (!AutoClickEngine.INSTANCE.isEnabled(app)) {
+        if (pickerView == null && !AutoClickEngine.INSTANCE.isEnabled(app)) {
             hideMarker();
             return;
         }

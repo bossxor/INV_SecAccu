@@ -8,7 +8,7 @@
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lcom/secaccu/clock/AutoClickEngine;->fireAt(J)V
+    value = Lcom/secaccu/clock/AutoClickEngine;->fireAt(JJ)V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -32,7 +32,7 @@
         }
     .end annotation
 
-    .line 204
+    .line 347
     iput-object p1, p0, Lcom/secaccu/clock/AutoClickEngine$2;->this$0:Lcom/secaccu/clock/AutoClickEngine;
 
     iput-object p2, p0, Lcom/secaccu/clock/AutoClickEngine$2;->val$context:Landroid/content/Context;
@@ -45,41 +45,15 @@
 
 # virtual methods
 .method public run()V
-    .locals 5
+    .locals 2
 
-    .line 207
-    iget-object v0, p0, Lcom/secaccu/clock/AutoClickEngine$2;->this$0:Lcom/secaccu/clock/AutoClickEngine;
-
-    iget-object v1, p0, Lcom/secaccu/clock/AutoClickEngine$2;->val$context:Landroid/content/Context;
-
-    invoke-virtual {v0, v1}, Lcom/secaccu/clock/AutoClickEngine;->hasPosition(Landroid/content/Context;)Z
-
-    move-result v0
-
-    if-eqz v0, :cond_0
-
-    .line 208
+    .line 350
     sget-object v0, Lcom/secaccu/clock/AutoClickOverlay;->INSTANCE:Lcom/secaccu/clock/AutoClickOverlay;
 
     iget-object v1, p0, Lcom/secaccu/clock/AutoClickEngine$2;->val$context:Landroid/content/Context;
 
-    iget-object v2, p0, Lcom/secaccu/clock/AutoClickEngine$2;->this$0:Lcom/secaccu/clock/AutoClickEngine;
+    invoke-virtual {v0, v1}, Lcom/secaccu/clock/AutoClickOverlay;->syncMarker(Landroid/content/Context;)V
 
-    invoke-virtual {v2, v1}, Lcom/secaccu/clock/AutoClickEngine;->getX(Landroid/content/Context;)F
-
-    move-result v2
-
-    iget-object v3, p0, Lcom/secaccu/clock/AutoClickEngine$2;->this$0:Lcom/secaccu/clock/AutoClickEngine;
-
-    iget-object v4, p0, Lcom/secaccu/clock/AutoClickEngine$2;->val$context:Landroid/content/Context;
-
-    invoke-virtual {v3, v4}, Lcom/secaccu/clock/AutoClickEngine;->getY(Landroid/content/Context;)F
-
-    move-result v3
-
-    invoke-virtual {v0, v1, v2, v3}, Lcom/secaccu/clock/AutoClickOverlay;->showMarker(Landroid/content/Context;FF)V
-
-    .line 210
-    :cond_0
+    .line 351
     return-void
 .end method

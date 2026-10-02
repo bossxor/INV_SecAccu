@@ -2958,3 +2958,22 @@
     .line 123
     return-void
 .end method
+
+.method protected onDestroy()V
+    .locals 1
+
+    invoke-virtual {p0}, Landroid/app/Activity;->isFinishing()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    sget-object v0, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
+
+    invoke-virtual {v0, p0}, Lcom/secaccu/clock/AutoClickEngine;->onAppClosed(Landroid/content/Context;)V
+
+    :cond_0
+    invoke-super {p0}, Landroidx/appcompat/app/AppCompatActivity;->onDestroy()V
+
+    return-void
+.end method
