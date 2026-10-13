@@ -12,13 +12,13 @@
 | targetSdk | 34 |
 | 저장소 | **Public** — https://github.com/bossxor/INV_SecAccu |
 | 다른 작업물 | https://bossxor.github.io/works-dashboard/ |
-| 최신 릴리스 | [v1.2.0](https://github.com/bossxor/INV_SecAccu/releases/tag/v1.2.0) |
+| 최신 릴리스 | [v1.2.1](https://github.com/bossxor/INV_SecAccu/releases/tag/v1.2.1) |
 
 ## 다운로드 (지인 공유용)
 
 로그인 없이 APK 바로 받기:
 
-**https://github.com/bossxor/INV_SecAccu/releases/download/v1.2.0/SecAccu-signed.apk**
+**https://github.com/bossxor/INV_SecAccu/releases/download/v1.2.1/SecAccu-signed.apk**
 
 ```bash
 adb install -r SecAccu-signed.apk
