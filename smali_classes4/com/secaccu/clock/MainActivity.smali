@@ -2913,6 +2913,21 @@
 
     invoke-virtual {v1, p0}, Lcom/secaccu/clock/AutoClickUi;->attach(Landroid/app/Activity;)V
 
+    sget-object v1, Lcom/secaccu/clock/ServerClock;->INSTANCE:Lcom/secaccu/clock/ServerClock;
+
+    invoke-virtual {v1}, Lcom/secaccu/clock/ServerClock;->isReady()Z
+
+    move-result v1
+
+    if-nez v1, :cond_autosync
+
+    iget-object v1, p0, Lcom/secaccu/clock/MainActivity;->selected:Lcom/secaccu/clock/TimeSite;
+
+    const/4 v2, 0x0
+
+    invoke-direct {p0, v1, v2}, Lcom/secaccu/clock/MainActivity;->runSync(Lcom/secaccu/clock/TimeSite;Z)V
+
+    :cond_autosync
     .line 113
     return-void
 .end method
