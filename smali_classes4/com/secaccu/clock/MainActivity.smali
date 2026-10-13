@@ -2959,6 +2959,29 @@
     return-void
 .end method
 
+.method protected onUserLeaveHint()V
+    .locals 2
+
+    invoke-super {p0}, Landroidx/appcompat/app/AppCompatActivity;->onUserLeaveHint()V
+
+    move-object v0, p0
+
+    check-cast v0, Landroid/content/Context;
+
+    invoke-static {v0}, Landroid/provider/Settings;->canDrawOverlays(Landroid/content/Context;)Z
+
+    move-result v1
+
+    if-eqz v1, :cond_leave
+
+    sget-object v1, Lcom/secaccu/clock/OverlayClockService;->Companion:Lcom/secaccu/clock/OverlayClockService$Companion;
+
+    invoke-virtual {v1, v0}, Lcom/secaccu/clock/OverlayClockService$Companion;->start(Landroid/content/Context;)V
+
+    :cond_leave
+    return-void
+.end method
+
 .method protected onDestroy()V
     .locals 1
 

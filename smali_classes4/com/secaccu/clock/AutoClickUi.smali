@@ -149,6 +149,38 @@
 
     invoke-virtual {v2, v3}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
 
+    new-instance v3, Landroid/widget/CheckBox;
+
+    invoke-direct {v3, p1}, Landroid/widget/CheckBox;-><init>(Landroid/content/Context;)V
+
+    const-string v4, "\uc815\uac01\uc5d0 \ub204\ub974\uae30 (\ub044\uba74 RTT/4 \uc55e\ub2f9\uaca8 \ub204\ub984)"
+
+    invoke-virtual {v3, v4}, Landroid/widget/CheckBox;->setText(Ljava/lang/CharSequence;)V
+
+    iget-object v4, p0, Lcom/secaccu/clock/AutoClickUi;->calcView:Landroid/widget/TextView;
+
+    invoke-virtual {v4}, Landroid/widget/TextView;->getTextColors()Landroid/content/res/ColorStateList;
+
+    move-result-object v4
+
+    invoke-virtual {v3, v4}, Landroid/widget/CheckBox;->setTextColor(Landroid/content/res/ColorStateList;)V
+
+    sget-object v4, Lcom/secaccu/clock/AutoClickEngine;->INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
+
+    invoke-virtual {v4, p1}, Lcom/secaccu/clock/AutoClickEngine;->isExactMode(Landroid/content/Context;)Z
+
+    move-result v4
+
+    invoke-virtual {v3, v4}, Landroid/widget/CheckBox;->setChecked(Z)V
+
+    new-instance v4, Lcom/secaccu/clock/AutoClickUi$5;
+
+    invoke-direct {v4, p1}, Lcom/secaccu/clock/AutoClickUi$5;-><init>(Landroid/app/Activity;)V
+
+    invoke-virtual {v3, v4}, Landroid/widget/CheckBox;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+
+    invoke-virtual {v2, v3}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
+
     .line 131
     const/high16 v3, 0x41400000    # 12.0f
 

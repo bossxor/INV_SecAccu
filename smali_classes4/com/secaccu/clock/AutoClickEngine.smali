@@ -6,6 +6,10 @@
 # static fields
 .field public static final INSTANCE:Lcom/secaccu/clock/AutoClickEngine;
 
+.field private static final KEY_EXACT:Ljava/lang/String; = "auto_click_exact"
+
+.field private static volatile exactMode:Z
+
 .field private static final KEY_ENABLED:Ljava/lang/String; = "auto_click_enabled"
 
 .field private static final KEY_HAS_POS:Ljava/lang/String; = "auto_click_has_pos"
@@ -397,7 +401,15 @@
 .method private static leadMs(D)J
     .locals 2
 
-    .line 118
+    sget-boolean v0, Lcom/secaccu/clock/AutoClickEngine;->exactMode:Z
+
+    if-eqz v0, :cond_lead
+
+    const-wide/16 p0, 0x0
+
+    return-wide p0
+
+    :cond_lead
     const-wide/high16 v0, 0x4010000000000000L    # 4.0
 
     div-double/2addr p0, v0
@@ -413,6 +425,60 @@
     move-result-wide p0
 
     return-wide p0
+.end method
+
+.method private loadMode(Landroid/content/Context;)V
+    .locals 3
+
+    invoke-direct {p0, p1}, Lcom/secaccu/clock/AutoClickEngine;->prefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "auto_click_exact"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    sput-boolean v0, Lcom/secaccu/clock/AutoClickEngine;->exactMode:Z
+
+    return-void
+.end method
+
+.method public isExactMode(Landroid/content/Context;)Z
+    .locals 1
+
+    invoke-direct {p0, p1}, Lcom/secaccu/clock/AutoClickEngine;->loadMode(Landroid/content/Context;)V
+
+    sget-boolean v0, Lcom/secaccu/clock/AutoClickEngine;->exactMode:Z
+
+    return v0
+.end method
+
+.method public setExactMode(Landroid/content/Context;Z)V
+    .locals 2
+
+    invoke-direct {p0, p1}, Lcom/secaccu/clock/AutoClickEngine;->prefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "auto_click_exact"
+
+    invoke-interface {v0, v1, p2}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    sput-boolean p2, Lcom/secaccu/clock/AutoClickEngine;->exactMode:Z
+
+    return-void
 .end method
 
 .method private static mark(Z)Ljava/lang/String;
@@ -631,6 +697,8 @@
 .method public calcLine(Landroid/content/Context;)Ljava/lang/String;
     .locals 6
 
+    invoke-direct {p0, p1}, Lcom/secaccu/clock/AutoClickEngine;->loadMode(Landroid/content/Context;)V
+
     .line 133
     sget-object p1, Lcom/secaccu/clock/ServerClock;->INSTANCE:Lcom/secaccu/clock/ServerClock;
 
@@ -738,7 +806,7 @@
 
     move-result-object p1
 
-    const-string v2, "ms)\n\uc815\uac01\uacfc \uadf8 \uc0ac\uc774 \ub204\ub984: "
+    const-string v2, "ms)\n\uc2e4\uc81c \ub204\ub984 \uc2dc\uac01: "
 
     invoke-virtual {p1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -877,6 +945,8 @@
 
 .method public evaluate(Landroid/content/Context;)V
     .locals 11
+
+    invoke-direct {p0, p1}, Lcom/secaccu/clock/AutoClickEngine;->loadMode(Landroid/content/Context;)V
 
     .line 217
     invoke-virtual {p1}, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
@@ -1591,6 +1661,8 @@
 
 .method public statusLine(Landroid/content/Context;)Ljava/lang/String;
     .locals 7
+
+    invoke-direct {p0, p1}, Lcom/secaccu/clock/AutoClickEngine;->loadMode(Landroid/content/Context;)V
 
     .line 182
     sget-object v0, Lcom/secaccu/clock/ServerClock;->INSTANCE:Lcom/secaccu/clock/ServerClock;

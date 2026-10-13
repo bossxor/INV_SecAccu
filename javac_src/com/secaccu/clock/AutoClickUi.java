@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -128,6 +129,18 @@ public final class AutoClickUi {
 
         calcView = text(activity, 13f);
         box.addView(calcView);
+        final CheckBox exact = new CheckBox(activity);
+        exact.setText("정각에 누르기 (끄면 RTT/4 앞당겨 누름)");
+        exact.setTextColor(calcView.getTextColors());
+        exact.setChecked(AutoClickEngine.INSTANCE.isExactMode(activity));
+        exact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AutoClickEngine.INSTANCE.setExactMode(activity, exact.isChecked());
+                refresh(activity);
+            }
+        });
+        box.addView(exact);
         logView = text(activity, 12f);
         box.addView(logView);
         checkView = text(activity, 12f);

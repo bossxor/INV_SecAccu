@@ -20,6 +20,8 @@ public final class AutoClickEngine {
     public static final AutoClickEngine INSTANCE = new AutoClickEngine();
 
     private static final String PREFS = "secaccu_ui";
+    private static final String KEY_EXACT = "auto_click_exact";
+    private static volatile boolean exactMode;
     private static final String KEY_ENABLED = "auto_click_enabled";
     private static final String KEY_X = "auto_click_x";
     private static final String KEY_Y = "auto_click_y";
@@ -113,9 +115,26 @@ public final class AutoClickEngine {
 
     // ---- press time: halfway between the exact target and the moment a click arrives exactly on it ----
 
-    /** Arrival-on-time needs RTT/2 of lead; the press goes out at half of that (RTT/4) to stay safely before the target. */
+    /** Arrival-on-time needs RTT/2 of lead; the press goes out at half of that (RTT/4) to stay safely before the target. Exact mode presses on the target itself. */
     private static long leadMs(double rttMs) {
+        if (exactMode) {
+            return 0L;
+        }
         return Math.max(0L, Math.round(rttMs / 4.0));
+    }
+
+    private void loadMode(Context context) {
+        exactMode = prefs(context).getBoolean(KEY_EXACT, false);
+    }
+
+    public boolean isExactMode(Context context) {
+        loadMode(context);
+        return exactMode;
+    }
+
+    public void setExactMode(Context context, boolean exact) {
+        prefs(context).edit().putBoolean(KEY_EXACT, exact).apply();
+        exactMode = exact;
     }
 
     private long nextExact(double serverNowMs, double rttMs) {
@@ -130,6 +149,7 @@ public final class AutoClickEngine {
 
     /** "Pressing at arrive makes the server see exactly the target; the app presses at press, between that and the target." */
     public String calcLine(Context context) {
+        loadMode(context);
         ServerClock.Snapshot snap = ServerClock.INSTANCE.isReady() ? ServerClock.INSTANCE.snapshot() : null;
         if (snap == null) {
             return "";
@@ -138,7 +158,7 @@ public final class AutoClickEngine {
         long arrive = exact - Math.round(snap.getRttMs() / 2.0);
         long press = exact - leadMs(snap.getRttMs());
         return "지금 누르면 서버 정각 도착: " + formatPressAt(arrive)
-                + "  (RTT " + Math.round(snap.getRttMs()) + "ms)\n\uC815\uAC01\uACFC \uADF8 \uC0AC\uC774 \uB204\uB984: " + formatPressAt(press);
+                + "  (RTT " + Math.round(snap.getRttMs()) + "ms)\n실제 누름 시각: " + formatPressAt(press);
     }
 
     // ---- result log / checklist ----
@@ -179,6 +199,7 @@ public final class AutoClickEngine {
     }
 
     public String statusLine(Context context) {
+        loadMode(context);
         if (!ServerClock.INSTANCE.isReady()) {
             return context.getString(id(context, "auto_click_need_sync", "string"));
         }
@@ -214,6 +235,7 @@ public final class AutoClickEngine {
     }
 
     public void evaluate(Context context) {
+        loadMode(context);
         appContext = context.getApplicationContext();
         if (!hasPosition(context) || !isEnabled(context)) {
             cancelSchedule();
